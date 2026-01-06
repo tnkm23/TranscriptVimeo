@@ -15,6 +15,7 @@
   const extractedTexts = new Set();
   let scrollAttempts = 0;
   const maxScrollAttempts = 100; // 無限ループ防止
+  const minScrollAttempts = 5; // スクロール終了判定の最小試行回数
   const scrollDistance = 100; // スクロール距離（ピクセル）
   const waitTime = 200; // 待機時間（ミリ秒）
   
@@ -43,7 +44,7 @@
     await new Promise(resolve => setTimeout(resolve, waitTime));
     
     // スクロール位置が変わらなくなったら終了
-    if (scrollableElement.scrollTop === currentHeight && scrollAttempts > 5) {
+    if (scrollableElement.scrollTop === currentHeight && scrollAttempts > minScrollAttempts) {
       console.log('スクロール完了');
       break;
     }
