@@ -18,7 +18,7 @@ The script will:
 - Automatically scroll through the virtual transcript container
 - Collect all transcript text with timestamps
 - Copy the complete transcript to your clipboard
-- Download the transcript as a text file named `Houdini_Copernicus_Transcript.txt`
+- Download the transcript as a text file named `vimeo_transcript.txt`
 - Scroll back to the top of the transcript
 
 ### Output

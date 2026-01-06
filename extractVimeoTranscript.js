@@ -74,8 +74,9 @@
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'Houdini_Copernicus_Transcript.txt';
+  a.download = 'vimeo_transcript.txt';
   a.click();
+  URL.revokeObjectURL(url);
   
   // 最後に一番上に戻す
   scroller.scrollTop = 0;
