@@ -13,9 +13,10 @@
   console.log('トランスクリプト抽出を開始します...');
   
   const extractedTexts = new Set();
-  let previousHeight = 0;
   let scrollAttempts = 0;
   const maxScrollAttempts = 100; // 無限ループ防止
+  const scrollDistance = 100; // スクロール距離（ピクセル）
+  const waitTime = 200; // 待機時間（ミリ秒）
   
   // スクロール可能な要素を見つける
   const scrollableElement = transcriptContainer.querySelector('[class*="scroll"], [style*="overflow"]') || transcriptContainer;
@@ -36,10 +37,10 @@
     const currentHeight = scrollableElement.scrollTop;
     
     // スクロール
-    scrollableElement.scrollBy(0, 100);
+    scrollableElement.scrollBy(0, scrollDistance);
     
     // 少し待機（新しい要素の読み込みを待つ）
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise(resolve => setTimeout(resolve, waitTime));
     
     // スクロール位置が変わらなくなったら終了
     if (scrollableElement.scrollTop === currentHeight && scrollAttempts > 5) {
