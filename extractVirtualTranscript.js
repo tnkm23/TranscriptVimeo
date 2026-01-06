@@ -1,82 +1,118 @@
 (async function extractVirtualTranscript() {
-  console.log('仮想スクロール内からの抽出を開始します...');
+  console.log('仮想スクロール対応トランスクリプト抽出を開始...');
 
-  // 設定：仮想スクロールの親コンテナとアイテムのクラス
-  const scrollerSelector = '[data-test-id="virtuoso-scroller"]'; 
-  const itemSelector = '.chakra-text.css-1rbuxqg';
-  const scrollStep = 400; // スクロール量（ピクセル）
-  const scrollDelay = 300; // 読み込み待機時間（ミリ秒）
-
-  const scroller = document.querySelector(scrollerSelector);
-  if (!scroller) {
-    console.error('スクロールコンテナが見つかりませんでした。トランスクリプトが表示されているか確認してください。');
+  // Vimeoのトランスクリプトパネルを探す
+  // トランスクリプトの最初の文章から逆算してコンテナを見つける
+  const allParagraphs = Array.from(document.querySelectorAll('p'));
+  const firstTranscriptPara = allParagraphs.find(p => {
+    const text = p.textContent.trim();
+    // トランスクリプトらしい段落を探す（英語の文章が含まれる）
+    return text.length > 30 && /\b(this|the|to|and|in|is|that|we|you|are|for)\b/i.test(text);
+  });
+  
+  if (!firstTranscriptPara) {
+    console.error('トランスクリプトが見つかりません。トランスクリプトパネルを開いていることを確認してください。');
     return;
   }
-
-  const collectedData = new Map(); // インデックスをキーにして重複を防ぐ
+  
+  // トランスクリプトパネルのスクロールコンテナを見つける
+  let scrollContainer = firstTranscriptPara;
+  for (let i = 0; i < 20; i++) {
+    const parent = scrollContainer.parentElement;
+    if (!parent) break;
+    
+    const computedStyle = window.getComputedStyle(parent);
+    const hasOverflow = computedStyle.overflowY === 'scroll' || computedStyle.overflowY === 'auto';
+    const isScrollable = parent.scrollHeight > parent.clientHeight;
+    
+    if (hasOverflow && isScrollable) {
+      scrollContainer = parent;
+      console.log(`✓ スクロールコンテナを発見: ${parent.tagName}`);
+      break;
+    }
+    scrollContainer = parent;
+  }
+  
+  const transcriptMap = new Map(); // テキストをキーとして重複を防ぐ
+  const scrollStep = 300; // スクロール量（ピクセル）
+  const scrollDelay = 250; // 読み込み待機時間（ミリ秒）
   let lastScrollTop = -1;
-  let noChangeCount = 0;
+  let stableCount = 0;
+  const maxStable = 5; // スクロール位置が変わらない回数
+  let iteration = 0;
+  const maxIterations = 100; // 最大スクロール回数
 
-  console.log('スクロールを開始します。完了までお待ちください...');
-
-  while (noChangeCount < 10) { // しばらく変化がなければ終了
-    // 現在表示されている要素を取得
-    const items = scroller.querySelectorAll('[data-index]');
-    items.forEach(item => {
-      const index = item.getAttribute('data-index');
-      const textElement = item.querySelector(itemSelector);
-      const timeElement = item.querySelector('.chakra-badge'); // タイムスタンプも取得
+  console.log('スクロールして全トランスクリプトを収集中...');
+  
+  while (stableCount < maxStable && iteration < maxIterations) {
+    // 現在表示されているすべてのパラグラフを取得
+    const paragraphs = scrollContainer.querySelectorAll('p');
+    
+    paragraphs.forEach(p => {
+      const text = p.textContent.trim();
       
-      if (textElement && index) {
-        const timestamp = timeElement ? `[${timeElement.textContent}] ` : '';
-        collectedData.set(index, timestamp + textElement.textContent.trim());
+      // トランスクリプトテキストの条件:
+      // 1. タイムスタンプ（00:00形式）ではない
+      // 2. 十分な長さがある
+      // 3. 英語の文章っぽい（単語が含まれる）
+      // 4. ナビゲーションヒント行（矢印キーなど）は除外
+      const isTimestamp = /^\d{2}:\d{2}$/.test(text);
+      const hasEnglishWords = /\b(the|this|to|a|and|in|of|for|is|that|it|we|you|are|have|with|on|be|at|by|from|as|or|an|will|can|so|if|but|not|all|would|there|their|what|up|out|when|your|how|about|which|get)\b/i.test(text);
+      const isNavHint = /矢印キー/.test(text);
+      
+      if (!isTimestamp && !isNavHint && text.length > 15 && hasEnglishWords) {
+        transcriptMap.set(text, true);
       }
     });
-
-    // スクロール実行
-    scroller.scrollTop += scrollStep;
+    
+    // スクロールダウン
+    const beforeScroll = scrollContainer.scrollTop;
+    scrollContainer.scrollTop += scrollStep;
     await new Promise(resolve => setTimeout(resolve, scrollDelay));
-
-    // スクロール位置のチェック
-    if (scroller.scrollTop === lastScrollTop) {
-      noChangeCount++;
+    
+    // スクロール位置の変化をチェック
+    if (scrollContainer.scrollTop === beforeScroll) {
+      stableCount++;
     } else {
-      noChangeCount = 0;
-      lastScrollTop = scroller.scrollTop;
+      stableCount = 0;
+      lastScrollTop = scrollContainer.scrollTop;
     }
     
-    if (collectedData.size > 0) {
-        console.log(`現在 ${collectedData.size} 行取得中...`);
+    iteration++;
+    
+    if (iteration % 5 === 0) {
+      console.log(`${iteration}回目のスクロール - ${transcriptMap.size}行収集済み`);
     }
   }
-
-  // データをインデックス順に並び替え
-  const sortedTranscript = Array.from(collectedData.entries())
-    .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
-    .map(entry => entry[1])
-    .join('\n\n');
-
+  
   console.log('==========================================');
-  console.log('抽出完了！ 合計:', collectedData.size, '行');
+  console.log(`抽出完了！合計: ${transcriptMap.size}行`);
+  console.log(`スクロール回数: ${iteration}`);
   console.log('==========================================');
-
+  
+  // トランスクリプトを結合
+  const fullTranscript = Array.from(transcriptMap.keys()).join('\n\n');
+  
   // クリップボードにコピー
   try {
-    await navigator.clipboard.writeText(sortedTranscript);
+    await navigator.clipboard.writeText(fullTranscript);
     console.log('✅ クリップボードに全内容をコピーしました！');
   } catch (err) {
-    console.log('⚠️ コピーに失敗しました。以下の内容を手動でコピーしてください。');
-    console.log(sortedTranscript);
+    console.log('⚠️ クリップボードへのコピーに失敗しました。');
   }
 
-  // ファイルとして保存
-  const blob = new Blob([sortedTranscript], { type: 'text/plain' });
+  // ファイルとしてダウンロード
+  const blob = new Blob([fullTranscript], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'Houdini_Copernicus_Transcript.txt';
-  a.click();
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `vimeo-transcript-${Date.now()}.txt`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  console.log('✅ ファイルをダウンロードしました！');
   
-  // 最後に一番上に戻す
-  scroller.scrollTop = 0;
+  // 一番上に戻す
+  scrollContainer.scrollTop = 0;
 })();

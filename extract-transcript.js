@@ -1,68 +1,121 @@
-// Vimeo Transcript Extraction Script with Virtual Scroll Support
-// このスクリプトはVimeoの動画トランスクリプトを仮想スクロール環境から抽出します
+// Vimeo transcript extraction with virtual scroll support
+// Paste this into DevTools console while the transcript panel is open (player view).
 
 (async function() {
-  // トランスクリプトコンテナを探す
-  const transcriptContainer = document.querySelector('[data-transcript-container], .transcript-container, [class*="transcript"]');
-  
-  if (!transcriptContainer) {
-    alert('トランスクリプトコンテナが見つかりません。トランスクリプトが表示されているか確認してください。');
+  const hasEnglishWords = (text) => /\b[a-zA-Z]{3,}\b/.test(text);
+  const isTimestampOnly = (text) => /^\s*\d{1,2}:\d{2}(?::\d{2})?\s*$/.test(text);
+
+  const transcriptRoot =
+    document.querySelector('.TranscriptList_lazy_module_listContainer__f67b6693') ||
+    document.querySelector('.Transcript_lazy_module_transcript__4f2662ee') ||
+    document.querySelector('[class*="Transcript"]');
+
+  if (!transcriptRoot) {
+    alert('Transcript panel not found. Click the Transcript button in the player and try again.');
     return;
   }
 
-  console.log('トランスクリプト抽出を開始します...');
-  
-  const extractedTexts = new Set();
-  let scrollAttempts = 0;
-  const maxScrollAttempts = 100; // 無限ループ防止
-  const minScrollAttempts = 5; // スクロール終了判定の最小試行回数
-  const scrollDistance = 100; // スクロール距離（ピクセル）
-  const waitTime = 200; // 待機時間（ミリ秒）
-  
-  // スクロール可能な要素を見つける
-  const scrollableElement = transcriptContainer.querySelector('[class*="scroll"], [style*="overflow"]') || transcriptContainer;
-  
-  // 少しずつスクロールしながら要素を取得
-  while (scrollAttempts < maxScrollAttempts) {
-    // 現在表示されているトランスクリプト要素を取得
-    const transcriptElements = scrollableElement.querySelectorAll('[data-transcript-text], [class*="transcript-text"], p, span');
-    
-    transcriptElements.forEach(element => {
-      const text = element.textContent.trim();
-      if (text && text.length > 0) {
-        extractedTexts.add(text);
-      }
+  const findFirstTranscriptNode = () => {
+    const candidates = Array.from(
+      transcriptRoot.querySelectorAll('.TranscriptCue_lazy_module_cueText__d61e74ab, p, span, div')
+    );
+    return candidates.find((el) => {
+      const text = (el.textContent || '').trim();
+      if (!text || text.length < 6 || text.length > 500) return false;
+      if (isTimestampOnly(text)) return false;
+      return hasEnglishWords(text);
     });
-    
-    // スクロール前の高さを記録
-    const currentHeight = scrollableElement.scrollTop;
-    
-    // スクロール
-    scrollableElement.scrollBy(0, scrollDistance);
-    
-    // 少し待機（新しい要素の読み込みを待つ）
-    await new Promise(resolve => setTimeout(resolve, waitTime));
-    
-    // スクロール位置が変わらなくなったら終了
-    if (scrollableElement.scrollTop === currentHeight && scrollAttempts > minScrollAttempts) {
-      console.log('スクロール完了');
+  };
+
+  const firstParagraph = findFirstTranscriptNode();
+  if (!firstParagraph) {
+    alert('Transcript text not found. Ensure the transcript is visible.');
+    return;
+  }
+
+  const findScrollable = (el) => {
+    let node = el;
+    while (node && node !== document.body) {
+      const style = getComputedStyle(node);
+      const overflowY = style.overflowY || style.overflow;
+      const canScroll = ['auto', 'scroll'].includes(overflowY);
+      if (canScroll && node.scrollHeight > node.clientHeight + 20) return node;
+      node = node.parentElement;
+    }
+    return document.scrollingElement || document.body;
+  };
+
+  const scrollable = findScrollable(transcriptRoot);
+  const seen = new Map(); // preserve order while deduping
+
+  const collectVisibleText = () => {
+    const nodes = scrollable.querySelectorAll('.TranscriptCue_lazy_module_cueText__d61e74ab, p, span, div');
+    nodes.forEach((node) => {
+      const text = (node.textContent || '').trim();
+      if (!text) return;
+      if (text.length < 3 || text.length > 600) return;
+      if (isTimestampOnly(text)) return;
+      if (!hasEnglishWords(text)) return;
+      if (!seen.has(text)) seen.set(text, seen.size);
+    });
+  };
+
+  const maxIterations = 160;
+  const stableThreshold = 6;
+  const scrollStep = Math.max(300, Math.floor(scrollable.clientHeight * 0.7));
+  let stableCount = 0;
+  let lastHeight = -1;
+  let lastCount = -1;
+
+  console.log('Starting transcript extraction...');
+
+  for (let i = 0; i < maxIterations; i++) {
+    collectVisibleText();
+
+    const { scrollTop, scrollHeight, clientHeight } = scrollable;
+    const atBottom = scrollTop + clientHeight >= scrollHeight - 4;
+    if (atBottom) {
+      stableCount++;
+    } else {
+      scrollable.scrollTo({ top: Math.min(scrollTop + scrollStep, scrollHeight), behavior: 'auto' });
+    }
+
+    await new Promise((r) => setTimeout(r, 150));
+
+    const heightUnchanged = scrollable.scrollHeight === lastHeight;
+    const countUnchanged = seen.size === lastCount;
+    if (heightUnchanged && countUnchanged) {
+      stableCount++;
+    } else {
+      stableCount = 0;
+    }
+    lastHeight = scrollable.scrollHeight;
+    lastCount = seen.size;
+
+    if (i % 10 === 0) {
+      console.log(`Scroll ${i}/${maxIterations}, collected ${seen.size} lines...`);
+    }
+
+    if (stableCount >= stableThreshold) {
+      console.log('Reached stable scroll height, stopping.');
       break;
     }
-    
-    scrollAttempts++;
-    
-    // 進捗表示
-    if (scrollAttempts % 10 === 0) {
-      console.log(`スクロール中... (${scrollAttempts}回目, ${extractedTexts.size}個のテキスト取得)`);
-    }
   }
-  
-  // 取得したテキストを整形
-  const transcript = Array.from(extractedTexts).join('\n');
-  
-  console.log(`抽出完了: ${extractedTexts.size}個のテキストを取得しました`);
-  
-  // ファイルとしてダウンロード
+
+  collectVisibleText();
+  scrollable.scrollTo({ top: 0, behavior: 'auto' });
+
+  const lines = Array.from(seen.keys());
+  const transcript = lines.join('\n');
+  console.log(`Finished: collected ${lines.length} lines.`);
+
+  try {
+    await navigator.clipboard.writeText(transcript);
+    console.log('Transcript copied to clipboard.');
+  } catch (err) {
+    console.warn('Clipboard copy failed:', err);
+  }
+
   const blob = new Blob([transcript], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -70,8 +123,8 @@
   a.download = `vimeo-transcript-${Date.now()}.txt`;
   document.body.appendChild(a);
   a.click();
-  document.body.removeChild(a);
+  a.remove();
   URL.revokeObjectURL(url);
-  
-  console.log('ファイルのダウンロードが開始されました');
+
+  console.log('Download triggered.');
 })();
