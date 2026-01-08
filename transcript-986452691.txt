@@ -1,0 +1,317 @@
+and cover something that we covered in the first video, and that is the use of uvs.
+So if we go ahead and drop a tile pattern,
+this creates this uniform grid for us.
+However, we can actually use this as an image and warp it in UV space.
+So if we were to use a UV map and then take a UV sample and plug our tiles into the texture
+and our UV map into the uvs, you'll see that nothing changes when we set our display flag on the sample.
+That's because this is your default UV space.
+This is where zero zero is in the bottom left and one one is in the top right
+and by default the tile pattern follows that.
+So this does of course allow us to do things like distortions and things on the UV map.
+So let's just use a distort and you can see that by default the distort actually just pans a texture.
+So if we increase the scale, you'll see it just pans left or right, but if we were to use something like a noise,
+so a fractal noise with its signature set to UV plugging that into direction, you'll see that as we increase the scale, it distorts that grid.
+So that's already something that could be quite useful for you.
+You could make all sorts of distortions occur through a particular tiling pattern.
+And this works for all tile patterns because we're not actually affecting the tile, we're affecting the UV space.
+So we're distorting UV space
+and then sampling the distorted space.
+So what are some other ways to generate uvs?
+Well, one of them is to use ramps
+and actually create our own UV space.
+So if we use a ramp mono right here, you'll be able to see
+that it runs from zero on the left to one on the right.
+And if we were to set it to vertical,
+then it runs from zero at the bottom to one at the top, which is much like having X and Y coordinates.
+So if we duplicate this and we have the one ramp running horizontally and the other ramp running vertically, this can be our X coordinate.
+This can be our Y coordinate, and then we can use a channel join.
+So if we use a channel join,
+we can put the horizontal ramp into the first input and the vertical ramp into second input.
+That gives us this.
+Now this may not look exactly like our original uvs, but it is actually the same thing.
+It's just different colors being shown.
+But really if we were to put this into blue, that's the same thing.
+The only difference is that when we use things like a UV map, it just uses red
+and blue as opposed to red and green.
+So we can put this back into red green and it's the exact same thing.
+Now over here on the channel join, we'll also change this to a UV so that the output is no longer RGBA,
+but if we plug this into this UV sample, you'll see that it looks different.
+The scaling is different over here.
+And the reason for that is because uvs in Copernicus actually go from minus one to one.
+And there's a bunch of easy ways to fix this.
+You can remap these ranges if you want.
+So remapping over here so that each one of these go from instead of zero to one,
+from minus one to one.
+So I'll put the same one over here like that.
+You'll see that these are now the same
+and these are now our UV coordinates, so they look a bit different, but it's the same thing.
+Alternatively, you can also transform these uvs
+using a UV transform.
+So after the channel join, all you would have to do over here is increase the uniform scale to two.
+And if we take a look at that now, it is the same.
+Cool.
+So that's how we go about actually generating our own uvs.
+Now, if we were to wap these spaces, we can do them individually.
+But another interesting thing that we could do is if we were
+to change this ramp to radial, so one radial channel and one vertical channel, and let's see what that gives us.
+It gives us this.
+Now this isn't exactly what we want out of this because we want to generate a radial pattern.
+So to do that, we go down here to our second ramp and we can set it to concentric.
+When we do that, we'll actually end up
+with a radial tile pattern because we're using this for X and this for Y, and when we join it together, that's our uv.
+We're still scaling it up by two, and then when we sample, we end up with this.
+Now the second ramp at the bottom is where most
+of our changes are going to occur.
+For example, if we reduce the upper end and increase the lower end, we end up
+with something like this, which in my opinion is much nicer for the look that we want to go for.
+So I'm going to increase that a little bit further just to something like that.
+Now, one thing that you will notice is that
+by default we have a uniform grid, but when it gets distorted like this, we actually don't have that same uniformity.
+You'll see that we have a lot more of these concentric shapes than we do radial.
+So it's changed that we can use a multiply constant plugging
+that into our radial ramp and then increasing the brightness on it.
+So basically increasing the multiplier until it's back
+to more or less a uniform grid.
+So something like that.
+Now, because we have this set up, it's really easy
+with our tile pattern to now make adjustments over here.
+You'll see that it does sometimes flash in and out and that's not a problem.
+What we can do is create a mask to ensure that we never end up with those odd situations.
+You'll see that it's on every odd number that it occurs
+and every even number works.
+But again, that's not really an issue.
+The only other thing that I'd like to mention over here is
+that the centers of these two should match if we change the center of the second ramp.
+So just moving this to the side, you'll see that all
+of those lines still stem from the center of our radial ramp.
+That's why we want these two to always match.
+To do that, it's really as simple as just copying the parameter from your concentric ramp and pasting it into your radial ramp.
+And now if we ever move this around, it moves as we would expect it to.
+Perfect.
+So let's give this a bit more
+of an interesting tile pattern to work with.
+We can change this to something like herringbone and then reduce the divisions, something like that.
+Now to get rid of all of these lines towards the outside, we're going to make a few masks.
+So let's go ahead and take this
+and turn it into a few masks that we can use.
+So let's use a remap.
+We're going to drag our low end all the way up
+and then compliment the ramp.
+So that gives us the outermost edge of the circle.
+So anything outside of this should be pure white.
+We can duplicate this.
+And then if we shift and click on both of these points and drag them all the way over to the start,
+that'll give us the center.
+So we now have the outside and the center, and let's also find that ring, that gradient over there.
+So to get the gradient will once again duplicate this ramp over.
+And the shape that will give us that is to simply add
+two points at the start, reducing this one to a value close to zero, and that's going to give us our third mask.
+So we now have three masks to work with.
+So we have our tile pattern that's being sampled up here
+and the three masks down here.
+So let's put our three masks into a network box and we can call this masks.
+We will add three outputs to this, each one of them just being mono dive inside, add an output node, plug each one in and go up level.
+And as you can see, output one is outer output, two is inner, and output three is ring.
+So now we have our three masks all from a single subnet.
+And now we can take this and we can do a multiply where we multiply it by the ring mask.
+So that cleans up our tiles quite nicely.
+The only other thing I'm going to do is on the tile pattern,
+just increase the inset.
+I think that looks a bit better.
+And one other thing, if your tiling isn't working correctly,
+you can also go down to the multiply constant that we're using for the radial ramp and just set this to an odd value, something like three
+or five, and that tends to fix it.
+So now we have a perfect tile.
+Okay, so let's take this tile
+and do something interesting with it.
+Looking at this, I think it would be cool if we had some sort of emblem or symbol in the middle.
+And so we can rasterize some geometry to put in the middle of that.
+What we'll do is a SAP import
+and inside of the SAP import, let's just go ahead and drop some sort of geometry.
+We can use a rubber toy for this
+and then we can go up a level and rasterize it.
+So we'll use a rasterized setup.
+This is going to set up the required inputs
+for a rasterized geometry.
+Then we can rasterize our geometry and we have that by default.
+It gives us the alpha,
+but that's not what we're going to be using.
+But what we actually want to focus on right now is the framing of this.
+The reason it's framed so strangely is because it goes from the negative one to one space.
+So all we have to do is use a match size,
+plug this in over here, go up a level and it should now fit into that box.
+We can also use scale to fit.
+That will allow us to adjust the size using the target size over here, and that will fit more closely towards the center.
+I'm also going to rotate this roberti by 90 so that we're looking from the top.
+And now we have that, but we don't want just an alpha.
+It would be nice if we add depth.
+So it's go to our rasterized geo quick setup, add depth from I,
+and then we want to equalize that just to make sure that the range is in a usable range.
+There we go.
+So we have our tiles and we have flippy.
+And I think it would be cool if we added a ring around flippy and then put him on the inside of this.
+So go ahead and use an SDF shape.
+The basic circle will be fine, and we'll be using an SDF two mono setting the operation
+type to onion skin to get an outline and then reducing the ISO offset to shrink it down.
+Then we can do a maximum operation between these two
+between mono and flippy.
+And then we have a nice little badge that we can now put in the middle of each one of these.
+So of course we can put them together already, but I'm going to show you a different way so that we can ensure that these two streams are separate
+until we actually want them merged together.
+The thing that we're going to be doing is another sub import over here.
+In this one, all we're going to do is place a grid on the XY plane with a size of two
+by two and just three rows and three columns like that.
+If we go up level, we can now use a stamp points
+and we're going to stamp our tiles down here and you'll see that they end up quite small.
+So we can increase the size to something like 0.
+5.
+So this one is going to be our tile stamp.
+Now let's also do a stamp for our rubber toy.
+So we'll plug this in over here and we'll obviously want this a lot smaller and it'll be difficult to compare.
+So let's do a maximum operation between these two so that we can more clearly see what we're doing.
+And then just reduce the size for our emblems just
+until they foot into the middle like that, and we can rename that stamp to emblem stamp.
+And then the last thing that we want is just the mask
+for this because it'll be extremely useful having a mask for each one of these.
+So we'll do one for the ring stamp.
+So we'll grab the ring and we'll stamp that, making sure that the size of this is the same as the size on our tile stamp.
+So once again, just copying the parameter for scale, pasting it down here.
+So now those two match perfectly, that'll be our ring mask stamp.
+Duplicate this down.
+And let's also just take the entire thing as a stamp, just like that.
+And we can call this islands stamp.
+Now again, it would be nice to have these all into single network.
+This would drop a null so that it automatically creates our outputs for us.
+So grab the stamps and just plug them in here.
+So just click and drag over here, create a subnet.
+And the first input we can rename to emblem as that's what's coming in.
+The second input is our ring mask.
+Our third input is our tiles, and that means that the last one is our outer mask.
+Now these aren't as important as our outputs,
+so let's sort those out.
+Our foreground is our emblem stamp, second input, ring stamp, third input, tile stamp, fourth output, island mask.
+And just like that, we now have our output so we can now delete this now.
+Okay, so now we have this, and
+because we have all of these masks, it's really easy for us to do further blends.
+So let's use a tile pattern right here.
+This one is going to be a different pattern.
+We can do something like windmill and then we're going to use a blend.
+We're going to blend with this as our background and the second tile as our foreground.
+And then we can use the mask that we created.
+So we have the island mask to use as a mask over here, and I mixed up the inputs.
+So just swap those around like that.
+If you want, you can use a dilate or erode that'll add a ring around each one.
+We can remove the soft edge and reduce that radius, right?
+So it's a bit more distinct.
+Next, let's add some patterns in between these.
+And a cool way to do that is by grabbing this island mask
+that we have right here, using a blur, pushing that blur up to something like 0.
+1.
+So it's quite a large blur.
+And then we can use a remap.
+And the nice thing about this is that we can close in on a particular range.
+So we can bring this all the way in over here, bring up
+that low end, and we can flip that if we want the inverse.
+And then we can do a separate patterning over there.
+So if we were to do another tile, let's make this one hopscotch.
+And once again, all blend blending these two together.
+And for this one, we'll use the mask again.
+So drag that mask in and correct our inputs.
+And now it would be nice to have a line
+around each of those as well.
+So we can use a dilate and erode removing the soft edge, dilating it in,
+and then using a difference.
+So we find the difference between the two of these, and that'll give us that outline.
+And if we want, we can subtract it from what we have.
+So subtract over there and that gives us those outlines,
+which we can of course adjust.
+Now it's all about getting creative when it comes to actually adjusting all of this.
+And so what I've shown you is most of this tutorial from here, it's just going to be once again adding variation.
+But the main thing that I wanted to show you is how we can start to implement a bunch of different systems together and do things like UV warping
+and stamping of particular inputs to get really interesting results.
+So already, if you just put this into a preview material
+and use this as the height increasing divisions reducing the heights, you can see that we already have some very interesting
+patterning going on.
+One thing is that you'll see that your depth over there is inverted on all of your emblems, and that's simply
+because depth is lower when something is closer to the camera.
+And all we have to do to correct that is use a remap,
+flip the ramp around and add something on the zero end just to make sure that the background remains black.
+You'll see that if we don't have it, it's white.
+We want the background to be black.
+And now the part closest to camera stands out the most.
+You can also increase your input ranges.
+So if you want that emblem to stand out the most, you can increase the output max to something like three
+or four, and you'll see that it stands out more than everything else.
+So like I said, that's most of it, but let's go ahead
+and add some variation.
+One nice thing to do is to use a connectivity segment by connectivity.
+We'll go down here to make our adjustments.
+This will give us unique IDs per tile, and we can even use this to generate uvs.
+So we can do UV map by id,
+and if we plug an ID in, you'll see that it gives us what we've had before where each one of these has a zero
+to one space UV coordinate.
+We can then use transform uv.
+So UV transform right here, plugging this into first input
+and our IDs into the seed, going down to the rotation, giving them random rotations, taking that using a ramp mono
+as well as a UV sample to take our samples and sample our ramp.
+This is going to give us those unique gradients per tile,
+and you will see that it's being cut off and repeated.
+That's simply because some of these are ending up too small,
+so you can go and reduce the uniform scale so that we end up with that.
+And that's gonna be a great thing to multiply
+with our subtract over here.
+So we can multiply our height by this unique tiling that we've done at the bottom.
+And if we take a look at our height now, you'll see that each one has a slight variation, right?
+So none of these bricks are placed perfectly straight, and that is going to look really good when you go
+to rendering because the light is gonna catch the different edges and it's going to add a really good look.
+You can do the same thing when it comes to roughness.
+So if we were to take this, we could once again put this into a network.
+And the reason I'm doing this network is because sometimes the only thing that we want to change about what we've done in there is the id.
+So we can just call this ID two gradient, and if we duplicate it, we can just dive inside.
+Then on our UV transform,
+we can just adjust the seed, right?
+So if we've got upper level, these two are going to give us different outputs.
+That's quite nice because we can use the one for our height and the other one for something like our roughness.
+So let's put that into roughness perhaps also blur our height slightly just to smooth out those edges.
+Now let's go in and hit this with some color.
+So it'll use our height to ambient occlusion.
+Taking our height map, pushing up the height scale slightly, taking that using a multiply,
+taking our original height.
+So this is just the one that's a black and white mask, taking our heights to ambient occlusion.
+And then we can adjust the influence that the ambient occlusion has on this.
+And now we can use a ramp RGB, taking this into position,
+bringing up the low end, bringing down the high end, giving it some colors, maybe green on the low end
+to give it a patina look, plug that into base color.
+And then it set this to metallic.
+So metal ness up to one,
+and let's see how that looks as a render.
+So just as a refresher, we can just do whatever geometry we want over here.
+Maybe I'll do a sphere, go to the stage level, use AC and import.
+So see an import or drop a camera, a comma,
+physical sky, A render geometry settings.
+And then choosing our primitive, Scrolling down, enabling dicing, setting our dicing and doing a render.
+So if you want the file that was used for the intro image, I will be including it for download.
+And you can take a look at what I did there.
+Most of it is just layering of various color variation
+and texture variation, and even adjusting heights because there are some really easy changes that you can make that really add to this.
+For example, where we have our heights going in here, we can multiply it by any one of the masks that we've had before.
+So if you use something like a multiply, grabbing any one of your masks, plugging it in over here, adjusting the influence, you can see that that's an easy way
+to reduce certain areas heights.
+And we can even use this down here as a mask for that so that it only applies to certain areas
+or even invert this mask.
+So invert so that those are still raised.
+We can also use that for an HSV adjust.
+So let's just make an adjustment here, say reducing the saturation, decreasing the value so it's darker, and then using any one of our masks for
+that, perhaps inverting that as well, getting a minimum With this one.
+And then we can see how that looks.
+Now we've got a really complex pattern that we created with various tiling types as well as with custom uvs
+that we created ourselves, and it looks pretty good.
+So I do hope that you enjoyed this video.
+I do hope that it helped you.
+If you have any questions
+or comments, please feel free to leave them down below.
+I'm most likely to reply to them over on the side effects website
+or if you're on the Houdini Academy Discord, but I'll try my best to get to every one of them.
+So thank you for watching.
+I'll be seeing you in the next series coming soon.
+So until then, bye.
