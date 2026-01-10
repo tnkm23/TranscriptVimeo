@@ -1,0 +1,41 @@
+{
+	"servers": {
+		"youtube-transcript": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-youtube-transcript"
+			],
+			"type": "stdio"
+		},
+		"filesystem": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-filesystem",
+				"/path/to/allowed/files"
+			],
+			"type": "stdio"
+		},
+		"git": {
+			"command": "uvx",
+			"args": [
+				"mcp-server-git"
+			],
+			"type": "stdio"
+		},
+		"youtube-dlp": {
+			"command": "uvx",
+			"args": ["youtube-dlp-server"],
+			"type": "stdio"
+		},
+		"chrome-devtools": {
+			"command": "npx",
+			"args": ["chrome-devtools-mcp@latest"]
+		},
+		"Notion": {
+			"url": "https://mcp.notion.com/mcp"
+		}
+	},
+	"inputs": []
+}

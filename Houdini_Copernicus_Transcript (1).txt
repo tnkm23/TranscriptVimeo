@@ -1,0 +1,123 @@
+## 2 | Copernicus Texturing
+
+https://vimeo.com/1084749425
+
+[00:24] That will pull in the geometry from the destruction sim like we had in the previous lesson. We'll then put down a rasterized setup
+
+[00:31] and um, the default settings work fine for this. And then from there, a rasterized geo. And with the ized geo we can bring in the default
+
+[00:39] of the p the position. And we could also add an ID attribute of active. Um, if you want, um, I don't think we use it in this setup,
+
+[00:46] but just to show you all those active attributes that I created back in subs. If you click on this, um, this down here in the lower right,
+
+[00:54] you can switch and see the different outputs and you can see that we can actually pull that active attribute from the RBD sim.
+
+[01:00] But for this, we'll switch it back to position. From there, we'll connect it over to a channel split. And if we pull the blue from the channel split,
+
+[01:11] that's actually pulling the depth information that we set up in SS to get it to the right range. I've done an equalize with a scale to maximum length,
+
+[01:20] and now we have the depth in the correct um, format. We are creating a height texture with the depth information
+
+[01:27] to take into Unreal. So looking at this texture, the white area will be flat while the darker the values go
+
+[01:33] towards black, the deeper they'll be. So that is our height of our sim. So what I like to do here is if we go over here,
+
+[01:44] I have another preview material. I'm just gonna drag this over here. We're visualizing a texture here, but to really see what it looks like, we need
+
+[01:51] to put it on a piece of geometry. So dropping down a preview material and setting the divisions to a thousand.
+
+[01:57] And I've also set the height scale and the normal map scale to 0.1. I could then take this and I could plug this directly into the height.
+
+[02:04] And so if we visualize this, this is actually what we're seeing and the height values that we're getting out of our sim right now.
+
+[02:14] So I like to use this instead of the, the texture view, um, in most cases just to get like a lay of the land.
+
+[02:21] Okay. So from there, um, I realized that I wanted to lower it more. Um, 'cause it's still kind of flat.
+
+[02:28] And so rather than going back to the SIM and trying to iterate over that, I decided to do it here in cups.
+
+[02:35] And so what I've done is I've taken an SDF shape of a circle and I've converted that SDF to a mono
+
+[02:43] and then given it a slight blur, I then equalize it and just so that it doesn't stay completely round.
+
+[02:51] When we lower the center, I've added a distort here and going into the direction of the distort, I've given a,
+
+[02:58] I've put down a fractal noise with the slope direction and distorted that circle shape with that. So we get something like this.
+
+[03:09] So then from there, if we put down a subtract a, a blend nodes with it set to subtract, we're gonna take the original height value
+
+[03:19] and subtract this new value from it, which will then lower the, the center even more. And so if we look at that, instead I visualize this,
+
+[03:30] you can see if I just bypass this, how it's lowering it even more here. Okay? So then from there I want
+
+[03:43] to start adding finer details. So, 'cause right now it's just kind of a plain looking fracture sum. So for the next step what I've done is I've taken a asphalt,
+
+[03:54] a damaged asphalt texture from mega scans that will be provided. And I've pulled that in. I've then extracted, um,
+
+[04:02] the red channel and I've scaled it so that we get the scale of the, the features that we want.
+
+[04:10] I'm then remapping it so that the darker areas are a bit darker, and then setting that to a mono and then inverting it.
+
+[04:20] So then now what we're gonna do here is we're gonna take and do another subtract. We're gonna take our original value here that we had
+
+[04:29] and we're gonna subtract even more. And now you may not see that much has happened and this is why I like to use that preview material
+
+[04:38] because we're subtracting only a 0.02 from it, but um, you don't really see it. And so if we plug this into the height now
+
+[04:50] and we visit that you can actually see there's a lot of detail being added. And so if I bypass this, we're adding all
+
+[04:57] that texture detail into the, the sim. We also have this subtract being masked out by that center value that I'm pulling from the SDF.
+
+[05:09] So I've taken that, that same SDF, and I've remapped it so it's stronger and then I'm using that as a mask.
+
+[05:17] Um, so that we're only applying that subtract where that mask is. And so you'll see it, it only happens in this space.
+
+[05:25] Okay, so then from there I want to add another level. So it's like the, the destruction sim gave us the large pieces
+
+[05:33] and the texture gave us small features and now we want something kind of in the middle. So for that, I took, uh, a procedural OID texture, um,
+
+[05:41] that I've created here using a fractal noise with it set to worldly cellular. And I've remapped it. So we get just those edges.
+
+[05:49] And then using another fractal that is a higher frequency, I've created a slope dur and then I'm distorting it.
+
+[05:58] So basically we're distorting those edges and then I'm going to raise the gamma and then I'm gonna, 'cause if I was to apply this right now, this would, um,
+
+[06:09] be the same value across the board. Um, but I want it to be stronger and weaker in areas. So I've taken a fractal noise that looks like this
+
+[06:16] and I'm just multiplying it so that it gets weaker in different areas. And then I'm doing the same thing.
+
+[06:21] I'm subtracting from it with the value of 0.3. And so if we look at that, you can kind of see it, um,
+
+[06:28] appearing here in the the middle. Um, but if we again, look at it using the height And we just bypass this, you can kind of see all those
+
+[06:42] medium sized cracks being added right on top. Okay, so now we have our height where we want it. And so let's create a few maps based on this.
+
+[06:53] So the first thing is, so that height directly goes right into the height. Um, but then from there we're gonna put down this awesome
+
+[07:00] node called height to normal and create a normal map from it. And that goes into normal From there, we're gonna take those values from the, the height map
+
+[07:13] and I'm going to then plug them into a height to ambient occlusion, which will give us something like this
+
+[07:21] and then remap it so that it gets a little bit darker on the crevices. And that's gonna become our diffuse map for visualization.
+
+[07:29] I've remapped it to different values so that when it goes into the preview material here, we could just get different values like
+
+[07:38] that rather than white to black. Um, the last bit of info here is the, the roughness. So I've taken the, that texture
+
+[07:49] that we had from the asphalt And I've multiplied it by the mask and then I've remapped it to the roughness values that I want.
+
+[07:59] And then that goes into roughness. And so that is what we have here in Copernicus. Now the last bit is to export it.
+
+[08:08] Um, so for a game ready asset, you will want to pack them and like channel pack them into red, green, and blue.
+
+[08:14] Um, but for this I did not. Um, but that would be a best practice going forward. Um, so the way I set this up is I have a few different
+
+[08:22] rock image outputs. Um, so I'm outputting the diffuse, the roughness, the normal, the height and the mask. A quick little trick here is, um,
+
+[08:35] say you're iterating on this and you don't want to, um, press render, um, five times for each iteration. What you can do is once you have that set up,
+
+[08:42] you can drop down a rock network and then you can do a fetch and fetch all of those and then just plug them into a merge
+
+[08:49] and then press render here and it'll go through and render them all out for um, every time you iterate on this.
+
+[08:56] So that is the Copernicus setup. And now let's jump over to Unreal.

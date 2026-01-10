@@ -1,0 +1,361 @@
+# Project Skylark | Plant Pots 3 | Texture Using Copernicus
+
+## 学習ノート
+
+### 概要
+このビデオでは、Houdini の **Copernicus** を使用して、プラントポット用のシンプルな**波模様のテクスチャ**をプロシージャルに作成する方法を解説しています。**SDF Shape**、**Distort**、**Ramp Gradient** を組み合わせて、タイル可能な波模様を生成し、**UV Projection** を使ってモデルに適用する実践的なワークフローを学びます。最終的には、複数のアセットで再利用可能な汎用テクスチャを1つ作成するだけで済む効率的なパイプラインを構築します。
+
+## 重要な概念
+
+### **SDF (Signed Distance Field)**
+- **Shape Nodes**で基本形状を作成（Rectangle、Circle など）
+- **符号付き距離場**として形状を定義
+- 後続のノードで変形・加工が容易
+
+### **SDF to Mono**
+- **SDF を単一値（グレースケール）**に変換
+- 距離情報を0-1の範囲の明度値に変換
+- テクスチャとして扱える形式に変換
+
+### **Distort by Slope**
+- **勾配（Slope）**に基づいて形状を歪める
+- Direction（方向）を制御することで波の形状を作成
+- スケーリングで歪みの強度を調整
+
+### **Ramp Gradient**
+- **Hill オプション**で双方向のグラデーションを作成
+- Direction（方向）を90度などに設定して波の向きを制御
+- Distort ノードの Direction 入力として使用
+
+### **Transform 2D**
+- テクスチャの**位置、回転、スケール**を調整
+- 波の幅や配置を微調整
+- タイリングの制御にも使用
+
+### **Constant Mapping (Clamp)**
+- テクスチャの**エッジをクランプ**して繰り返しを防止
+- タイル可能なテクスチャを維持しながらエッジ処理
+- `0.5` などのスケール値で波の数を増やすことも可能
+
+### **Blend ノード**
+- マスクを使用して**色をブレンド**
+- 波模様をマスクとして使用
+- レイヤリングの基礎
+
+### **Ramp RGB**
+- **カラーグラデーション**を作成
+- Vertical（垂直）方向のグラデーションで色変化
+- 補色や任意のカラースキームを適用
+
+### **Tile Patcher**
+- **ランダムなディテール**を追加（傷、汚れなど）
+- Position、Rotation、Scale を Varying（可変）に設定
+- プロシージャルなバリエーションを生成
+
+### **UV Projection (Cylindrical)**
+- タイル可能なテクスチャを**円筒形状にプロジェクション**
+- **Initialize** ボタンでリセット可能
+- **Centroid**: `[0, $DY, 0]` でY軸中心に配置
+- **Scale**: `$DY` (Bounding Box の Y サイズ) でスケール自動調整
+
+### **Copernicus Material Preview**
+- Copernicus ノードを**リアルタイムでプレビュー**
+- Constant Source から **Copernicus Node** 参照に切り替え
+- ビューポートをロック（ピン）してイテレーション効率化
+
+### **ROP Image Output**
+- テクスチャを**ファイルとしてエクスポート**
+- PNG、EXR などの形式に対応
+- Export ボタンでレンダリング実行
+
+## 実装手順
+
+### 1. 基本的な波模様の作成
+1. **Copernicus Network** を作成
+2. **Shape Node → Rectangle** を配置
+3. サイズを調整（後で変更可能）
+4. **SDF to Mono** で単一値に変換
+
+### 2. 波形への変形
+1. **Ramp Gradient** を作成
+2. **Hill オプション**を選択（双方向グラデーション）
+3. **Direction を 90度**に設定
+4. **Distort by Slope** を配置
+5. Ramp を Direction 入力に接続
+6. **Scaling を増やして**波の振幅を調整
+
+### 3. 波の配置とタイリング
+1. **Transform 2D** を追加
+2. スケールで波を引き伸ばす
+3. Translate で位置調整（半分を白、半分を黒に）
+4. **Constant Mapping (Clamp)** を追加してエッジ処理
+5. **別の Transform 2D** を追加
+6. Scale を `0.5` などにして波の数を増やす（タイリング）
+
+### 4. カラーリング
+1. **Ramp RGB** を作成
+2. **Vertical（垂直）**方向に設定
+3. カラーポイントを追加・調整
+4. 補色や好みの配色を設定
+5. **Blend ノード**を配置
+6. 波模様を**Mask** として使用
+7. Ramp RGB をカラーソースとして接続
+
+### 5. ディテールの追加（オプション）
+1. **Tile Patcher** を追加
+2. Shape: **Circle**（傷のような形状）
+3. **Position を Varying** に設定してランダム配置
+4. **Rotation を Varying** に設定
+5. **Scale を Varying** に設定してランダムサイズ
+6. **HSV Adjust** または Blend でマスクとして適用
+7. Value を暗くして汚れや傷を表現
+8. ランダム値を追加してバリエーション増加
+
+### 6. モデルへの適用
+1. **UV Projection** ノードを配置
+2. Type: **Cylindrical**
+3. **Initialize** ボタンを押す（必要に応じてリセット）
+4. Centroid を `[0, $DY, 0]` に設定（Y軸中心）
+5. Scale を `$DY` に設定（バウンディングボックスのY方向サイズ）
+6. これでどんなサイズのモデルでもスケールが自動調整
+
+### 7. Copernicus Material Preview でプレビュー
+1. **Copernicus Material Preview** ノードを配置
+2. **Constant Source → Copernicus Node** に変更
+3. 作成したテクスチャノード（例: "out"）を参照
+4. ビューポートを**ピン（ロック）**
+5. Copernicus に戻って調整
+6. リアルタイムでモデル上の変化を確認
+
+### 8. エクスポート
+1. **ROP Image Output** を配置
+2. テクスチャノードに接続
+3. ファイル名を設定（例: `my_texture.png`）
+4. **Export** ボタンをクリック
+5. 指定した場所にテクスチャが保存される
+
+## 応用方法
+
+### 汎用的な再利用可能テクスチャ
+- **1つのテクスチャを複数のアセットで共有**
+- タイル可能な設計により、どのモデルにも適用可能
+- 異なるスタイルが必要な場合のみ新しいテクスチャを作成
+- プロジェクト全体の一貫性を維持
+
+### プロシージャルなバリエーション
+- **パラメータ調整だけで無限のパターン**を生成
+- Ramp Gradient の Direction を変えて波の向き変更
+- Transform 2D のスケールで波の密度調整
+- Distort の Scaling で波の振幅を変更
+
+### リアルタイムイテレーション
+- **Copernicus Material Preview + ビューポートロック**で効率化
+- パラメータを調整しながら即座に結果確認
+- アーティスティックな調整がスピーディに
+
+### 複雑なディテールのレイヤリング
+- **Tile Patcher** でプロシージャルな傷・汚れを追加
+- Blend や HSV Adjust で微妙な変化を重ねる
+- ランダムな Position、Rotation、Scale でリアリズム向上
+
+### 様々な形状への適用
+- **Cylindrical Projection** でポット形状に最適
+- `$DY`（バウンディングボックス）を使った自動スケーリング
+- Initialize でリセットしてから手動調整も可能
+
+### カラースキームの実験
+- **Ramp RGB** で素早くカラーバリエーション試行
+- 補色、モノクロ、カスタムパレットを簡単に切り替え
+- ビューポートで即座に確認
+
+### Normal Map や他のマップの生成
+- **同じワークフローで Normal Map、Roughness Map** なども作成可能
+- Copernicus の専用ノードを活用
+- ゲームエンジン対応のマップセットを一括生成
+
+## まとめ
+**Copernicus** を使ったプロシージャルテクスチャリングは、シンプルな波模様から始めて、無限のバリエーションを生成できる強力な手法です。**SDF Shape → SDF to Mono → Distort → Ramp Gradient** の基本パターンを理解すれば、複雑なパターンも構築可能です。**Copernicus Material Preview** によるリアルタイムプレビューと、**UV Projection** による自動スケーリングにより、**効率的で柔軟なテクスチャパイプライン**を実現できます。1つのタイル可能なテクスチャを作成するだけで、プロジェクト全体のアセットに適用できるため、メンテナンス性も優れています。
+
+---
+
+# トランスクリプト
+
+[00:00] Now next part is, uh, doing some texturing on this model with, uh, Copernicus. Uh, so let's start by making a texture
+
+[00:07] and then later on we can just put it on our mesh. So let's do Copernicus network and we're gonna make a texture over here.
+
+[00:14] Now I kept the Turing quite simple and I created a wave. Now the way how we make this wave,
+
+[00:22] this is just still me trying out Copernicus and there might be better ways of doing this. I'm gonna start out by the, uh, shape notes
+
+[00:32] and take a rectangle. And we want to put the size here, like so, something like that. I can always modify it later on, but something like this.
+
+[00:45] Then I'm gonna change this to, uh, mono. So SDF to mono. If you don't know, we're gonna convert this SDF sign
+
+[00:52] distance field to a mono, which is a single value or a gray scale value. If that's more understandable in terms,
+
+[00:58] we're gonna just simply do this. So now we have a simple shape and I wanted just, I wanna distort this to create a wave.
+
+[01:05] And one way that I've figured it out, how you could do it, uh, is by just using the distortion notes.
+
+[01:10] So distort by slope and we just need to create like, um, a ramp or a gradient. We're gonna type in ramp ingredients that sort of has that,
+
+[01:20] um, changes. So we're gonna here create this ramp and we're gonna do a hill option. So click on this icon, go with hill,
+
+[01:28] and this will then be my, uh, direction. So you can see this will calculate some direction and you can kind of see like these two different values will
+
+[01:35] be used then, uh, distorted shape. Now you might not see much going on. You can try playing around with the scaling.
+
+[01:42] Not much is changing just because the direction is not set up like I want it to be. So let's go with a direction of 90
+
+[01:49] and now you very slightly saw it, but we definitely to increase it here. But you can see that now we are kind of like
+
+[01:56] creating a simple wave. So it can really play around. And this could be very funky to create some cool, uh,
+
+[02:04] different shapes for your, uh, plants. Um, but I'm gonna keep it very simple and just keep like a simple wave
+
+[02:12] and just maybe even say like, Hey, I just wanna have a simple wave and now I can do a transform.
+
+[02:19] So let's do, uh, transform 2D and we can play around with some of this scaling and stretched a bit more.
+
+[02:26] Uh, so I do wanna make sure that half of my texture is the back value. Half of my texture is the white value.
+
+[02:31] So I can, uh, move this around. So you can see that let's the, oh, let's, let's say I wanna move it downwards,
+
+[02:39] but of course we are repeating a texture which is not ideal in this case. Uh, and we can actually easily solve this
+
+[02:44] by adding here a constant, uh, mapping value. So we'll clamp that value and I can now scale that like so,
+
+[02:52] and we still normally have a tillable texture out of this, as you can see. So, uh, I can just use this as a horizontal
+
+[02:58] Tie option and we can actually also tile this ourselves as well. So if you want to tile this, we do need to know the node,
+
+[03:04] 'cause I set the board to, uh, clamp. So let's do another transform node and let's see if we can maybe tile the waves.
+
+[03:14] So let's do scale. Oh, should be 0.5 for example. Now we have a few more waves. So it's, as you can see, a more tillable, uh, option.
+
+[03:25] And now the only part left is some coloring. This is roughly a mosque that I've used. And then we can just simply do blend,
+
+[03:32] and I would just use this as our mosque. And only thing left is to make something like a ramp with colors.
+
+[03:38] So ramp RGB. And we're gonna go from a vertical. And this is already kind of like a nice score,
+
+[03:47] but maybe we need to do some tweaks. So let's see what we can do. Um, so let's do, I kind of like this
+
+[04:04] and this is just for example, one chord and then I'm gonna just use a masking like this and I can quickly
+
+[04:15] just like you shift it and see it. Uh, so let's play around and let's maybe make it a bit darker.
+
+[04:25] Maybe it could be blue, maybe it could be else. This is more complimentary colors. Uh, so maybe something like that could actually be fine.
+
+[04:35] This is my texture. And in the final project this is, this is all we generate, just a simple color texture.
+
+[04:42] So this is what we do as output. If you wanna render this out into an actual texture, you can go through the rope output image
+
+[04:49] and you can just drag and drop this note over here. And you can see now there should be a link to each other
+
+[04:54] and you can give this a proper name and just simply say, uh, my texture dot BNG for example, and then click export.
+
+[05:05] And then you should have the textured at the given location. It's a simple as that. You can also try to generate normal maps and other maps.
+
+[05:12] There are, uh, tools for this. So we can, uh, also or scatter some details and scratches. That's all possible to add some more details.
+
+[05:21] For example, if you want to add some scratches, you would do like a tile patcher node and you could use that to, uh, add some randomness in there.
+
+[05:29] So I will maybe give a quick example of how we could do it. Uh, so let's go with a, uh, random shape.
+
+[05:36] Let's do maybe circle. And in there we want to offset the, the position. So this is the position we're gonna, for example here,
+
+[05:44] creates lots of random positions as you can see. And we can also add random rotations. Uh, we need to set this to varying.
+
+[05:52] And now we can add random rotations. Well, there are circles, so you won't be seeing the Rotations at this moment, but you will see it when we
+
+[05:59] actually do random scaling or sizing. So each of these dots, uh, as you can see here, we can actually add some random scaling to it.
+
+[06:07] And now we can see that we are creating these scratches. Uh, and we can do here a uniform or a random scale.
+
+[06:13] So set to vary. And now we can have some random scratch marks. Uh, again, this is up to you if you want to add this,
+
+[06:21] but it could be cool, uh, for some more detailing. So we can add lots of like random, uh, detailing.
+
+[06:29] Uh, so yeah, um, you can do the same trick that we did before, uh, by blending this in. Or you can also do HHSV moss
+
+[06:40] and use this as your mosque layer. And I can for example, say that we want to, as you can see here, make this a bit darker,
+
+[06:49] make some dark spots, and you can easily tweak this with the note. And you can also add random, uh, values.
+
+[07:00] This might also be useful. So that's good to values. So this too random and now we have some more
+
+[07:06] randomness too with that. So yeah, this is, again, if you're familiar with some of how procedural texturing is done
+
+[07:13] and other packages you might be familiar with some of this as well. Uh, 'cause some of the same IDs are, uh, easy
+
+[07:19] to apply here as well. So for us, uh, what we mainly did is keep this very subtle. Like we just want to have something
+
+[07:26] that maybe has little scratches, but not too much. It should be like a nice clean, uh, shape or texture.
+
+[07:33] Now we can also do modif, uh, view this on our model. So we're gonna have to go back or,
+
+[07:38] or currently this is the model that I made and the uvs on that wasn't great or we don't even have uvs probably.
+
+[07:46] And the way that I did it is just simply using a production because we have something that is tillable,
+
+[07:51] we can just project it and it will tile from itself. So I'm gonna do UV projection, uh, but in a more, uh, spherical cynical sense.
+
+[07:59] So here, uh, Synical and you can press the initialize button. Uh, but you can see now it's kind of not really what we want it to be.
+
+[08:07] So I'm gonna reset all the values, which could be done by control with the mouse. And what I mainly want to do is here, first of all,
+
+[08:17] set, uh, the Synthroid. So we're gonna use a Synthroid function and this will be here zero dot dimension of y.
+
+[08:29] And now only thing left I would say also is maybe the scale. Let's say if someone creates like a very big object,
+
+[08:36] we also want to make sure that the scaling is done, which is, can be referenced to the banning box.
+
+[08:40] So we're gonna measure, uh, the banning box scale. So which will be DY size. So the dimension of the y size is,
+
+[08:48] and now it's perfectly in the middle and scaling. So our reviews are kind of decent and We can now use the Copernicus material preview note.
+
+[08:58] So this node by itself won't be doing too much. It's just basically able to reference Copernicus layers or uh, nodes.
+
+[09:05] So the way how it works is in this node we're gonna go to, instead of constant source value, we're gonna go
+
+[09:11] to Copernicus node and we're gonna reference to our no note that we made before, which is just called out in my case.
+
+[09:19] And if everything went right, you should be able to see our prop like this. And now it's actually pretty cool that we can go back
+
+[09:28] and forward and tweak the round. I do see that I have some guess not properly av at the bottom.
+
+[09:35] And I probably the, the easiest for solution right now is just multiply, uh, this by 1.0, say five, and that will just make it nice
+
+[09:47] and the way how we expect it to be. So I can lock my view parts. So this is a pin that will lock your view port
+
+[09:53] to this, uh, network. We can go back to Copernicus and I can say, uh, my transform here because this is the tiling of the pattern
+
+[10:04] and we can say something that tiles way more like this. And now you have something like that. Or again, you can play around with different patterns.
+
+[10:12] So this is the cool part where you're basically trying to find out, uh, the style a bit. So I can go back here and like I mentioned
+
+[10:20] before, we can actually really play around with this and do something very funky. Uh, if this is what you want, uh, you can do that.
+
+[10:29] Uh, but I will refer back to the hail shape or we can just randomly click this and just see what comes up.
+
+[10:37] Uh, if something works or doesn't work, you will just figure it out quite quickly. Um, but you can create some cool patterns as well.
+
+[10:44] Um, again, I kept it quite simple in, in, in most cases here, but you can do a lot more cool stuff.
+
+[10:52] Uh, and just play around like if you want to see more of these damages, uh, you can see that we can now nicely see it on our model.
+
+[11:00] So yeah, so this way, um, we can just check how it looks and if we're happy, don't forget to export your texture.
+
+[11:06] Click the button, export texture. And this texture is reusable for every assets that we make with this tool. So this texture you only need to generate once.
+
+[11:15] This is a very generic tellable texture, so don't worry about like making multiple textures. Only if you want different styles,
+
+[11:23] then you can make multiple textures. But the ideas that we have one texture that can, uh, cover all the different models that we generate
+
+[11:30] with this tooling. So now this would be roughly my new, uh, ending. This is mainly for previewing the Copernicus
+
+[11:37] layer that we have. So that will roughly be the tool. And in the next video, let's wrap up a few of the things
+
+[11:44] that are left.

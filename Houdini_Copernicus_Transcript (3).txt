@@ -1,0 +1,979 @@
+## Don't Run from COPs | Nikola Damjanov | Houdini 20.5 HIVE Paris
+
+https://vimeo.com/970685082
+
+[00:11] Thank you, thank you, thank you. Uh, it is been a long day, right? I mean, two days, especially for people
+
+[00:15] who are there yesterday, uh, as well. So thank you for staying so, so long. Uh, we seen some incredible stuff.
+
+[00:21] I mean, I'm not an animator, I dunno about you, but I cannot wait to go back home and just like try to fly the toan above Electra
+
+[00:28] and just drop, wreck those spiders with increasing number of legs. That, that's gonna be super fun. And we also witness, I think, a high first, right?
+
+[00:36] Uh, a quiz on a, on a hi. So you might be starting a tradition here. So yeah, disregard the Olympics.
+
+[00:44] This is the new, the new stuff that we should focus on. Uh, nevertheless, thank you for having me. Uh, uh, again, and I say again
+
+[00:50] because I was here last year, uh, that's the, I'm gonna repeat the photo again this year, Chris. Sure, sure. Yeah. Okay.
+
+[00:57] So we should probably wrap this up so we can catch a little bit of sun and get a better photo.
+
+[01:01] Uh, it was super lovely being, uh, here last year. Uh, I kind of got a chance to visit like one third
+
+[01:06] of the Paris that I wanted. I I did two second, third this year, so maybe next year I can do the pool, the full tour.
+
+[01:13] Uh, but I did get a chance to meet a lot of wonderful people. Some of those people are here as well.
+
+[01:18] I don't know, it's like maybe somebody from the audience is in the audience. Uh, again, are there any people
+
+[01:22] that were here last year in the audiences? Oh, nice, nice, nice. Fantastic. That's lovely. I mean, last year, uh,
+
+[01:31] my talk was a bit different than today. What today thought it's gonna be about last year, I had a chance to kinda like little bit guide you
+
+[01:38] through my, like, journey over the last few years, how I dealt with procedural and how I incorporated it with my both daily job
+
+[01:45] and, and my doodling. Uh, this year is gonna be a bit different. Uh, some things did not change. I'm still like working in, in mobile games,
+
+[01:53] in the mobile gaming industry. So my day-to-Day, like procedural problems are usually around stuff which you see here on screen.
+
+[02:01] So I'm dealing with crowds, I'm dealing with customizing player characters. I'm dealing with like VFX and stuff like that,
+
+[02:07] but on a mobile gaming level, which is a bit more subdued. Uh, but that's why I, I do tend to kinda, uh,
+
+[02:13] like take every chance that I get to work on these, like, personal projects. I, I tend to be very jealous with my, with my free time, not
+
+[02:20] to take any like, commercial stuff. I wanna focus just like, ah, my time. I wanna do things that I want. Uh,
+
+[02:25] and I, I just jump around. Like, sometimes I do things for, like, for November, sometimes I have different, uh, rabbit holes.
+
+[02:31] There's a bunch of projects which I still haven't finished. Hopefully. This also, this maybe already like a year and a half old, but my current rabbit hole is like, uh,
+
+[02:40] procedurally replicating stuff from Scavengers Rain. And I, if you haven't seen that show, it's a amazing show. Definitely go and and check it out.
+
+[02:48] I think it's a masterclass in, in, in visual storytelling. So that's my current rabbit hole. But one of these projects was like, happened a couple
+
+[02:56] of years back when I was involved in like, producing the, the donning short. Uh oh. Yes, yes. This was super fun, uh, on many levels.
+
+[03:04] Uh, um, it, it was challenging for me. But what was cool is that I was the kinda responsible for all the terrains and like height fields were super
+
+[03:13] awesome for that are like easy no problem. Like iterations, speed, everything, everything, everything like job done. But like the texture in part I was kind of doing outside
+
+[03:22] of kini, I was substance painter. It was okay, but you know, like when you touch, when you're dealing with bunch of height fields, you need
+
+[03:28] to ping back the data. Things can kind of get, uh, like tiresome at certain point. So as like a cherry on the top of that effort, we wanted
+
+[03:36] to create this tutorial for the, for the height fields, for the side effects website. And it, it, it was supposed to kind of transfer a bunch
+
+[03:43] of the techniques that we did from the, uh, from the, from the shorts to the tutorial. But I also wanted to do everything in in Houdini.
+
+[03:51] I kind hope, like I'll just use cops. I mean, how hard can it be? And I'll texture everything, uh, uh, there.
+
+[03:57] And that was my first like, actual production experience with cops ever in Houdini. I mean, like bigger than dropping out three nose
+
+[04:04] to do something very, very simple. And it was challenging. I mean, for me, it, it didn't felt like the rest of Houdini,
+
+[04:11] it was missing a lot of performance. I couldn't wrap my hand around with managing all the image planes. It's just not made for me in a sense.
+
+[04:19] I can manage to do everything, uh, for it, but it, it was probably not my Go-to, uh, tool at, at that point.
+
+[04:25] So it's kind a bit surprised when he called me, uh, like to test out the new Copernicus. Like, no, my Copernicus impression is probably the same
+
+[04:34] as my, uh, NUS impression. Like, no, like, what you wanna test me the new one? Is it gonna be better? And they said like,
+
+[04:41] it's not only gonna be better, we're gonna, it's gonna be so much better. We we're gonna skip the cups 2.0, it goes straight
+
+[04:48] to cops 3.0 because it's so much better. I was like, okay, okay, okay. Like, hold your horses. I wanna check how this looks.
+
+[04:55] And I think it was the first one who actually demoed it to me over over a Zoom call. Uh, and he was super proud about
+
+[05:01] to about all the SDF shapes, which I think he implemented in the, he might correct me here, but he was really proud.
+
+[05:07] All right, yeah, yeah, yeah. And they're awesome. As they have shapes, you can do a lot of stuff with them.
+
+[05:11] Uh, so when I actually got a chance to, to, to like, to play with the tool itself, I was surprised.
+
+[05:17] Like I was Copernicus, I was surprised, uh, in, in a sense that, okay, cool, like this feels natural, feels like a,
+
+[05:22] like a workflow that I can like that even because we didn't have any, any documentation because RT was like alpha, beta level.
+
+[05:30] It felt like something I could easily switch to. It felt like the rest of the Houdini, the speed was there,
+
+[05:36] like it was really, really, really fast. And even though it had a limited tool set, like when you actually could combine it with the rest
+
+[05:43] of the power that Houdini kind of gives you outta the box, it really showed potential. So we kind of devised this plan, like, cool,
+
+[05:50] we're gonna do some things. We're gonna create three shiny nice materials. We're gonna render out some share balls, and then we're gonna present that at, at hi,
+
+[05:58] all good, fine, no problem. Plan, well done. And that plan, I think went like within three days, I, the plan got ruined
+
+[06:05] because I got so sidetracked with playing around with all the stuff that I could do in, in, uh, uh, in,
+
+[06:10] in cups that I created like a bunch more than, than three materials. And I was like, okay, uh, what am I gonna
+
+[06:16] do about all of this? Now we need to like come up with a new plan. So I thought, okay, how can I demonstrate all these things
+
+[06:22] that I, I I played around with, with cops? So I thought, how about I create a little bit of like small snippet scenes, uh,
+
+[06:30] that we can maybe demonstrate like the power of, of tech tree that, that actually you can do in, in cops.
+
+[06:35] So I created this and it's like everything that you see here, it's like, okay, it's procedurally modeling kini. That's one thing. But like, models are really like playing
+
+[06:43] second pedal to this. But everything here is like completely procedurally textured in cops. And like all these scenes are calorie lying on displacement
+
+[06:52] maps, which render really great actually in, in Karma. Not all, everything here is rendered karma. I have to admit.
+
+[06:58] Something is rendered in, in Octane, but it's kind of mix, mix smash. But that's just kind of, I thought like,
+
+[07:03] can I use just like simple geometry and rely on, on textures to build up some cool scenes and demonstrate how differently,
+
+[07:11] like you can lose cops do to build these scenes. And I know that cops is envisioned to be a lot more than just like, texture, textures, synthes,
+
+[07:17] this part with Houdini. But that was kind of my main focus and that's what I'm going to focus on on today's stocks,
+
+[07:23] uh, uh, uh, as well. So my idea was to kinda run through, uh, most of the, the materials that you have seen here.
+
+[07:30] Uh, not maybe all of them because I, I don't think we wanna stay here like too long. So we'll kind of go through a little bit of a breakdowns.
+
+[07:38] I might talk a bit fast, hopefully I won't, if I do just wait till this really gets released on YouTube
+
+[07:43] and you can like, watch at half speed and, and everything should be, uh, should be, should be fine, but it's gonna be a little bit like cops speed dating.
+
+[07:51] I hope you don't mind. So moving forward, like the first scene, the glass scene, uh, basically like all the glasses are just like carbon shaders
+
+[08:00] and it's just like height displacement that, that I did on them. And these are probably the most simplest, uh, shaders
+
+[08:06] that I've, uh, that I've built the most simplest, uh, textures. And they're simple because basically they rely almost exclusively just on, on a tile,
+
+[08:15] on the tile pattern node. It's a super powerful node because you can use it to build like your base level
+
+[08:21] of almost everything here. And just using the most like bare bones of it, just like picking out the shape, picking up a,
+
+[08:27] a specific rotation that I would like, just blurring it a little bit so it doesn't get that, like hard edges
+
+[08:33] and just little bit of a gradient at the top at the bottom so I don't get like placement errors at the
+
+[08:38] edges of the, of the glass. And you can see here using the material preview node, which also works fantastically well with conjunction
+
+[08:45] with cops and everything because it's fast, it's in the view port, you can just plug in all the nodes that you need here.
+
+[08:51] I'm just previewing height for the sake of, of, of the, of this specific use case. But you can do so much more with it
+
+[08:56] and you can plug in your own custom geometry if you have some specific uvs that you wanna, that you wanna test out here.
+
+[09:02] I'm just playing around with some shapes, probably not choosing the best one, best shapes to kinda show variation, but you get the, the gist of it.
+
+[09:09] You can actually like model very, very, very, like in real time using just, just textures to, to kind of test out and concept out the, uh, the ideas.
+
+[09:19] And I think I used, like, this is the only use case where, where I use like negative displacement. I just kind of felt that that like subtractive method works
+
+[09:26] well better for kind of glass, it had more control. So I don't have that many intersecting geometry. And like some things maybe you have out out the box in, in,
+
+[09:35] in, in, in cups like twist, but if you just plug like a linear gradient in a in a distort node, you can easily get
+
+[09:41] that twist all the way, uh, all the way around. And similarly for like the other shapes of the glass, uh,
+
+[09:47] again, just a tile pattern, I'm just kinda selecting the, the, the patterns I want at the top, at the bottom, I'm kind
+
+[09:54] of messing out again just to avoid some, uh, displacement errors. I, I'm kinda messing out the top and the bottom
+
+[09:59] and just adding a stripe in the middle manually with a simple wrap. And I did one more like, I call it a Charlie,
+
+[10:04] charlie brown pattern just because I love that, that kind of pattern. You could just quickly just drop in a switch node
+
+[10:11] and just preview stuff and, and continue working. Uh, as, uh, uh, as is now for the KFC, uh, uh,
+
+[10:19] this kind of used more like actually like more than, than than one kind of a system. Uh, let's quickly go through three of them.
+
+[10:25] One is the actual height map for the, for the cellis and the coins and the actual rock face. I am focusing mostly on height maps
+
+[10:32] because when you're building textures, at least in my experience, they're usually the backbone on everything else. Once you kind of build it height map,
+
+[10:39] you can easily extrapolate your roughness, your, your base colors away from that. But that's kind of the most crucial part when you're
+
+[10:46] building stuff, uh, like this. So for the chalice, I mean, you can start something, uh, very similarly as you would actually model this in, in,
+
+[10:53] in subs where you're just gonna, I dunno, ramping a a a p scale on, on a sweep node, but I'm doing something literally the same thing,
+
+[11:01] but just on a, on a, like a, uh, horizontal like vertical, uh, ramp here, just kind of defining that shape in a curve node in a remap node
+
+[11:09] to get the base shape. But just on a displacement, uh, uh, level. Where things start to get interesting is that once you kind
+
+[11:16] of move away from that, like mesh resolution into text resolution, when you start like adding the more and more like level details
+
+[11:22] and as an artist that I start to like working like, okay, now I'm working on some medium level details,
+
+[11:27] I can just maybe replicate a bunch of ramps and then multiply it only at the bottom part to kind
+
+[11:32] of like cut in some interesting shapes. I can just use a simple ramp to mask out where I actually want that, uh, influence to be.
+
+[11:40] I can replicate a many, many of those, uh, of those, uh, uh, uh, ramps. And then do the distortion trick with a twist to twist it,
+
+[11:48] uh, around the chalice. And again, just kinda mask it out, uh, where I, uh, where I want, and you can just see me here like trying
+
+[11:55] to kinda slowly build up, uh, all the details. And at any point you can just go back and change whatever.
+
+[12:00] It's super quick. You can work in one k, 2K, it doesn't really like matter that much. The responsiveness is is usually quite there
+
+[12:08] and it looks even better when you actually render it, uh, out using, uh, using, using displacement. Uh, right now I'm, I think I'm just repeating those details,
+
+[12:17] uh, up there in, in the top part. But they're not representing because they're too small. I think for this, uh, displacement preview a
+
+[12:24] lot, uh, a lot level. And then I'm just gonna trying to kind replicate some of the techniques that I'd used before.
+
+[12:31] I can just use a tile pattern to tie a little bit of, of the rest hexagons and, and polygons at the, at the bottom.
+
+[12:37] We will see them appearing, I think hopefully, uh, soon there. Just like, these are my maybe holders for like gems,
+
+[12:43] which I can remapping and like list sculpt the silhouette a little bit. And when, when you're doing things like this,
+
+[12:50] you should probably be a little bit careful about the number of tiles that you're doing. So if you're leading with, I dunno, uh, eight gradients
+
+[12:56] to cut out the base shape, then your, your evaluational level of details should probably be some multi levels of eight,
+
+[13:02] either like 16 or 24 of those gems, uh, and whatnot. Same approach for the, for the middle part, I'm just isolating the tile sample for that part.
+
+[13:10] This is where I want a little bit more gems. So I have some specific controls. Uh, I found very interesting, like circular base pattern,
+
+[13:18] which I, I wanted to cut out from that middle part to add some maybe like tertiary details. And, uh, at the end, you'll see now one
+
+[13:25] of those fantastic illa as the F shapes is the, is the fish scale one he implemented, which I thought would like, would, will work really well
+
+[13:32] as like engraved detail for the entire part of the, uh, of the chalice. And then in render time, it's just like a simple, uh, uh,
+
+[13:40] like simple tube and everything else is, uh, is, is displacement for the coins. Uh, I mean like too many things where,
+
+[13:48] where the word like the issue here for it's actually kinda creating those, those shapes, uh, of the coins. Uh, I mean, I mean, it's circular thing, like,
+
+[13:56] and you want things to go around in circle and you don't have like a polar distort node out to the box,
+
+[14:02] but you have this like UV sample node, uh, which then you can build your own uvs and you can like distort things in unlimited, uh, uh, ways,
+
+[14:10] or you can distort it on a stop level and then just rasterize it like this. What I did here is actually use like the, uh, like, um,
+
+[14:17] radial and concentric gradients to build my own custom uvs. And then I combine that again, like with the lab library
+
+[14:23] of like prebuilt, uh, SDF shapes to kind of get this first version of, of this like stylized pirate coin.
+
+[14:30] Uh, uh, on, on top. For the second version, I didn't even get bothered to, to actually any, uh, manual work.
+
+[14:37] I just like imported an image. Uh, you can do that and you can convert that image back to an SDF
+
+[14:43] and then manipulate it from from there, which is super powerful option. Similar trick for the, for like a polar, I just
+
+[14:50] typed a bunch of dots in the font, uh, to get that kinda circle, uh, uh, dos like a quick way to, uh,
+
+[14:57] to hack it to get that like second like side the, the, the shape of the, uh, uh, of the, of the coin.
+
+[15:03] And now we come to actually building the, the pile start off with a, like a coin shape, then using that slope direction
+
+[15:10] with a bit of a large, uh, fractal noise to start distorting the, the shapes and giving this edge a little bit more of a, of a breakup.
+
+[15:17] And you can like decide how much of this breakup you actually, uh, you actually want. Then I just plug that straight into a
+
+[15:23] a, a tile pattern node. And this is where I can play out, play around a little bit with like how I'm gonna direct this.
+
+[15:29] Like what are the amount of coins do I want them to be, like more or less, uh, dispersed more or less order.
+
+[15:35] Like I can play with the quotation variation, I can play with scale variation. I can play with many, many things to kinda just start
+
+[15:43] to build this, this pile, uh, a little bit more. But you can see there's still no actual shapes because I'm just gonna getting that UV output
+
+[15:51] or that tile pattern for two reason. One reason is to just get that one channel of the UV to get
+
+[15:57] that like randomized, like slant for each coin. So not every coin is like flat in, in the, in the height map, so that once I multiply this
+
+[16:05] with the original height map, every coin can get a little bit like angles. So we get more nice variation.
+
+[16:10] And I use the, again, the same uvs I get from the, uh, from the tile pattern to actually map on the shapes that I,
+
+[16:18] that I, uh, that I build, uh, uh, in, in, in the previous, uh, uh, notes. And this way I have like that little bit more control, uh,
+
+[16:26] between like actually distributing, uh, the coins and what, what size and what shapes the, the actual coins will, will have on their, uh, on their surface.
+
+[16:35] I could actually just plug probably just the shape directly into the tile sample, but just, I just want a little bit more control, uh,
+
+[16:41] over the entire process. For the rock part, uh, I started with just building one big, uh, rocky shape and like the Pentagon was probably the best choice.
+
+[16:52] You can just, and then you start working as an artist, like from big movements to, to small movements. Uh, I just kinda started distorting the shape a little bit
+
+[17:00] just to break, break, break up a little bit that, uh, organic shape to get something more or less, uh, rocky.
+
+[17:06] Then I start carving out the edges. Usually the trick is you just copy the same shape around the original shape and,
+
+[17:12] and kind of just subtrac it, uh, out. Then I, I just multiply that very plainer looking gradient just to get it like main directional slope on the rock.
+
+[17:21] So once you, once you start combining it, it kind of looks like, like it, it's kind mixing a little bit together.
+
+[17:27] Then I started working on like more little bit of like secondary details. This is where I start introducing, um,
+
+[17:33] like actual edge deformation and, and, and like movements in the rock itself. And like all variants of war, my noise are usually,
+
+[17:40] or water noise are your friend here because they have that sort, like rock looking, uh, uh, shapes to them.
+
+[17:45] And then you can use them and combine 'em to start. I don't know how much you can actually see that,
+
+[17:50] the slight variations in the height map, but I'm just kinda using a bunch of these different noises, uh, either to like distort the edges
+
+[17:57] so there can look like a little, little bit broken or just introduce crevices, uh, into the rock, uh, uh, itself.
+
+[18:03] And sometimes I take this noise and I, I just kinda elongate it in a specific direction if I want like a bit more directionality in the damage
+
+[18:11] that I'm doing for this, uh, for this unique rock. And no rock would be safe without any cracks. Uh, so again, like war nose to the rescue, uh,
+
+[18:20] what I'm doing here is I'm combining like two, two different scales of, of the same noise, just to get some little bit more, uh, variation in the,
+
+[18:27] in the, in the cell size. Uh, you can do like, like two or three levels is the same thing, converting it back
+
+[18:33] to SDF, so I can like convert it back to the mono and get all this nice like edge fall off details.
+
+[18:39] So the, the cracks have some, uh, some kind of a, uh, transfer, uh, to them. Uh, then I'm just running couple of these sorts to, to,
+
+[18:47] so they're not like completely angular and I'm just like breaking up the edges a little bit. And once I just multiply it over the, uh,
+
+[18:56] the base height map, you can choose how much of these cracks you, uh, you, you, uh, you want. Then you just plug that into a tile sampler.
+
+[19:05] You can like tile sample, uh, uh, the tile pattern a little bit to like more of these, uh, variance, like a smaller bunch of rocks,
+
+[19:12] uh, wire, bigger, smaller. And then I start actually subtracting and combining those variances. Well, to get even more variation from this single, uh,
+
+[19:20] uh, uh, rock. And think that the final touch was just me isolating the parts without any rocks. Just introduce a little bit
+
+[19:27] of more like tertiary details here with, uh, without like, isolated parts of a, of a high frequency, uh, uh, noise.
+
+[19:34] And then like kind of bringing that like, idea of modeling with textures to maybe like the, a bit more higher level is,
+
+[19:40] is like this, the tire thing. Uh, we'll go, I think only to two materials here, but like the whole rim is just like
+
+[19:47] displacement from a single plane. And even the, the, uh, the outer rim, uh, of the tire is, is very simple, uh, uh, uh, uh, geometry.
+
+[19:55] So for the actual wall of the tire, this was a bit more of a manual process because I was like actually looking at
+
+[20:01] the reference, uh, on a second monitor and trying to kinda replicate the shapes and the flow lines that you actually get in a,
+
+[20:07] uh, in a tire wall. So I'm just creating some base shape. I'm using a gradient to, to introduce like
+
+[20:12] that directional waviness, uh, trying to match the, uh, the pattern of the, uh, of the, of the tire. And it's super easy to to, to play with it.
+
+[20:21] Just kind drop a distort note and, uh, and a and a gradient. And once I'm happy with the result,
+
+[20:27] I'm gonna just add a little little bit of blur to help this basement look better, plugging that into a tile.
+
+[20:32] Uh, so I can horizontally, uh, vertically, sorry, a tile and then just manually, uh, placing it and I'm just following the same thing, uh, uh,
+
+[20:41] all over again and combining everything, uh, uh, in the, in the end to get the, the, the final texture for the, uh,
+
+[20:48] for the, for the tire wall. Uh, and just like adding it all together to get the, uh, the, the final, the final thing, uh,
+
+[20:55] that you're gonna see right, uh, right here. So it's a bit more like manual, uh, tweaking, but again, it's still very flexible.
+
+[21:01] You can go back and, and tweak whatever you want. The limit itself, uh, I mean if you just look at,
+
+[21:06] at the SDF shapes that I, I I, like, I started building, uh, you would think like, what is this gibberish?
+
+[21:12] It doesn't like come up to, to nothing. And it's very hard to do in this context. Uh, but I didn't watch it in this, this context.
+
+[21:20] I kind of just built like, uh, uh, radially, uh, symmetry, uh, again with a custom uv, just with the gradient,
+
+[21:27] which repeats I think like 14 times, something like that. So you can just build your radial symmetry by a custom UV map that, that you plug in into,
+
+[21:35] into the UV UV sample. And now when you start like building your car rims or, or whatever, not it, it's, uh, it's way more contextual
+
+[21:42] and you can actually, uh, uh, see what you're doing. So you can like, watch this node and then go back to your sdfs and, and, and,
+
+[21:48] and start tweaking them to maybe like adjust the shape and get something that you, that you, that you maybe like,
+
+[21:54] like more or, or wanna or wanna do something, uh, else. Uh, I just stick to this kind of base level,
+
+[21:59] but you can like combine different levels of these F dfs to, to add like addit like more way, way more details to the,
+
+[22:06] uh, to the, to the rims. Then I just cut out the outer shell because I am building like a car tire.
+
+[22:11] I'm building the, uh, the outer rim with a, with a simple, uh, uh, shape. And I'm just like, uh, multiplying that with this, uh,
+
+[22:18] with this like, uh, uh, uh, like a radial gradient because I want that height difference. I want that central hub to be way more in, in the,
+
+[22:27] in the tire, again, using simple shapes to build a central hub and subtracting to build the, uh, the actual hole for the central hub.
+
+[22:36] Now, like the actual out the box, you cannot get like that circular, uh, uh, stamp in the, in, in the tile node,
+
+[22:43] but you can just dive in and, and kind of hijack the, uh, the, the node and just kinda replace the geometry with your simple circle
+
+[22:51] of which has five points. And basically your, uh, you are done with a quick hijack. You get your, your circular DI distribution,
+
+[22:58] and you can build the same way you build your central hubs. You can build your other ones and get the height map for the, uh, for the remits, uh,
+
+[23:05] uh, uh, itself. For this scene, I was trying to kind of figure out how can like subs and cups talk, uh, uh, a little bit more, uh, uh, uh,
+
+[23:15] like in more, in more detail. So we'll talk about this kind of space padding. Uh, uh, uh, uh, first, uh, I, it was actually super easy
+
+[23:24] to do it because I just kind of dropped a couple of, of soap import, uh, nodes there. And the setup is like super simple.
+
+[23:30] It's, it's just a plane we, which got, uh, uh, re meshed. Uh, and I just kind of manually picked out some points which I wanna, uh, pin
+
+[23:40] and run over, like a completely static, uh, uh, volume simulation. And then just like subdivided in in the end.
+
+[23:47] Uh, so, so we can get like ra uh, as, as geometry, absolutely the same process for those three variations.
+
+[23:53] I'm just picking out different types of, of points to get different type of variation for that clot. Uh, for the clot, uh, uh, padding, same nodes, same thing.
+
+[24:03] I'm building those three variations. I'm rest, I'm izing them, uh, to get actual, like height, uh, textures, uh, uh, out of them.
+
+[24:11] And now I'm, uh, plugging each and every one into the basically same kind of a looking tile pattern, but I'm also building this, uh, very large fractal noise
+
+[24:20] and masks out of that fractal noise because these masks will actually drive the, the random distribution of, of those, uh, uh,
+
+[24:28] of those individual, uh, vari, uh, variations and typical, they also drive rotations here, uh, uh, as well. And then I, I just combine them, uh, uh, in the end.
+
+[24:36] And if I want variation order, if I don't like the distribution, I can just go back to the, the initial noise itself, offset a little bit
+
+[24:44] and see, see how this, uh, how this goes. And you can, you can easily extend this to have like multiple levels of this padding so
+
+[24:50] that they're not all, uh, uh, unified. I am using the same type of a tile, uh, pattern to build an SDF just
+
+[24:58] because I wanted that SDF capability of distance to, to start building the details in between the paddings, uh, itself.
+
+[25:06] And I'm just like selecting different, uh, uh, type of, of like SDF to mono versions where I, where I either want like the full frame
+
+[25:13] or just the part of the frame or just the corners so I can build this, like this vision, this like metallic, uh, frame details that go around this,
+
+[25:22] uh, this soft clot, uh, uh, padding. And in the end, I just add them together. And you can always use like a remap node, uh, to,
+
+[25:29] to like determine how how prominent they are in the, in, in the, in the final. This, uh, uh, displacement, uh, the rubber floor thing, uh,
+
+[25:38] again, is a, a tile node as a, as a general starting point. Uh, I think you're starting to kinda get
+
+[25:44] the, the rhythm here. Uh, it's super powerful, uh, node, uh, luckily you already have this, uh, uh, this six sided polygon as, uh, as a base shape,
+
+[25:53] so there's not that much thing they had to build, uh, to get the idea, but I'm kind of blurring it
+
+[25:58] and isolating the edges because I wanted this floor to look a little bit, uh, like worn out rubber. So I wanted like, the edges of the every single tile
+
+[26:06] to be a little bit raised, uh, and like damaged. Uh, so that's why I kinda isolated that edges to just
+
+[26:13] to have the control of, of the raised, uh, edges at certain point. Then I just use a high frequency noise
+
+[26:18] to introduce a little bit of edge damage, which is not that visible here, but believe me, it's very subtle,
+
+[26:24] but it's kind of a rubber thing. I didn't want to go, uh, overboard it. And it is kind of works on, on a scale that,
+
+[26:29] uh, that it should work. I am using the same tile pattern to get that, like per tile variation because I want to adjust a little bit variation
+
+[26:38] between the tile heights, uh, uh, themself and also add a little bit of noise on, on top, just like building out variation with visual interest,
+
+[26:47] one more tile sample to build, like those tertiary details. I, I just kind of scale them down so I don't have to like,
+
+[26:53] tile, tile, a bunch of those things. And I blended them into, uh, uh, uh, uh, together. Uh, and of course I was, I was completely carried away
+
+[27:01] with the cracks I did on the rock, so I, I, I was like, yeah, I, I gotta do one more cracking for the, for the,
+
+[27:07] for the rubber floor, even though it doesn't make that much sense. Uh, uh, I guess again, noise turns to, to literally just to,
+
+[27:14] uh, to edges and you can just wipe it a little bit. In this case, the difference was is that I used another noise to mask it out,
+
+[27:22] so it's not all over the place, it just appears in certain, uh, uh, areas. This thing is completely just textured with one single, uh,
+
+[27:30] uh, with, with one single image. I didn't, I didn't even build the, the color map for this one because all the color, just like in shader
+
+[27:37] with, with some, uh, uh, uh, subsurface and, uh, uh, and, and emission, uh, for, I, again, I'm, I'm, I'm starting with the tile pattern,
+
+[27:47] but this time it's, it's not any strict pattern like I would do for the, for the rubber thing. It's the kind of way more organic
+
+[27:52] and way, way more, uh, added because I'm trying to replicate that organic distributions of, I dunno how, like this alien eggs
+
+[27:59] or what, whatever they are. Uh, they still gross me out. I dunno why I build them. Uh, so I'm just kinda blurring them out
+
+[28:05] to get a little bit more the distribution of the values and, and that can, that sharp preap to just to increase, uh, uh,
+
+[28:11] volume to, so they, they look more like inflated, uh, uh, egg blobs and whatnot. And then luckily, because I can convert them to SDF,
+
+[28:19] I can get the distance away from the shapes and I can remap that distance to get these like al ramps,
+
+[28:25] which are like spreading away from the, that initial initial shapes because I wanted to build this, like, that little bit like organic mess buildup, which is
+
+[28:34] concentrated around those, uh, those, those main, uh, uh, x and I'm hopefully doing that right now. Yeah. Yeah. And then again, just let's boil it a little bit
+
+[28:43] to kind of keep everything a little bit more, uh, more in, in an, uh, uh, organic world. Uh, and now I started like adding, uh, uh, uh, details,
+
+[28:52] just kinda a little bit of a noise breakup. So not everything is perfect, feels a bit more like organic.
+
+[28:57] And even more like ky not that much, of course, be gentle with, with distortion, uh, uh, as well. Just, again, a touch blower, uh, to make it a bit more fit,
+
+[29:07] everything, uh, uh, together. And now I'm, I'm like building this mask because I have this SDF, which I built from this,
+
+[29:14] so I can know, like the distance, so I can isolate just the, uh, like the, the closest distance from those main eggs.
+
+[29:20] I can add variation, just, uh, uh, there. Then I, I, I scattered a bunch of lines trying to replicate a little bit of, um, of a wine shape, uh,
+
+[29:29] like organic, uh, uh, uh, veins, uh, and just bringing that in again, remapped with that steep curve. So they're like, they, they have more, uh, uh, more volume
+
+[29:38] and there's that just bringing this, uh, into the mix with the, the maximum blend level. So it just kind of fits in, uh, uh, uh, nicely.
+
+[29:46] And at the end, I just add a little bit more details around the actual egg, uh, egg shapes, uh, in the, in the end.
+
+[29:52] And I think that the final touch, the final, like tertiary level was this small, uh, grungy bits. Uh, on, on top this scene was more of a, like,
+
+[30:01] actual exercise in like, let's do some, uh, tile patterns, like the, I just wanna do tile pattern, an organic stuff,
+
+[30:07] just really, really tile pattern. Let's put, push that node a little bit to the, to the max. And starting with, with the roof, uh,
+
+[30:14] this will bit more stylized. Um, uh, luckily you already have a, a nice shape, which is called the Quarles Al Quale.
+
+[30:23] Uh, I dunno, uh, which can be used to building this kind of a stylized, uh, uh, rooftops. Uh, again, I kind took out the UV map for two reasons.
+
+[30:31] I needed this kind of vertical gradient that goes around every, every piece of the roof. Uh, two specific reason.
+
+[30:37] One is that because I actually wanted to kinda, uh, directionally blur just the edges of every roof tile. So when you, when you displace it, uh, uh,
+
+[30:46] it looks a little bit more angled, uh, when you use it as a displacement map. And the second reason, uh, was
+
+[30:52] because I wanted to kinda expose those edges and then introduce like this wooden type of, of details only in, in those parts.
+
+[31:00] Now, how do they come up with, with actually building this wood? It's actually a super simple trick. You can just start with like very elongated, uh, noise,
+
+[31:07] scattered some, uh, like faded spheres, blur them out, use them as, uh, like, uh, a distortion, uh, tool just
+
+[31:15] to kind of bulge out the textures, uh, away to create like room for those like wood knots. Then I can blend in regional shapes
+
+[31:22] as well to make them white. Then I can use the remap node. But the trick is that I'm, I'm, I'm repeating the remap
+
+[31:28] and I'm lowering the input max. So the, the repeat is getting repeated the three map over the entire value of the,
+
+[31:34] of the range of the, uh, noise. So you get these like wood level grains, uh, in the, in the texture, which works really well for ized wood.
+
+[31:43] Actually, we could probably extend it to, to get something more realistic. And then I'm bringing those details in only on the,
+
+[31:49] on the edges, because I kind of felt like that's the part where, where, where that could be useful. There's a very cool node called high two ambient occlusion
+
+[31:56] that can give you like this type of a mask. For example, all the crevices, which I use to mask out,
+
+[32:02] uh, a tile node. 'cause they wanted this mos buildups only to appear in those, in those, uh, uh, uh, uh, crevices.
+
+[32:09] And that was kind of, uh, that part, uh, for the actual kind of wall and, and, and like payment type
+
+[32:16] of a, of a, of a pattern. Uh, like this was the tile pattern node out the box. I just picked, uh, a pattern.
+
+[32:22] You have a preset of old bunch of them. This one is actually French pattern I didn't pick up to, to suck up for you guys.
+
+[32:28] So, you know, I did that before I came here. But nevertheless, it's an awesome pattern. Uh, I played a little bit with variation,
+
+[32:34] and again, I'm just isolating those UUVs, but this time I'm like remapping those UUVs to be, uh, like this radial, because I wanted every tile
+
+[32:42] to have a little bit of a bump, uh, uh, on a middle, you know, uh, it's super useful, these UUVs,
+
+[32:48] you can do whatever you want once you actually build the actual tile itself. And again, I'm starting to build in the, the variation here.
+
+[32:55] Now, both in actual height difference, I'm just adding subtle height differences here. They're a bit exaggerated right now when you see them,
+
+[33:01] but when you lower displacement, they're, they're like, right, uh, there, where, where they're supposed to be. But what I'm also doing is that I'm selecting only a part
+
+[33:11] of these tiles because I wanted some of them to be cut cracked, but not all of them. So I'm like just selecting a bit like a percentage of the,
+
+[33:18] of those tiles that I got from the tile generator. I'm building a, a, a completely new part of the cracks,
+
+[33:23] and I'm only cracking those parts, but then I'm plugging that to a connectivity node, which can gimme a UV for all the new specific shapes.
+
+[33:31] Why? Because I want it now that every cracked part of the tile has a different rotation. So it kind of feels little bit more organic.
+
+[33:37] It's not just cracked. It has also moved after it got cracked, uh, on a, on a, on, on a texture level.
+
+[33:44] Uh, and I start introducing the, like all those variations back into, into my main flow, uh, adding in the, uh, edge variation, the edge variation here.
+
+[33:53] The cool trick is that, uh, once you start distorting it with, with some, uh, noise, the Kool-Aid trick is to, uh,
+
+[34:00] just mix it, uh, back with the original. But on a, on a, like a minimum blend level. And what that does, it actually just kinda sculpts away the
+
+[34:07] edges because just keeps the minimal, uh, value. And it literally works. Like you're going in, in a ZBrush and like doing like a trim dynamic type of work on,
+
+[34:15] uh, uh, uh, on an edge. It does magic. So again, I'm introducing the, the, the variation in, in per correct tile mode.
+
+[34:22] And I'm also gig, like now isolating a little bit the edges because I want to add some, like even higher frequency variation, uh, uh, there on
+
+[34:30] that part, uh, as well. And you can like, play around and then just like adjust the distortion to see how,
+
+[34:35] you know, and it's a super simple noise in the end, just a little bit blurred to build like that ground level grout, which goes, uh, in between the,
+
+[34:43] the tiles, uh, uh, themselves. And since, uh, and I just like a little bit introduced the gap, slight gap
+
+[34:51] between the tiles and the grout just to kind of sell. It's, it's a bit, uh, uh, old and their stuff, uh, uh, uh, appearing there
+
+[34:59] and smaller rocks, uh, distributed around the tiles, uh, themselves. And since this is kinda, everything is basically driven, but that, but that, but that first tile load,
+
+[35:08] you can just go in, pick a different tile and everything regenerate, uh, uh, itself, like immediately you can get just variations, like, I need,
+
+[35:16] like this walls, this, this payments, whatnot, and you can even go back there, okay? But I want more cracks on, on more elements,
+
+[35:23] and it's super responsive and, and super fast, so you can just build stuff like this all day around. Now, for the mosaics mosaic was a bit trickier.
+
+[35:33] Uh, uh, I didn't like, because you don't get these like, circular things out of the box. I didn't hijack the, the tile node.
+
+[35:39] Uh, this time I just gonna build it my own, uh, uh, like point cloud. At first start from a circle.
+
+[35:45] You just do that kind of 2D expand node. You can select how many of those circles you want in, in
+
+[35:51] between, you resample it to get the even distribution node of points. So like that every, that mosaic type is, is, uh,
+
+[35:57] piece is, is correct. I just added one more.in the middle, uh, and like calculated the normal so they, so they can align
+
+[36:05] to the, to the shape of the, of the circle. And then I can plug that sub directly to the stamp, uh, uh,
+
+[36:10] uh, node to get the actual elements of the mosaic. I did a similar thing, but just kind of building the, uh,
+
+[36:17] the, the, the, like the rings, and I'll show you why I build the rings, uh, as well. Then I just took the UUVs from, uh, like a tile sampler node
+
+[36:25] with just simple circles, because that I just need circular UUVs, which overlap. And then I resampled that, that base, uh, uh, shape,
+
+[36:33] which kinda allowed me to keep that control, uh, uh, uh, separate. And I did the same thing for the, uh, uh, for the rings.
+
+[36:39] Why the rings? Because once I started plugging these new shapes into the, like, segment by connectivity, I couldn't get like, per ring
+
+[36:46] and the per mosaic shape, uh, uh, variations to build out the, the color and the sl for every part of the, of the, of the mosaic.
+
+[36:56] And you'll see me doing that this right now. So for the color, uh, which I should be starting working on now,
+
+[37:03] something is really difficult to time your talk with, with the videos. Uh, and I'm talking fast, so, and talking too fast, okay.
+
+[37:12] Oh, cool. Oh, that's first. So I'm just gonna remapping the gradients to this, uh, ring. So like the, the, the majority
+
+[37:18] of the ring has the same color, but then I'm, I'm using the variation, uh, from a, uh, like mosaic piece to actually introduce a little bit more
+
+[37:25] of a, like, hue variation type of, uh, uh, uh, of a thing on a per piece, uh, uh, uh, level.
+
+[37:32] And again, since it's driven by basically by one node at the end, you can just like choose how many
+
+[37:36] of these things you, uh, you want and build your variations. And it wouldn't be a Houdini presentation without flower
+
+[37:43] simulated in value. I guess that that's the trend for the last couple of, uh, uh, of years, uh, the correct ground.
+
+[37:50] This scene, uh, was actually super easy because it just, your, your friendly, uh, noise, uh, like you go, you start with it, you, you choose your,
+
+[37:58] your scale that you, that you want, you get this like t variations, so you can control, control it. Uh, you remap it a little bit just so you can like,
+
+[38:07] balance out like how deep are the, how deep is the middle part, or how high you edge you want your edges.
+
+[38:14] And then you start introducing details. Of course, hopefully you will learn. Now this add levels of distort using noise to,
+
+[38:22] to break up the edges and add visual interest. I'm also using the same noise to I convert it back to edges
+
+[38:28] and add just a little bit of more, uh, kind of a crack details, uh, on top, but still keeping my main fault clients, uh, like dominant.
+
+[38:37] And I'm using the same distort as it did on the, uh, uh, on the main shape, just so they,
+
+[38:42] so they match up once I start reintroducing them, uh, them back. And I just kind of multiply or sub track whatever I, I've built to build the tracks in
+
+[38:51] between those specific, uh, elements, uh, of the, uh, of the noises. And just like a little bit of just a random noise at top.
+
+[38:58] You are building like dirt and rocks. Just add a bunch of noise. You're not, probably not gonna do anything
+
+[39:03] wrong and just mask it. Uh, uh, out scarf was a little bit interesting because I had to actually like,
+
+[39:08] build this initial neat piece. Uh, uh, uh, first this was little bit like ping and pong, uh, trying to figure out what works, uh, best.
+
+[39:18] In the end, I just took one shape and like, uh, distorted it, uh, uh, but just like the, the top part of it, that was kind
+
+[39:25] of the best way to, to do it. Then I mirrored it to get the, the second part of that, uh,
+
+[39:29] shape and it with a simple, like fade out swir to get this like, uh, uh, I don't know, bulge, uh, uh, out of it.
+
+[39:36] And that's kinda like my main knit, uh, uh, uh, shape, which then I started adding details, just a little bit of, of edge breakups.
+
+[39:44] So not, and not everything is, is, is perfect. Uh, again, this just like little bit of noise, introduce details.
+
+[39:50] I tried to introduce little bit of like loose hair here and there, but this was absolutely not visible on, on, on the scale.
+
+[39:56] I was, I was, I was working at. And then I plugged the same shape in two tile sample nodes
+
+[40:00] with just like, different rotations and I can blend them together, together. This like nice styled, uh, uh, neat, uh, uh, uh, texture
+
+[40:08] and just like for a global level of variation. One more, one more like level of, of distortion, uh, on the,
+
+[40:14] uh, at the, uh, and the end and the flower was, I was, I just wanted to like, see if I can just like model
+
+[40:21] and do the flower everything in, in, in one go. Uh, and like, there's different type of ways you could probably do the base
+
+[40:27] shape of the, of the pedal. I started out doing it, uh, like this way, just starting with a, like a simple circular shape
+
+[40:34] and then trying to massage and distort it in, into, into a position. Uh, it kind of works, uh, but it's not to that kind obvious, you can like mirror it
+
+[40:43] and can get much better way is just to start, uh, with like linear gradient, rotate that remap the bottom part.
+
+[40:51] And when you subtract, uh, the those two and threshold it, uh, you literally get what you, what you remapped.
+
+[40:59] And when you mirror that and go back to the remap node, the thing that you are, uh, like actually remapping is the,
+
+[41:05] is the thing that you, that you can actually get. And this is way more direct and way more, uh, uh, easier,
+
+[41:10] or you can just model it in subs or you can just import your own image. It's up to you. Sometimes I like
+
+[41:15] to make my life more difficult, so that's why I did it. Uh, uh, uh, this way it's more fun that way.
+
+[41:19] Come on, you all know this now. Just levels of, of distortion, probably just kind of building my, my like base level of opacity, uh, map,
+
+[41:29] which I'm probably gonna plug something like this back to the image trace node, uh, on a sub level so I can get the actual mesh to, uh, uh, to simulate.
+
+[41:37] And I'm trying to build like the rest of the organic parts of the flower. I wanted that like organic flow
+
+[41:43] that the flowers usually, uh, have. So I just kind of distorted this elongated noise in, in one direction, and then I mirrored it, uh, onto itself.
+
+[41:51] So you can get this just like, uh, like these organic wind structures that are moving away from the, uh, uh,
+
+[41:57] from the, from the middle. Again, just the remapping with this little bit of a more steep curve to having
+
+[42:04] that little bit more organic, uh, uh, shapes to the, to the entire thing. And in this case, I'm trying to isolate all of this height,
+
+[42:11] variation and distortion lower to the top part of the flower, because that, like, the older part of the flower and the newer part is lower.
+
+[42:18] So I wanted like less distortion, uh, uh, uh, uh, there. And I think like, like this was like probably the, the stage
+
+[42:25] where I, I started kind of started building off the, uh, the, the color for the, for the flower, uh, uh, as well.
+
+[42:33] Uh, so I just, I just kind of branched off from the height map. Uh, at certain point, uh, I built like this basil color based on, on this,
+
+[42:42] like just mixing two noise in two colors. And I, and I used this to add a little bit more details, uh,
+
+[42:49] uh, uh, there, then I wanted like just kinda blur the height map to get a bit more color variation on the edges.
+
+[42:55] I wanted the flower, uh, brighter, uh, there, uh, then I used the same eno I did for actually building the shapes, uh, in the flower
+
+[43:03] to distort that circle there. So I can mask out a color in the bottom part to start getting that kind of like, color following the,
+
+[43:10] the growth patterns, uh, as, as well. And then just, uh, one more color variation, just super fast just to kind of test out the,
+
+[43:17] uh, the, the things. And this is where, where I try to kind of build something which is, uh, okay,
+
+[43:23] like can I now animate? How, how would cops work if I start animating the, uh, uh, the, uh, the, the textures?
+
+[43:30] And maybe you saw this, uh, maybe you didn't, I don't know if you saw the, the, the, the, the peak and the snake peak.
+
+[43:36] So this was all basically built around like one, like it's two noisy, just blended together to give me like a starting position, uh, uh,
+
+[43:45] for this like rust type of, uh, uh, uh, of an effect. So it's basically like that noise, it's the starting position.
+
+[43:51] And then from there on, I like branching with two remap, uh, nodes. One is just doing the threshold thing,
+
+[43:56] which kind of determines scale. This is the difference between, its, it's metal, but it's, it's rust and I can like slide between it.
+
+[44:03] And the other one, the bottom one is, is doing basically the same thing, but it's also giving me that fade away,
+
+[44:09] so it's not like a full hard on threshold. There's some width to it. And I'm using that to kind of bow up the material be
+
+[44:16] before it becomes, uh, uh, actual, uh, uh, rust. And I'm just kind of try trying to add like some kinda like micro cracks.
+
+[44:25] Uh, uh, I think here, sadly, it's not that, that visible. Maybe you can see a little bit, uh, here, uh,
+
+[44:31] because I wanted to like that paint to like start cracking a little bit, uh, before it starts, uh, bulging and,
+
+[44:37] and dissolving, uh, uh, uh, into noise. And the actual rust is just like bunch of noises, high frequency noises that you can eventually, uh, remap to,
+
+[44:47] uh, to rust color, uh, uh, uh, texture. Uh, I also tried like doing some little bit of like actual directional scratches, uh,
+
+[44:56] on the surface as well. Uh, uh, but they ended up not being that, that, that visible in the, in the, in the render.
+
+[45:02] I think. Uh, and for the colors, uh, I'm using those same thresholds that I, that I, I'm building, uh, down there, uh, there to,
+
+[45:10] to start building the color as well. Because once I have the mask, what the rust is, I can like start working
+
+[45:15] with some like directional distortions and directional blurs to start building those like, uh, rust, uh, uh, drips away from the, from the rust.
+
+[45:23] And you can modulate this distance. Uh, like for example is is like the more rust you have, the longer the, the drips there are.
+
+[45:30] It's basically just kind of setting up one control and maybe relink everything to, uh, to making, uh, uh, animate.
+
+[45:39] And then like, I, I was thinking about this like rust drips, and they're like, cool, like they work on this texture
+
+[45:44] level, uh, uh, but like, can I make them work on a geometry level? Because it's one thing that you have a geometry
+
+[45:50] where like drips are always going in one direction. It's a completely different problem when you wanna texture procedurally something which has shapes in all the
+
+[45:57] directions, and then you want the rust to actually drip only in one direction. So this was kind of my test to try to replicate.
+
+[46:05] Uh, that is the video playing iris. Okay, cool. So, so the thing is here that I first of all started like adding a bit more like
+
+[46:12] UV based, uh, detail. So I'm kind of moving away from this like tellable textures, but more into like procedural texturing,
+
+[46:18] a specific, uh, uh, asset. And you can like ra ize your uvs and start building things, uh, uh, uh, from there.
+
+[46:26] So I, I built these rivets, uh, based on the, on the UV islands, and it's actually not that difficult.
+
+[46:31] You can just like turn your geometry to uvs, resample all the, uh, the edges, convert them to, to splines
+
+[46:38] and just kinda re-set them a little bit and resample them to get the points that you could just stamp the, the rivets on.
+
+[46:45] And it works out automatically because whenever you change UUVs, this will adapt, uh, uh, easily. And then you can like set up your re-sample rate, whether
+
+[46:53] or not you want like more or less rivets, uh, uh, to, to play around and you can like, insert them more
+
+[46:59] or less to, uh, to get the desired like metallic, uh, uh, uh, look. Uh, after that, I think that just gonna be a little bit more detail,
+
+[47:07] just using like an edge detect, uh, after a a, a tile node. Uh, I just want like a little bit of panel leak to be, uh,
+
+[47:14] introduced in this, uh, uh, entire, uh, entire setup. Uh, but the main, the, the, like, the crux of the problem was actually trying to take those rivets
+
+[47:24] and have like every, every rivet drip in, in a like, world based, uh, uh, orientation. This was kind of a tricky thing to do.
+
+[47:31] Maybe there's some smarter ways, but what I ended up doing is that I, I kind of calculated the down vector
+
+[47:37] before I, I, I, I moved the geometry to thei space, then I reoriented that same vector in the US space
+
+[47:45] and the calculated the difference, uh, uh, between like that angle and the, uh, down angle in the UV space.
+
+[47:53] I hope you're following me because I kind of lost myself as well, a certain point. Uh, uh, and just kinda,
+
+[47:58] and then I'm using the difference between those two vectors to determine like how, how rotated the, uh, uh, the, the,
+
+[48:05] the, like the Sprite is when I, when I stamp it, uh, on then I'm building this like rust, drip, uh, asset,
+
+[48:11] which is just gonna, uh, like kind of its pivot is in the middle. Uh, so once I can introduce it
+
+[48:17] and stamp it with this, uh, like Sprite rotation parameter, it kind of follows the, the road, the, uh, uh, orientation
+
+[48:24] so you can actually get drips, which are going down and following the shape, and then the world, uh, uh, uh, direction.
+
+[48:30] It doesn't work like perfectly well, of course, especially for the underside, when the vectors can get start getting mixed, hopefully there'll be a better solution for this,
+
+[48:38] uh, uh, pretty much too. But you can do it. And it's not that hacky, just like a couple of lines of code, uh, that you can do.
+
+[48:44] Uh, you can see I just like rotated an object and it, uh, like auto calculates, uh, uh, uh, itself.
+
+[48:51] And this is the part we actually, uh, decided to kinda left out of the presentation. Uh, for two reason. One reason is I think it would just kind
+
+[48:58] of be, um, like duplicating the bunch of the things which I already, uh, explained. Uh, and second reason being is that, uh, I can hope
+
+[49:06] that in this whole spirit of community sharing, we we're probably gonna share, I think maybe even all of these materials, uh, pretty much soon,
+
+[49:15] uh, to the community. So you can just go in and, and like actually try to, uh, like create something better.
+
+[49:23] Uh, uh, uh, uh, hopefully. And that is kind of the date. That was the, my, my breakdowns of, of this, uh,
+
+[49:30] scenes fully based on, uh, on, on cops. Thank you. And I am a chatty guy, so feel free
+
+[49:47] to reach out at any point. No, plenty. Sorry, Chris, didn't mean to make you run. Uh, I need to work out, Uh, more kayaking
+
+[49:57] Questions. Uh, thanks so much. It's really amazing and, uh, it's been a really long time,
+
+[50:14] but I never saw, uh, such really cool things in cup with this new. Yes. Uh, and it opens a lot of possibilities, um, about,
+
+[50:25] uh, being able to batch, uh, your displacement into objects. Uh, is it doable right now? Uh, like, uh, I don't know, suppliers and other stuff
+
+[50:37] because, uh, production could use also micro guns. All of these, Uh, uh, are asking me if you can like,
+
+[50:44] turn those basement maps back into the objects. Is that the question? Yeah. I mean, jet, I mean, technically you can, you can just drop a dense enough mesh,
+
+[50:53] you can apply displacement on a sub level and you can re meash it from, from there. And probably the, the new quadrant mesh will probably be
+
+[50:59] your best friend there as well to actually build an actual model, uh, uh, from this. And what's also cool, which I haven't tried,
+
+[51:06] but that just came to mind because the new quadri measure, you can, you can introduce specific guides and then you can probably actually, uh,
+
+[51:13] like bake out like edge maps, uh, from like, from the cops level as well to guide the, the quad,
+
+[51:19] the quadri measure, that that will definitely help as well. Yeah. Um, I, I have got a bunch of questions, in fact, uh,
+
+[51:26] that's a good one. Is, uh, uh, can you, when you import a soap, can you use any attributes that you set into your soap?
+
+[51:33] Like several, uh, vector normal maps, stuff like that? Uh, can You please repeat the Question? Uh, yeah. Um, for now, you, you use a surfing port
+
+[51:43] to import into che. Yes. Uh, can you use any attributes and, uh, Ize? Yes, you can ize any, any custom attributes.
+
+[51:50] You, you have a preset. I think that right now the ize know has some presets Mm-Hmm. Which is like depths. I take normal layer, stuff like that.
+
+[51:58] But you can literally ize any custom attribute that you have in your geometry. Okay. So you can build your,
+
+[52:05] your like edge wear on a top level, uh, using like, I don't know, a measure node, and you can ize that as a, as a, as a mask
+
+[52:12] to use in, in cups. Perfect. And last question. Um, what is the resolution max that you can use in cocus?
+
+[52:20] So, uh, I had no problem, uh, working in 2K. Uh, I'm working on this laptop, which I mean, uh,
+
+[52:27] I think Cocus is like fully run on on GPO. Uh, I'm working on this laptop, which has like, I think 40, 70 mobile.
+
+[52:34] I mean, it's, it's not super high end, but it's not too shabby. Uh, uh, as well, I've been working all the time exclusively
+
+[52:40] in 2K and exporting 4K and eight k, uh, is, uh, I did run, uh, out of memory maybe once or twice,
+
+[52:48] but that was usually the case when I wanted to export like, uh, six, eight K maps at the same time.
+
+[52:55] Okay. Okay. Yeah, it opens a lot of possibilities. Uh, yeah, thanks a lot. But the cool thing is that you can work in one resolution
+
+[53:03] and just like in the end of the line, you can drop a rough note and say, it just render this output at this resolution,
+
+[53:09] and it'll just do that. Yes. Hi. Hello. Um, I just wanted to know if it's was possible to just, uh, draw a pattern and use it?
+
+[53:22] Uh, yes. I mean, you can, uh, I not directly on a cop level, but you can drop a sub node
+
+[53:28] and you can do that new, I think like texture, like masculine texture type of a thing, which is basically 2D volume.
+
+[53:33] You can actually like paint a texture in, in, in, in qian, use it as, as a pattern or whatever you, you, you want.
+
+[53:40] So there's not like a drawing node currently in cops, but you can draw in subs and then just import it, uh, from, from there.
+
+[53:47] Okay. Thanks For, for the, uh, bubble on the wall that's animated. Did, is that an animation in the cops?
+
+[54:00] And how many different expressions did you have to touch to And that Yeah, thank you. That animation is just like the, uh, uh, level
+
+[54:07] of displacement, which I, which I did. I just kinda modulating with a sinus function, the level of displacement over, over time, and just
+
+[54:14] because the type of texture was kind of okay for that use case. Uh, because like the bubbles are the most dominant one.
+
+[54:20] And since, because they're the biggest, uh, they have the biggest value that you, you notice the, the, the change there, uh, the, the biggest.
+
+[54:29] But if you, if you'd like to animate something else, you probably need to do something a bit more complicated.
+
+[54:33] Yeah. But you can just animate parameters directly in crops as well. Yeah. So if you, uh, make material in here
+
+[54:46] and you, let's say you just assign it in a, in, in Solaris, does it sort of bake it to actual texture beforehand or does it stay live?
+
+[54:55] Because let's say you have a thing and you zoom in it, like just to like a macro level, is it sort of automatically update
+
+[55:02] or is it fixed to the resolution that it's set that you're in on the, on the cop level, or does it automatically sort of, uh,
+
+[55:10] As far as I know, it's fixed on the level that you're, you're working with because I think it, it needs
+
+[55:14] to be built out to some kind of a, a texture, especially if you're using like XP or something, it needs to be transferred to, to some level.
+
+[55:22] Uh, and I know we, we discussed this before. There's this example of it, this like, uh, uh, like very intricate pattern type of a thing that,
+
+[55:29] that they did for the sneak peek. Uh, I, I'm also very curious how they did that. I'm guessing it was like multiple levels of texture.
+
+[55:35] So when you zoom in, you get higher and higher and higher a resolution. Yeah, that's what I was wondering if that's sort
+
+[55:40] of a live thing that keeps updating that you just keep getting more detail the closer that you get, or if that's not No,
+
+[55:45] No, no, no. This, yeah, you're bound to the resolution that you're, you're working with Two questions, Just one question, just,
+
+[55:57] um, great presentation. Thanks so much. Thank you. The SDF notes, they're all, uh, generator nodes. Are they, or are you, is there anything to sort
+
+[56:06] of generate SDS from things like edge detections or stuff like that? So, uh, uh, I'm sure that the tele can give you more info,
+
+[56:14] but you have this like base level of SDF shapes and there's a lot of them actually already implemented there, which are just like,
+
+[56:21] like your usual f implementation. Uh, but what's cool is that you can take any black and white image and convert it to, to an SD Fs
+
+[56:28] and then like treat it as DF as an, as an SDF from, from there on. Yeah. It'll calculate the distance based on the, on the,
+
+[56:35] on the like edge values and everything. So literally almost static everything can be turning into an SDF. Yeah. Yeah. I mean, maybe in the future
+
+[56:42] you could just draw curves and, you know, you know, freeze the wars and all that. Yeah. Yeah. Why not? Cool. Great.
+
+[56:55] Amazing stuff. Is there such a thing as a solver cop to sort of do accumulation or feedback effects? Um, do you see any use case for that?
+
+[57:07] That's, uh, I do see use case for, for that. There's not such thing right now. Maybe you can hack it a little bit on a soft level.
+
+[57:15] I guess they could, can probably be, uh, uh, uh, be done. Uh, but what you can maybe do is that you can probably run,
+
+[57:23] uh, like a, like a sub level, uh, simulation type of, uh, of a thing and then like ize that to detect,
+
+[57:31] then drive the cops from Sure. From there. But it's actually a good idea. It might be, I did miss a couple of times, like a,
+
+[57:36] like a forage loop or something like that in Inop. It's not there yet. I don't know if there any plans to,
+
+[57:41] to have it, uh, uh, soon. But I do see potentials in it. Yes. Yeah. And also, is there such a thing as an OpenCL wrangle
+
+[57:50] or some kind of code manipulation sniped you can do? I think there is, uh, yes. Yes, there is. Yeah.
+
+[57:56] I think that basically everything is open seal now, right? So I think there's like literally an open seal now,
+
+[58:00] so you can, if you are like that level of, of a guy, you can drive in and do whatever, hopefully.
+
+[58:07] Thanks My questions. Excellent. Thank you so much, Nicola. You're a real pioneer in the space for sure. Nice work.
+
+[58:24] Thank you.
