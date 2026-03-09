@@ -1,0 +1,25 @@
+# GitHub Copilot が無視するファイル/ディレクトリ
+# コンテキスト圧縮（compaction）を防ぐために不要なファイルを除外
+
+# 生成済みトランスクリプト（サンプル以外）
+transcript-*.txt
+Houdini_Copernicus_Transcript*.txt
+
+# 生成済みマークダウン（サンプル以外）
+video*.md
+study-notes-*.md
+
+# 環境変数
+.env
+.env.local
+
+# ログやキャッシュ
+*.log
+.cache/
+node_modules/
+.vscode/mcp.json
+
+# 大きなメディアファイル
+*.mp4
+*.mov
+*.avi
