@@ -10,32 +10,59 @@
    * Vimeo は Chakra UI のハッシュクラスを使うため、クラス名依存を最小化し
    * 構造的特徴（group クラス + 英語テキストの p 要素）を手がかりにする。
    */
-  const findTranscriptScrollable = () => {
-    // "group" クラスを持つ div の中の <p> が各トランスクリプトキュー
-    const cueEl = document.querySelector('.group p') ||
-                  document.querySelector('[class*="TranscriptList"] p') ||
-                  document.querySelector('[class*="Transcript"] p');
-    if (!cueEl) return null;
+  const findCueEl = () =>
+    document.querySelector('.group p') ||
+    document.querySelector('[class*="TranscriptList"] p') ||
+    document.querySelector('[class*="Transcript"] p');
 
-    // <p> の親をたどって overflow:auto/scroll のコンテナを返す
+  /** cueEl の親をたどってスクロール可能なコンテナを返す。 */
+  const findScrollableFrom = (cueEl) => {
     let node = cueEl.parentElement;
     while (node && node !== document.body) {
-      const style = getComputedStyle(node);
-      const oy = style.overflowY;
-      if (['auto', 'scroll'].includes(oy) && node.scrollHeight > node.clientHeight + 20) {
-        return node;
-      }
+      const oy = getComputedStyle(node).overflowY;
+      if (['auto', 'scroll'].includes(oy) && node.scrollHeight > node.clientHeight + 20) return node;
       node = node.parentElement;
     }
     return null;
   };
 
-  const scrollable = findTranscriptScrollable();
+  /** トランスクリプトボタンを探してクリックする。 */
+  const openTranscriptPanel = () => {
+    const btn = Array.from(document.querySelectorAll('button')).find(
+      b => /トランスクリプト|transcript/i.test(b.textContent)
+    );
+    if (btn) { btn.click(); return true; }
+    return false;
+  };
+
+  /** cueEl が見つかるまで最大 waitMs 待機する。 */
+  const waitForCue = (waitMs = 5000) =>
+    new Promise((resolve) => {
+      const interval = 200;
+      let elapsed = 0;
+      const timer = setInterval(() => {
+        const el = findCueEl();
+        if (el) { clearInterval(timer); resolve(el); return; }
+        elapsed += interval;
+        if (elapsed >= waitMs) { clearInterval(timer); resolve(null); }
+      }, interval);
+    });
+
+  // パネルが未開なら自動クリック → 待機
+  let cueEl = findCueEl();
+  if (!cueEl) {
+    console.log('Opening transcript panel automatically...');
+    openTranscriptPanel();
+    cueEl = await waitForCue(6000);
+  }
+
+  const scrollable = cueEl ? findScrollableFrom(cueEl) : null;
 
   if (!scrollable) {
     alert('Transcript panel not found. Click the Transcript button and try again.');
     return;
   }
+  console.log('Transcript panel found.');
 
   const seen = new Map();
 

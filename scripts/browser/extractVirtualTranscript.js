@@ -9,19 +9,48 @@
     return matches.map(s => s.trim()).filter(Boolean);
   };
 
-  const findTranscriptRoot = () => {
-    return (
-      document.querySelector('.group p') ||
-      document.querySelector('[class*="TranscriptList"] p') ||
-      document.querySelector('[class*="Transcript"] p')
+  const findTranscriptRoot = () => (
+    document.querySelector('.group p') ||
+    document.querySelector('[class*="TranscriptList"] p') ||
+    document.querySelector('[class*="Transcript"] p')
+  );
+
+  /** トランスクリプトボタンを探してクリックする（パネルが未開の場合）。 */
+  const openTranscriptPanel = () => {
+    const btn = Array.from(document.querySelectorAll('button')).find(
+      b => /トランスクリプト|transcript/i.test(b.textContent)
     );
+    if (btn) { btn.click(); return true; }
+    return false;
   };
 
-  const transcriptCueEl = findTranscriptRoot();
+  /** findTranscriptRoot が要素を返すまで最大 waitMs 待機する。 */
+  const waitForTranscript = (waitMs = 5000) =>
+    new Promise((resolve) => {
+      const interval = 200;
+      let elapsed = 0;
+      const timer = setInterval(() => {
+        const el = findTranscriptRoot();
+        if (el) { clearInterval(timer); resolve(el); return; }
+        elapsed += interval;
+        if (elapsed >= waitMs) { clearInterval(timer); resolve(null); }
+      }, interval);
+    });
+
+  // パネルが既に開いているか確認し、未開なら自動クリック
+  let transcriptCueEl = findTranscriptRoot();
+  if (!transcriptCueEl) {
+    console.log('トランスクリプトパネルを自動で開きます...');
+    const clicked = openTranscriptPanel();
+    if (clicked) {
+      transcriptCueEl = await waitForTranscript(6000);
+    }
+  }
   if (!transcriptCueEl) {
     console.error('トランスクリプトが見つかりません。トランスクリプトパネルを開いていることを確認してください。');
     return;
   }
+  console.log('トランスクリプト要素を検出しました。');
 
   const findScrollable = (el) => {
     let node = el.parentElement;
