@@ -34,6 +34,7 @@
 			"args": ["chrome-devtools-mcp@latest"]
 		},
 		"Notion": {
+			"type": "http",
 			"url": "https://mcp.notion.com/mcp"
 		},
 		"context7": {
