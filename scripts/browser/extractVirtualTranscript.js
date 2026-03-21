@@ -11,22 +11,21 @@
 
   const findTranscriptRoot = () => {
     return (
-      document.querySelector('[role="listbox"]') ||
-      document.querySelector('.TranscriptList_lazy_module_listContainer__f67b6693') ||
-      document.querySelector('.Transcript_lazy_module_transcript__4f2662ee') ||
-      document.querySelector('[class*="Transcript"]')
+      document.querySelector('.group p') ||
+      document.querySelector('[class*="TranscriptList"] p') ||
+      document.querySelector('[class*="Transcript"] p')
     );
   };
 
-  const transcriptRoot = findTranscriptRoot();
-  if (!transcriptRoot) {
+  const transcriptCueEl = findTranscriptRoot();
+  if (!transcriptCueEl) {
     console.error('トランスクリプトが見つかりません。トランスクリプトパネルを開いていることを確認してください。');
     return;
   }
 
   const findScrollable = (el) => {
-    let node = el;
-    for (let i = 0; i < 30 && node; i++) {
+    let node = el.parentElement;
+    while (node && node !== document.body) {
       const style = getComputedStyle(node);
       const overflowY = style.overflowY || style.overflow;
       const canScroll = ['auto', 'scroll'].includes(overflowY) && node.scrollHeight > node.clientHeight + 20;
@@ -36,7 +35,7 @@
     return document.scrollingElement || document.body;
   };
 
-  const scrollContainer = findScrollable(transcriptRoot);
+  const scrollContainer = findScrollable(transcriptCueEl);
   
   const transcriptMap = new Map(); // テキストをキーとして重複を防ぐ
   const scrollStep = 300; // スクロール量（ピクセル）
@@ -50,7 +49,7 @@
   console.log('スクロールして全トランスクリプトを収集中...');
   
   const collectVisibleText = () => {
-    const nodes = scrollContainer.querySelectorAll('[role="option"], p, span, div');
+    const nodes = scrollContainer.querySelectorAll('p');
     nodes.forEach(node => {
       let text = (node.textContent || '').trim();
       if (!text) return;

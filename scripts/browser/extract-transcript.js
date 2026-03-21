@@ -5,55 +5,48 @@
   const hasEnglishWords = (text) => /\b[a-zA-Z]{3,}\b/.test(text);
   const isTimestampOnly = (text) => /^\s*\d{1,2}:\d{2}(?::\d{2})?\s*$/.test(text);
 
-  const transcriptRoot =
-    document.querySelector('.TranscriptList_lazy_module_listContainer__f67b6693') ||
-    document.querySelector('.Transcript_lazy_module_transcript__4f2662ee') ||
-    document.querySelector('[class*="Transcript"]');
+  /**
+   * トランスクリプトのキュー要素と、スクロール可能なコンテナを検出する。
+   * Vimeo は Chakra UI のハッシュクラスを使うため、クラス名依存を最小化し
+   * 構造的特徴（group クラス + 英語テキストの p 要素）を手がかりにする。
+   */
+  const findTranscriptScrollable = () => {
+    // "group" クラスを持つ div の中の <p> が各トランスクリプトキュー
+    const cueEl = document.querySelector('.group p') ||
+                  document.querySelector('[class*="TranscriptList"] p') ||
+                  document.querySelector('[class*="Transcript"] p');
+    if (!cueEl) return null;
 
-  if (!transcriptRoot) {
-    alert('Transcript panel not found. Click the Transcript button in the player and try again.');
-    return;
-  }
-
-  const findFirstTranscriptNode = () => {
-    const candidates = Array.from(
-      transcriptRoot.querySelectorAll('.TranscriptCue_lazy_module_cueText__d61e74ab, p, span, div')
-    );
-    return candidates.find((el) => {
-      const text = (el.textContent || '').trim();
-      if (!text || text.length < 6 || text.length > 500) return false;
-      if (isTimestampOnly(text)) return false;
-      return hasEnglishWords(text);
-    });
-  };
-
-  const firstParagraph = findFirstTranscriptNode();
-  if (!firstParagraph) {
-    alert('Transcript text not found. Ensure the transcript is visible.');
-    return;
-  }
-
-  const findScrollable = (el) => {
-    let node = el;
+    // <p> の親をたどって overflow:auto/scroll のコンテナを返す
+    let node = cueEl.parentElement;
     while (node && node !== document.body) {
       const style = getComputedStyle(node);
-      const overflowY = style.overflowY || style.overflow;
-      const canScroll = ['auto', 'scroll'].includes(overflowY);
-      if (canScroll && node.scrollHeight > node.clientHeight + 20) return node;
+      const oy = style.overflowY;
+      if (['auto', 'scroll'].includes(oy) && node.scrollHeight > node.clientHeight + 20) {
+        return node;
+      }
       node = node.parentElement;
     }
-    return document.scrollingElement || document.body;
+    return null;
   };
 
-  const scrollable = findScrollable(transcriptRoot);
-  const seen = new Map(); // preserve order while deduping
+  const scrollable = findTranscriptScrollable();
 
+  if (!scrollable) {
+    alert('Transcript panel not found. Click the Transcript button and try again.');
+    return;
+  }
+
+  const seen = new Map();
+
+  /**
+   * 現在表示されているトランスクリプトテキストを収集する。
+   * スクロールコンテナ内の <p> 要素のみを対象にすることで誤検出を防ぐ。
+   */
   const collectVisibleText = () => {
-    const nodes = scrollable.querySelectorAll('.TranscriptCue_lazy_module_cueText__d61e74ab, p, span, div');
-    nodes.forEach((node) => {
+    scrollable.querySelectorAll('p').forEach((node) => {
       const text = (node.textContent || '').trim();
-      if (!text) return;
-      if (text.length < 3 || text.length > 600) return;
+      if (!text || text.length < 5 || text.length > 600) return;
       if (isTimestampOnly(text)) return;
       if (!hasEnglishWords(text)) return;
       if (!seen.has(text)) seen.set(text, seen.size);
