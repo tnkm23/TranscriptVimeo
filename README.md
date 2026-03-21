@@ -107,6 +107,42 @@ node scripts/notionCreate-StudyNotes.js output/study-notes/building-a-fluid-solv
 
 ---
 
+## 🔍 トランスクリプト品質分析
+
+抽出したトランスクリプトが AI 要約に適しているか事前に評価できます。
+
+```powershell
+node .github/skills/transcript-quality-analysis/scripts/analyze.js output/transcripts/<file>.txt
+```
+
+**出力例:**
+```
+=== Transcript Quality Report ===
+File        : 1164757132-xxx.txt
+Total lines : 709
+
+[Filler Words]     74.2%  (um, so, uh が上位)
+[Technical Content] 33.0%  (density, velocity, VDB 等)
+[Transcription Errors] 6 件  (erian → Eulerian 等)
+[Line Length]       84.6 chars 平均
+
+Score  : 69 / 100
+Rating : ⚠️ FAIR — preprocessTranscript() を通してから要約
+```
+
+| スコア | 判定 | 推奨アクション |
+|---|---|---|
+| 80–100 | ✅ GOOD | そのまま `generateStudyNotes.js` で要約可 |
+| 50–79 | ⚠️ FAIR | 前処理後に要約（現行の `preprocessTranscript()` で対応） |
+| 0–49 | ❌ POOR | 手動確認後、追加前処理を実施 |
+
+JSON 形式での出力も可能：
+```powershell
+node .github/skills/transcript-quality-analysis/scripts/analyze.js <file>.txt --json
+```
+
+---
+
 ## 📁 ファイル構成
 
 ```
@@ -123,6 +159,12 @@ scripts/
 output/
 ├── transcripts/   # 抽出したトランスクリプト (.txt)
 └── study-notes/   # 生成した学習ノート (.md)
+
+.github/skills/
+└── transcript-quality-analysis/    # トランスクリプト品質分析スキル
+    ├── SKILL.md                     # スキル定義・ワークフロー手順
+    ├── scripts/analyze.js           # 品質分析スクリプト
+    └── references/                  # 評価基準・前処理パターン集
 ```
 
 ---
