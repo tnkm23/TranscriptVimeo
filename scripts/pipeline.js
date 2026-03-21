@@ -143,10 +143,9 @@ async function runPipeline(url, titleArg) {
       const transcriptMap = new Map();
       const scrollStep = 300;
       const scrollDelay = 300;
-      let stableCount = 0;
-      const maxStable = 5;
-      let iteration = 0;
-      const maxIterations = 150;
+      // maxIterations はフェイルセーフのみ。底到達を検出して即停止するため
+      // 300px × 2000 = 600,000px 相当まで対応（数時間の動画でも十分）
+      const maxIterations = 2000;
 
       const collectVisibleText = () => {
         scrollContainer.querySelectorAll('p').forEach(node => {
@@ -161,20 +160,14 @@ async function runPipeline(url, titleArg) {
         });
       };
 
-      while (stableCount < maxStable && iteration < maxIterations) {
+      for (let i = 0; i < maxIterations; i++) {
         collectVisibleText();
-        const before = scrollContainer.scrollTop;
-        scrollContainer.scrollTop = Math.min(before + scrollStep, scrollContainer.scrollHeight);
-        await new Promise(r => setTimeout(r, scrollDelay));
-        if (
-          scrollContainer.scrollTop === before ||
-          scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 2
-        ) {
-          stableCount++;
-        } else {
-          stableCount = 0;
+        // 底に達したら即終了（maxStable ループを待たない）
+        if (scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 2) {
+          break;
         }
-        iteration++;
+        scrollContainer.scrollTop += scrollStep;
+        await new Promise(r => setTimeout(r, scrollDelay));
       }
       collectVisibleText();
       scrollContainer.scrollTop = 0;
