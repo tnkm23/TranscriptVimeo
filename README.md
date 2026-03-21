@@ -141,3 +141,7 @@ output/
 copy .env.example .env
 # .env を編集して各値を設定
 ```
+
+2026.3.21 chatGPTの有料プラン契約していないのでgenerateStudyNotesのパイプラインは断念。  
+抽出したtranscriptを手動でchatGPTに投げて要約はできる。
+トランスクリプトのみ Notion に投稿（node scripts/pipeline.js 　--コマンドなし）で運用する。
