@@ -1,40 +1,98 @@
 # TranscriptVimeo
-Extract transcripts from Vimeo
+Vimeo の動画からトランスクリプトを抽出し、Notion の学習ノートとして自動保存します。
 
-## 仮想スクロール対応抽出スクリプト
+---
 
-これはChromeのDevtoolでVimeoの動画からtranscriptを抽出するコードです。
+## 🚀 自動パイプライン（推奨）
 
-### 説明
+Playwright を使い、1コマンドで「抽出 → 保存 → Notion アップロード」を自動実行します。
 
-「特定のコンテナ内を少しずつスクロール」→「現れた要素を保存」→「さらにスクロール」という処理を繰り返すことで、仮想スクロールされているトランスクリプト全体を抽出します。
+### セットアップ
 
-### 実行方法
+```powershell
+# 依存パッケージのインストール (初回のみ)
+npm install
 
-1. Vimeo/SideFXのページを開き、トランスクリプトが表示されている状態にします。
-   - デフォルトでは表示されていないので、"transcript"をクリックして表示する必要があります。
+# 環境変数を設定 (.env は .gitignore 済み)
+$env:NOTION_TOKEN = "ntn_xxx_your_token"
+$env:NOTION_PARENT_PAGE_ID = "your_page_ID_here"
+```
 
-2. F12キー（または右クリック > 検証）でコンソールを開きます。
+### 実行
 
-3. `extract-transcript.js` のコードを貼り付けてEnterを押します。
+```powershell
+# タイトルを指定する場合
+node scripts/pipeline.js https://vimeo.com/1164757132 --title "Building a Fluid Solver"
 
-4. 画面が自動で少しずつスクロールされ、最後にファイルがダウンロードされます。
+# タイトルを省略する場合（ページ <h1> から自動検出）
+node scripts/pipeline.js https://vimeo.com/1164757132
+```
 
-## Notion への投稿
+**パイプラインの処理フロー:**
+1. Chromium ブラウザ（表示あり）で Vimeo URL を開く
+2. トランスクリプトパネルを自動でクリックして開く
+3. 仮想スクロールで全テキストを収集する
+4. `output/transcripts/<videoId>-<timestamp>.txt` に保存する
+5. Notion ページを作成してトランスクリプトをアップロードする
 
-Notion へページを作成するスクリプト（notionCreate-RealTranscript.js / notionTest.js）は、トークン等を環境変数から読み込みます。リポジトリに秘密情報を含めないための設定です。
+---
 
-- 必要な環境変数:
-  - NOTION_TOKEN: Notion の統合トークン（例: ntn_xxx...）
-  - NOTION_PARENT_PAGE_ID: 親ページまたはデータベースのID（ハイフン無し）
+## 🛠️ 手動スクリプト（DevTools）
 
-### セットアップ手順
+### 仮想スクロール対応抽出
 
-1. .env.example を参考に .env を作成し、上記2つの値を設定します。
-2. Windows PowerShell で環境を読み込む例:
-   - `$env:NOTION_TOKEN = "ntn_xxx_your_token"`
-   - `$env:NOTION_PARENT_PAGE_ID = "bc60fd201be74d06adc8ddcbf8a45a5c"`
-3. 実行例:
-   - `node notionCreate-RealTranscript.js transcript-latest.txt`
+Vimeo のトランスクリプトパネルをスクロールしながら全テキストを収集します。
 
-※ .gitignore により .env はコミット対象外です。過去のコミットにトークンが含まれている場合は、履歴の書き換え（filter-repo/BFG）とトークンのローテーションを行ってください。
+#### 実行方法
+
+1. Vimeo の動画ページを開きます
+2. `F12` でデベロッパーツールのコンソールを開きます
+3. `scripts/browser/extractVirtualTranscript.js` の内容を貼り付けて実行します
+4. スクロールが自動実行され、完了するとファイルがダウンロードされます
+
+> トランスクリプトパネルが閉じていても、スクリプトが自動で開きます。
+
+---
+
+## 📤 Notion へ手動アップロード
+
+```powershell
+# 環境変数を設定してからスクリプトを実行
+$env:NOTION_TOKEN = "ntn_xxx_your_token"
+$env:NOTION_PARENT_PAGE_ID = "your_page_ID_here"
+
+node scripts/notionCreate-RealTranscript.js <transcript-file> --title "Page Title"
+
+# 例
+node scripts/notionCreate-RealTranscript.js output/transcripts/1164757132-1234567890.txt --title "Building a Fluid Solver"
+```
+
+---
+
+## 📁 ファイル構成
+
+```
+scripts/
+├── pipeline.js                      # 自動パイプライン (Playwright)
+├── notionCreate-RealTranscript.js   # Notion ページ作成
+├── notionCreate-StudyNotes.js       # 学習ノート生成
+├── notionTest.js                    # Notion API 接続テスト
+└── browser/
+    ├── extractVirtualTranscript.js  # DevTools 用 (仮想スクロール対応)
+    └── extract-transcript.js        # DevTools 用 (シンプル版)
+
+output/
+├── transcripts/   # 抽出したトランスクリプト (.txt)
+└── study-notes/   # 生成した学習ノート (.md)
+```
+
+---
+
+## 🔑 必要な環境変数
+
+| 変数名 | 説明 |
+|--------|------|
+| `NOTION_TOKEN` | Notion 統合トークン（`ntn_xxx...`） |
+| `NOTION_PARENT_PAGE_ID` | 親ページまたはデータベースの ID（ハイフン無し） |
+
+`.env.example` を参考に `.env` を作成してください（`.gitignore` で除外済みです）。

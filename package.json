@@ -1,0 +1,12 @@
+{
+  "name": "transcript-vimeo",
+  "version": "1.0.0",
+  "description": "Vimeo transcript extraction and Notion upload pipeline",
+  "main": "scripts/pipeline.js",
+  "scripts": {
+    "pipeline": "node scripts/pipeline.js"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}
