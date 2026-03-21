@@ -4,7 +4,7 @@
 			"command": "npx",
 			"args": [
 				"-y",
-				"@modelcontextprotocol/server-youtube-transcript"
+				"@kimtaeyoon83/mcp-server-youtube-transcript"
 			],
 			"type": "stdio"
 		},
@@ -13,7 +13,7 @@
 			"args": [
 				"-y",
 				"@modelcontextprotocol/server-filesystem",
-				"/path/to/allowed/files"
+				"D:/python/TranscriptVimeo"
 			],
 			"type": "stdio"
 		},
@@ -35,6 +35,10 @@
 		},
 		"Notion": {
 			"url": "https://mcp.notion.com/mcp"
+		},
+		"context7": {
+			"command": "npx",
+			"args": ["-y", "@upstash/context7-mcp@latest"]
 		}
 	},
 	"inputs": []
