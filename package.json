@@ -4,10 +4,12 @@
   "description": "Vimeo transcript extraction and Notion upload pipeline",
   "main": "scripts/pipeline.js",
   "scripts": {
-    "pipeline": "node scripts/pipeline.js"
+    "pipeline": "node scripts/pipeline.js",
+    "study-notes": "node scripts/generateStudyNotes.js"
   },
   "dependencies": {
     "dotenv": "^17.3.1",
+    "openai": "^4.104.0",
     "playwright": "^1.49.0"
   }
 }

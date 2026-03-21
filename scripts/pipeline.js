@@ -2,15 +2,17 @@
  * Vimeo トランスクリプト抽出 → Notion アップロード 自動パイプライン
  *
  * Usage:
- *   node scripts/pipeline.js <vimeo-url> [--title "Video Title"]
+ *   node scripts/pipeline.js <vimeo-url> [--title "Video Title"] [--notes] [--model gpt-4o-mini]
  *
  * Examples:
  *   node scripts/pipeline.js https://vimeo.com/1164757132 --title "Building a Fluid Solver"
+ *   node scripts/pipeline.js https://vimeo.com/1164757132 --title "Building a Fluid Solver" --notes
  *   node scripts/pipeline.js https://vimeo.com/1164757132   # タイトルはページから自動検出
  *
  * 環境変数:
  *   NOTION_TOKEN           - Notion 統合トークン
  *   NOTION_PARENT_PAGE_ID  - 親ページ ID
+ *   OPENAI_API_KEY         - OpenAI API キー (--notes 使用時)
  */
 
 require('dotenv').config();
@@ -18,25 +20,32 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 const { createNotionPage } = require('./notionCreate-RealTranscript');
+const { generateStudyNotes } = require('./generateStudyNotes');
 
 /**
- * CLI 引数をパースして url と title を返す。
+ * CLI 引数をパースして url, title, notes フラグ, model を返す。
  *
  * @param {string[]} argv - process.argv
- * @returns {{ url: string|null, title: string|null }}
+ * @returns {{ url: string|null, title: string|null, notes: boolean, model: string }}
  */
 function parseArgs(argv) {
   const args = argv.slice(2);
   let url = null;
   let title = null;
+  let notes = false;
+  let model = 'gpt-4o-mini';
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--title' && args[i + 1]) {
       title = args[++i];
+    } else if (args[i] === '--notes') {
+      notes = true;
+    } else if (args[i] === '--model' && args[i + 1]) {
+      model = args[++i];
     } else if (!url) {
       url = args[i];
     }
   }
-  return { url, title };
+  return { url, title, notes, model };
 }
 
 /**
@@ -52,11 +61,14 @@ function extractVideoId(url) {
 /**
  * Playwright を使って Vimeo からトランスクリプトを抽出し、
  * output/transcripts/ に保存して Notion にアップロードする。
+ * --notes フラグ指定時は学習ノートも生成して Notion に投稿する。
  *
  * @param {string} url - Vimeo 動画 URL
  * @param {string|null} titleArg - タイトル (null の場合はページから自動検出)
+ * @param {{ notes?: boolean, model?: string }} [options]
  */
-async function runPipeline(url, titleArg) {
+async function runPipeline(url, titleArg, options = {}) {
+  const { notes = false, model = 'gpt-4o-mini' } = options;
   const videoId = extractVideoId(url);
   console.log('\n🎬 Vimeo Pipeline 開始');
   console.log(`   URL: ${url}`);
@@ -199,21 +211,35 @@ async function runPipeline(url, titleArg) {
     const notionPage = await createNotionPage(filePath, title);
 
     console.log('\n✅ パイプライン完了!');
-    console.log(`   Notion ページ: ${notionPage.url}`);
+    console.log(`   Notion ページ (transcript): ${notionPage.url}`);
+
+    // 学習ノート生成 (--notes 指定時)
+    if (notes) {
+      console.log('\n📚 学習ノート生成中...');
+      const { mdPath, notionPage: notesPage } = await generateStudyNotes(
+        filePath,
+        title,
+        { model, postNotion: true }
+      );
+      console.log(`   Markdown: ${mdPath}`);
+      if (notesPage) {
+        console.log(`   Notion ページ (学習ノート): ${notesPage.url}`);
+      }
+    }
   } finally {
     await browser.close();
   }
 }
 
 // Main
-const { url, title } = parseArgs(process.argv);
+const { url, title, notes, model } = parseArgs(process.argv);
 if (!url) {
-  console.error('Usage: node scripts/pipeline.js <vimeo-url> [--title "Video Title"]');
-  console.error('Example: node scripts/pipeline.js https://vimeo.com/1164757132 --title "My Video"');
+  console.error('Usage: node scripts/pipeline.js <vimeo-url> [--title "Video Title"] [--notes] [--model gpt-4o-mini]');
+  console.error('Example: node scripts/pipeline.js https://vimeo.com/1164757132 --title "My Video" --notes');
   process.exit(1);
 }
 
-runPipeline(url, title).catch((err) => {
+runPipeline(url, title, { notes, model }).catch((err) => {
   console.error('\n❌ Pipeline error:', err.message);
   process.exit(1);
 });
