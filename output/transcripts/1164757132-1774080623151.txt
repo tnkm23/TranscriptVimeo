@@ -1,0 +1,640 @@
+Welcome to Building a Fluid Solver in Copernicus.
+This is a continuation replacement of the building Fluid Solvers from scratch.
+Done many years ago in DOPs, decided to look at it again except this time inside our new, uh, 2D image manipulation, uh, system called Copernicus.
+So there's uh, two main types of fluid solvers out there.
+One is when you do erian.
+So basically you have a fixed grid and you move the fluid by adjusting the values of that grid.
+And the other is laine.
+When you have a bunch of particles representing your fluid, that you move around in space by moving the particle positions, obviously in a compositor type world or a 2D image manipulation world, uh, you would, uh, want to do all larian type of system.
+So that's what we're gonna be looking at here.
+So let's start off putting down a geometry node and inside of dot, adding ourselves a conet so we can get, uh, Copernicus nodes going.
+We're gonna start off with a simple mandrel.
+So I'll use a file to bring in a mandrel, which is a nice, I would say monkey, except someone will pedantically correct me on whether or not it is an AP or a monkey or a Mac macatee or, um, some other definition that I am unfamiliar with.
+Um, so we're gonna make this guy move.
+So to make it move at all, there's already a distort no in Copernicus we can start with.
+So I'll put a distort down and I can adjust how far I want to dis distort it here.
+And you can see it actually does, uh, update and move itself along a certain distance.
+So move that back to its default amount.
+Now in order to have that add up and repeat itself, we're gonna need to have some form of feedback.
+And in 21, we have this capability inside the blocks of Copernicus.
+So I put down a block here and I need to specify what goes in and outta the block.
+And, uh, to make this easier, I can make sure I select both of them.
+And that way I can add to both the inputs and outputs at the same time.
+So it makes it a little bit faster to set things up.
+So I say I put in a single color layer and I'll output a single color layer.
+So now we have that on both sides.
+And I can wire in my initial file, send that through our distort and to our result.
+And there we go.
+We have that slightly move in manual manl.
+Um, to get this to feedback, there is a simulate option turnaround simulation.
+And now when I hit play and it just feeds back in, in internal to itself, uh, this is done.
+Um, if I adjust the angle, you can see it'll adjust which way as the sign feedback and we can see the bar turns, um, orange, let us know that we now have the incorrect results.
+Um, basically if we were to ook this from scratch, we'd get a different result than we see here.
+'cause this, um, was a result of change in the angle during the, uh, cooking process.
+Um, the cache can be controlled on the block end.
+Um, so what's kind of interesting on the Copernicus is because this is all on GP and stone, all distortion on the GPO is actually incredibly fast.
+Um, it's faster than it even seems to be because, uh, it has to spend time drawing it.
+So if I turn off Cach in entirely, uh, and then go forward a frame, we can see we have no cache at all.
+But this also means that if I change anything, it has to ook from the start.
+Uh, and normally that'd be a very bad idea, uh, 'cause um, you know, cooking 90 frames at a time is bad, except here it's fast enough.
+I can actually, in real time just recook 90 frames so I can see the result of my simulation.
+Um, immediately.
+This is very useful when you want to, uh, see something that takes a while to take effect over time you can change the parameters and see the results right away without having to constantly resimulate and see how it changes it.
+Um, but the other option we have here is, uh, rather than, um, using a play bar for playing back, we've got this one called live simulation.
+And live simulation, uh, enables a sort of play bar independent continuous cook, where it'll keep rerunning the simulation over and over again and feeding the results back in.
+Um, this is controlled by a couple different things.
+Once you've turned on live mode, uh, you can press it here to toggle it on.
+Um, you can also go down here and press it here to toggle it on.
+And then you can also, if you could have a keyboard that has it, not all keyboards too, you can press the pause key and pause and restart that way.
+Um, so this is a great way because now while, while it's running, I can do things like change my angle, uh, change my scale, and all this stuff is just, uh, adapting right away.
+So great for playing around with stuff, but I'll go back to the cache simulation than we had originally.
+Now we're gonna do a more interest in motion.
+'cause this was pretty boring.
+Just move into the one direction.
+Uh, so let's make it move in different places.
+So the distort has a, uh, input for a direction, which is a UV layer.
+So provides you basically two directions, which is exactly what we want in this case.
+And to get an interest in set of, uh, directions, we can use a fractal noise.
+And from this, um, we can do a what is used in a distorted by slope, namely run slope direction.
+And this will produce a, uh, a field which, whose values are basically pointing up the slope or down the slope depending on how the angle's set.
+And so an interesting point to notice here is this is got this weird purple and cyan and yellow type look to it.
+Um, that's not actually the native values of it.
+We have things called, uh, visualizers that we turn on, um, when feet with layers of different types.
+So this layer's been flagged as a vector layer, um, because it's a direction, um, as opposed to a texture map, which would be, uh, colored differently.
+If I do a layer properties, I can change my, uh, type info to none.
+And now I'm gonna see the raw data as if it was basically a color layer or a texture layer.
+And so you can see here the negative values are showing up as black.
+Um, so if I go to the composite view and turn on the, uh, pixel inspector, um, I can see these are values with negative distances.
+Tho those are the same values here except they're colored, uh, magenta.
+That's because we use a, um, hue for specifying the direction.
+And then the, um, the, the brightness is set by the magnitude of the vector.
+This lets you just visualize, um, directions, um, properly with ethanol becoming just negative and, and black.
+So we can, uh, wire that directly into the, um, thing.
+Let's just adjust the fractals roughness a bit so it's less of an extreme result.
+Um, and we can put this into our direction field.
+Oops, I can wire that properly.
+And now when we, um, play it forward, we will see the, um, the band actually updated move.
+What you notice here, it's sort of mosaiced, it's sort of like all gone and made these big constant uniform blobs, which is not how I imagine fluid moving.
+Um, to understand why this is occurring, we need to try and visualize this, um, this slope direction a little bit better than we have here with these, with these colors.
+Uh, so what we can do is we can start off with an SDF shape and set the SDF shape to be a, um, compound arrow.
+So now we have a, a simple arrow to start with and convert this to monochrome.
+And now the monochrome one we can do a scatter shape on and basically replicate that throughout our, uh, entire area.
+And, uh, increase the number of stamps here, maybe increase the style scale a little bit to make them a little bit shorter.
+Um, but now what we can do is these are all point in just the default direction, but we can override that direction using our slope direction.
+So put that in there.
+And now we can actually see, uh, what's gonna be called a quiver plot of where the, um, where the, where the, uh, directions are pointing.
+Um, in this case it's hard to tell because they're all being drawn at the same size.
+Um, so if we do a, uh, length of the, uh, length of the distance to find out how fast it's moving, uh, we can wire that into our scale parameter And then adjust the tile scale down a bit so we have more uniform sizes.
+And now we can see that we have places like this, um, where the fluid is going outwards.
+Uh, so sorry, up here too where it's all pointing outwards and other places where it'll be like here, um, where it's all pointing inwards.
+And if we look at our original, um, fractal noise, um, we can see here if we have the dark areas, um, those are basically places that become where the, um, fluid is moving outwards.
+'cause it's pointed uphill right now.
+And, uh, because of that, that's why all the um, the, the color will leave those areas and get concentrated, um, wherever it is converging into.
+So this behavior of, um, stuff going inwards outwards is called divergence.
+And um, we obviously don't want it if we want to have things just keep moving.
+So one of the ways we can get rid of that is actually to change our angle that we do the, uh, slope direction in.
+So currently we're going uphill.
+Um, but as we change this, it will change to going cross slopes 90 degrees.
+We'll be going around the hill.
+If you think about it, if you have a hill and you go at the equal altitude around it, you're gonna loop back to where you came from originally.
+So basically go and form these little circulation circles, which are thus not going to, um, diverge or converge.
+And likewise, we go full.
+180 will be just reversed in the direction.
+So if we leave this at, uh, 90, um, we should then be able to run our simulation again.
+And this time we'll see, um, the fluid not just congeal in one spot, but sort of rotate around these little vortices.
+Now the other way you can get rid of divergence other than, um, trying to just, uh, mathematically find the cross slopes that you, uh, can avoid the divergence in the first place.
+Um, if we go back to one which had the divergence in it, so it convert this to zero again, uh, we have what is called um, uh, project flow project non divergent multigrid, a very long-winded name.
+But the key idea is that it projects onto a non divergent system.
+And so basically it removes the divergence from the field.
+Uh, so if we apply this on our default, um, one, um, we basically can see the field changes considerably as all the divergence is removed.
+Um, we want to switch to periodic conditions 'cause we've got, uh, wrapping on in this case.
+And so now what is left over will be the parts of it that is, um, properly, um, non divergent here.
+And if we increase the number of iterations, it becomes more, um, correct on the, on the system.
+And actually here the sizes are wrong because I forgot to scale the sizes.
+So we're seeing the wrong sizes.
+So that's why you saw those big things still there.
+Um, so you can see here it almost immediately removes all of the arrows, uh, from the system because that initial series of zero degrees was almost entirely divergent.
+Um, so if we change slowly the arrows, um, we can see that we around 90 we get the maximum size.
+And roughly these arrows are just changing in length.
+They aren't changing in direction a little bit because of round off issues.
+Um, but they're mostly just changing to length because this is basically just extracting that 90 degree component and removing the part that wasn't.
+Um, so that's, that's a general idea of, uh, projecting non divergence.
+So where does this come in?
+So one thing you notice when we did have the proper 90 degrees switch back to that And we run the simulation, um, was these vortices just are sort of pinned in place and don't really move around like you'd expect fluid to.
+So what we're missing here is momentum.
+We need to actually move the velocity in addition to the color.
+Um, to do this, we need to have an extra field that we feed back.
+So let's go to the, um, block beginning, block end and just, uh, return to frame one and add ourselves an extra field.
+So I've selected both.
+So I add to both at this point an extra UV field here.
+And our, our default one we can just pass in as our, um, default slope direction and we'll distort by the, um, passed in velocity.
+Um, but then this velocity here is gonna be fed back.
+So what are we wiring here?
+Come back out here the next frame.
+Um, so we want to then also distort the velocity, um, so that it affects and moves through the fluid.
+And we do that by wiring it up and feeding it back.
+And so now we're going to be moving both at the same time.
+But I do this, it starts a little bit, but again, we get this mosaic effect and that's because the same thing is happening as the, as the velocity moved, eventually it became divergent and when it became divergent it just congealed and, um, sopped into these boring patterns.
+Well, it's kind of an interesting stain glass pattern.
+I mean, that could be what you want, but if I get my project on divergent and throw it in there this way, every time I object the lost, yeah, I keep snapping it back to the non divergent world.
+And then we have something which, um, is actually starting to act like a 2D fluid.
+Now what I can do now is I've got an issue where I've got two of these distorts and, um, both of 'em have this magical scale, which basically how fast to move per time step.
+And I might might want to have only one rather than having to have synchronized two parameters all the time and worry about I'm getting wrong.
+So what I can do is just pack up these things into a cable.
+So I can do a cable pack, I do a cable pack and wire in my, my C and my V and set fields from import and get CNV wire names and then wire those into a single distort node.
+So after we pack the cable pack in, we can wire in the distort and then do a cable unpack and the cable unpack, we wire in the output and this we can set fields from import to get the CNV fields back and wire up again, uh, to our block end.
+Um, and that's, we actually don't need the second to distort.
+We do however, want the flow project non divergent to be maintained.
+So make sure that's wired in and turn back, oops, turn back on my, uh, cooking here.
+And uh, we should then see both of them restore.
+We have a single distort now, um, controlling both cases can get rid of this one now.
+Okay, let's add some forces to this.
+Um, so I'm gonna say that the blue part of the mandrel moves upwards.
+So to do that I'll do a channel extract and extract from the C channel, whatever the current blue is.
+So this would be, uh, um, version three.
+Um, and from this I want to then adjust the V so I can do this.
+The, the universal, um, ad constant, um, would be a bright node.
+Um, because I can use this to modulate the shift.
+If I set the shift to one and the scale by time step on, I'm then ask it to shift just in the vertical direction.
+And that way we will be constantly adding um, to the velocity wherever it's blue.
+Um, so that's pretty slow, so I can change the amount of it by pushing shift up.
+So I've got a pretty fast moving one.
+Um, it's pretty, pretty quickly going a bit too fast though, so I want to add some drag to slow things back down again.
+Um, so I can do that by putting in another bright.
+Um, and just, uh, again, uh, this bright I can scale by time step, lemme just stomp so that it updates, um, scale by time step and change its brightness value to say point, uh, five or so.
+So that will 0.
+6 in this case.
+So that would pretty much slow it down.
+I said before, what you can also do is go on a certain frame like, uh, like this frame 8 36 frames in, and here I can turn off the, um, cache and uh, force it to recoup.
+So now I've got basically one, I always recoup the frame 36.
+So if I wanna change how much drag I have, uh, oh, negative drag of course makes things blow up.
+But with uh, no drag, I get this sort of thing after 36 frames, if I increase the drag, I will eventually get something that can't move.
+Um, and that way I can really start to see not just how does it happen in one frame, but what will it do over a second animation, which is usually much more important for controlling the look.
+Now an interesting thing to note here is the C and v are actually completely uncoupled right now.
+So if I look at the, uh, the C field, it's 2 56 by 2 56 and look at the V field and it is one K by one K.
+If we look here, the C channel is 2 56 by 2 56.
+And the V and ls one K by one K, they're very different resolutions, but they're working together because Copernicus by default will just implicitly do all the samples and required, can make it work properly.
+I can however, go back up to the original file and do a resample and decide to increase the resolution of my, um, manl to be four times bigger.
+And then because we had no cash on it, just immediately recook and showed me the result of that, which is a nice sharp simulation.
+So for 2D simulations, um, you can actually just tend to go to a very high res and get nice sharp results.
+There's no need to do anything more fancy.
+Um, and but similarly as well, I could go to the, um, the, the fractal noise and drive it by the drive it by the mandrel.
+So it runs at 2 56.
+So now this is a low resolution, uh, velocity field being done with a high resolution, um, texture map being infected through it.
+But let's turn that off too and just do the low resolution, lower resolution.
+Um, so what we're going do now is we're going to try and improve the quality of this by doing backwards forwards error correction.
+The idea of backwards forwards error correction is that, um, basically as, as we did this, uh, distortion here, we were going back and sampling the input and we basically have four voxels, four pixels to sample from.
+We blend them together.
+So that will cause a little bit of blurring.
+That blurring accumulates every single frame and eventually gets stuff that is very muddy, has lost the sharpness that you had with original, um, original mandrel.
+So to get that back, we want to, uh, somehow compute the amount of air that happened and remove the air.
+And so that's the idea of this B-F-E-C-C process.
+So to step through it, uh, we start off and we first move it forward, um, which I'll call forward in this case because we've just moved it forward one time step and now we want to, um, move it backwards again, thus the backwards forwards part.
+So I just do the same distort, but I just changed the sign of it so it goes negative.
+Um, but I move back that one that I had just done, um, forward.
+So now I've gone forward and backwards.
+So theoretically we should get the exact same thing back.
+There was no error in the math.
+Um, this should be the same as this.
+And indeed we look at it and there's just a very small difference.
+Now if I can see the differences, it got a little bit blurrier, um, uh, when this was applied.
+Um, so now if we do a difference between these two, so if I subtract, I subtract from my, my original one, I can find out what error was introduced.
+And so this is the difference between the two when it goes forwards and backwards and, um, if I applied this back onto my original image and and effect it forward, I would get my correction term I need.
+So I can do that pretty straightforward by just going forward again with the air by itself.
+So I run the air forward and so now this moves the air slightly forward for that one time step.
+And now I can then do the, um, apply that back as a correction term.
+So for this I can do a oops, another, um, I think it's a subtraction, obviously forget about which sign it is, it's positive or negative, get the wrong one.
+I'll of course be pretty apparent pretty quickly, um, to do the corrective term here.
+And um, this would actually be too much.
+So I need to do 50% of it so I can scale the mask by 50% to get that result.
+And now let's see, um, how that works overall.
+See if I got the whole sign correct as I go forward here I jumped the frame two 40, uh, we can see actually we're getting a very sharp result.
+Um, so in particular, um, to see to ab the two do a switch Switch, Just a normal switch, I'm going switch between this and doing the, just the pure forward.
+So if I switch to one, we'll see the pure forward, we see it gets all blurry and do this, it gets nice and sharp.
+Now, you know, wait a second.
+You say what is all it's nice where it's nice, but where it's not nice.
+We've got this crap here showing up where it's basically, um, becoming negative and so forth.
+Um, the trouble is, is this is an approximation technique and you can indeed get stuff that leaves the original bound of the area.
+Um, there's the correct way of solving this is to do a local clamping.
+Um, but that's more tricky to set up.
+And I write some open seal codes.
+I'm just do a global clamping, which is sort of a, a partial solution, uh, to do a global clamping.
+I need to find out what the original range of my image was.
+So I can do that with the statistics.
+And the statistics will, um, for my, my original input, try and get that one before the forward.
+Not that makes much of a difference there.
+Um, this will tell me my minimum maximum, um, values.
+Um, but I want to now convert these minimum maximums into, Into, uh, lengths And actually not lengths because, uh, for the, for the negative one, I actually want the minimum channel in case it happens to be negative.
+Otherwise, my, uh, my, uh, the, uh, velocities won't be able to be positive.
+And likewise, I want a maximum for the, uh, the maximum side.
+This gives me two float mono outputs, um, two, two buyers of it.
+And I can then do a clamp.
+And the clamp can be done after we've done the, um, the final operation, um, to clamp and make sure we don't ever exceed our original range.
+So clamp to the lower and clamps to the upper.
+Um, one trick is this scales these values inside for the lower limit.
+So I have to set the lower limit to one 'cause otherwise it would basically multiply by zero and I always get zero.
+And the results of this is we will get the, um, clamping enabled.
+Um, so we're getting, um, we're still, I won't say that it's, uh, great because it should be doing the local, uh, updates, but it's definitely better than if we don't clamp and we end up with these more extreme errors.
+So for the next part we're gonna look at adding some sources.
+Let's save this.
+So we're going to just simply copy and paste this to make a new version of it.
+This way.
+Hopefully the result on artifact of this presentation can have these different files inside of it.
+And we'll go and just get rid of all this complicated B-F-E-C-C stuff for the purpose of further working.
+Uh, 'cause it'll be easier for us to, uh, work around without so many nodes.
+Let's simplify that all nicely down into a simple update.
+And this is our, this is our drag and our, um, buoyancy and our flow project.
+So for this one I'm going to, I'm going convert from a c set up to a density, temperature and velocity setup.
+So I look here, I'm gonna select both the, um, end and begin at the same time.
+So I'm able to, uh, adjust both at the same time and I'll want, uh, density and temperature and V and these will be mono, mono and uv.
+Um, simulate the cable pack here and want all three wired in.
+So it'll be, uh, distorted in all three.
+Then we unpack, unpack all three.
+And then down here, obviously the, uh, our, um, ancy is applied to the V layer and that's output to the V layer and the temperature layer we can just send directly through like that.
+So currently we have something that's running off, um, the, uh, density, but we'd rather actually have the temperature drive buoyancy.
+So I'll just wire that directly in like, so.
+Um, and now we need to have a new source because we're not sourcing from an RGB image.
+Um, but we'll be sourcing from a, From another image.
+So I wanna start with a SDF shape and this time go to a marker of the infinity symbol, shrink this down a bit and move it down a bit.
+I can also click here.
+And this lets me interactively pick locations where I want it to be.
+So get it somewhat more interactively that way.
+Do an SEF to mono to convert to monochro.
+And then I'm gonna wire that is as our initial temperature and velocity.
+And I'm also going to, uh, layer to create an initial zero, um, of, uh, velocity.
+So UV layer default of zero and move that as our default velocity.
+Okay, now we should have this then puff upwards when we apply it.
+Let's see if I have it wired up properly.
+Um, I definitely do not.
+So let's do a quick little, uh, debug here.
+We have the velocity coming in.
+Ah, I've got the velocity temperature wired up to the distort direction and of course won't work very well.
+Um, so now let us try this here.
+There we go.
+We've got a puff of, uh, smoke coming up from a little infinity sign.
+Uh, turn off the Option there.
+Okay, rather than, um, the current system, we are just starting with this and rather than constantly adding every frame, so I'm going to change it over here, um, to start with a blank image, um, rather than with the original image and put a layer in where we just set the value to zero and this'll be our default, uh, temperature and density.
+And instead I wanna put this in as a source so I could just have this source live inside of this block begin.
+Um, but it's possible you do stuff like loading from files or interface on SOPs, um, which won't be able to be compiled and live inside of this, um, block block.
+So it's quite useful to be able to just put the source outside of it and do that.
+I can just add an extra input.
+And this input doesn't have a correspondent, um, input, um, on the end.
+And so there'll be no feedback occurring.
+Um, so what you get out of this output here, the source output will be whatever you put into the source input directly every frame.
+And so let's me then just put the SDF to mono in.
+And I've got the source coming in, so I'm going to use that to update the density and the temperature every frame.
+So I'm going to do a maximum for the, uh, density.
+So it will always be the largest of the two.
+And this way we immediately get, um, the, the, the source increasing.
+Actually I want to use the density after it's been infected, so wired like so, and I'm going to actually just put a null here to make it easier to move the source around.
+'cause otherwise it can be harder to see the wiring.
+And so the maximum I then, um, I probably before the maximum want to decay it.
+Um, so I'm going at constant, which as I point out becomes a bright and basically, um, subtract, um, minus 0.
+4 say per time sep.
+So over a second lose per 0.
+4.
+And we can buy that into our, um, density.
+Um, this is going to, um, actually do nothing interesting because we've lost our temperature.
+We also want to source the temperature.
+So to do that I will do another, um, add constant, um, to the temperature and bring in the source as the shift amount And, um, shift value of one.
+So scale by time step.
+So that's, we add a little bit of temperature every frame and we want this to slowly decay.
+Uh, so again, we can use bright, um, to scale it down, um, every frame so it gets cooler as time goes on.
+And now we will, um, properly rise and slowly decay.
+Um, so because we have the temperatures decaying differently than the, uh, the density here.
+So if we look at the temperature field here, um, I can do this on the block in by changing which output I view.
+Um, we can see that one has been decaying, decaying, uh, uh, geometrically while the density's decaying arithmetically so linearly towards um, zero in particular, I can adjust my, um, temperature decay rate, uh, with that add constant here and have it decay faster.
+And basically that will result in a shorter, um, flame because it's going to zero faster, um, as it as it goes forward.
+So the idea of this is we can use that as a sort of lifetime to measure how old the particular bits of flame are and use that to decay to drive a ramp or something similar for fire.
+And so I can do this with a mono to RGB and I can use something like the lacto orange ramp.
+Oops, lacto orange tends to look better, especially if you, um, pop up, pump up the, uh, the output like this.
+And uh, we now have a moving system gets nice and uh, more interesting as soon as it, uh, has starts to feed back into itself.
+It's rather smooth in this period.
+Um, so the CF timon I can change to an outline, raise the thickness, and so now I've got this nice little flame coming off.
+You want to move faster, I can go to the timescale and thus make a strong patch simulation.
+So we aren't reco from frame one, make it run faster or slower.
+Uh, I see fit The, this is still end up becoming pretty smooth in Lamin at least until the fluid gets back on itself again.
+So it can do to try and preserve the, the motion as something called vortex confinement.
+Um, this is where you basically find places that are spinning.
+And because this project on divergent is basically erasing spin, uh, because it gets reinterpreted as divergence, uh, we can just boost it back in again using um, as vortex confinement.
+Now my point to Wikipedia for how to do this, except they refer to it as VC one and VC two with no description of what those mean.
+So it's not very helpful.
+So instead I had to go back to our, um, gas vortex confinement DOP to see how it was built and uh, then rebuild it here in cos.
+So that's what I'll be doing next.
+So first I'm going to change from this interest and look in one into a more boring one 'cause then we can see more clearly what 40 Cs we have involved.
+So I'm gonna start with a circle, make it small SDF two mono and use this as our source.
+And so now we'll have, um, this shape, oops, I had that as the initial frame.
+So we can see we got the, the blob forming a, um, this sort of, uh, shape as it rises.
+Um, so what we're going to do now is try and capture the spins of the areas of the, of the, of the fluid and try and boost where those are.
+Uh, so due to that we need to find the curl.
+And so I'm gonna do this before we have added the brightness to it.
+So here I'm going to do a derivative And this takes the derivative of the, the velocity field, so how it's changing over space and uh, make sure I actually wire the struck lane like that properly.
+Um, so the derivative has two components.
+Um, so it's actually a two by two matrix.
+Um, so we output as two UV fields, but what we want is the, the, the skew of it.
+Um, so we can do a channel extract of the, the CDX, um, and take the, the first element of that and like y lemme sorry, the second element of that and the first element of the other.
+So this is the x, y and YX partial derivatives.
+And these two we can subtract and that gives us the magnitude of the curl, the direction of the curl.
+And 2D is pretty straightforward because it's going to be, um, coming outta the monitor all the time.
+So wire up the mask is not what we're expect from that.
+Um, so we now have, um, this curl direction, I mean curl magnitude field.
+Now what we need to do now is find the gradient of this curl magnitude and we can do that with slope direction.
+Um, and that, well, that tells us which direction has increase in, uh, curl.
+So actually if I go back to an earlier one, um, we can see here the, the curl field and the, the slope direction is gonna be pointing into the up the up the curl field.
+But what we actually wanted to do is cross that with the curl vector.
+But we know the curl vector is pointing directly into the scene, into the screen.
+So that's equivalent to just setting the 90 in it to a cross slope function.
+Um, we then need to normalize it, um, so we don't end up counting length twice.
+Oops, Not edge detect, normalize.
+There we go.
+Uh, so we normalize our direction and then we can use this to scale again with our actual curl magnitude.
+But one trick is we actually need to take the absolute function, um, which I can do with the function cop to find the absolute function, the curl magnitude.
+Otherwise basically our two signs we'll cancel each other.
+So this ensures we, we sort of actually keep the sign, uh, when we reconstruct our, uh, adjustment factor.
+So this is a, um, a vector field pointing to try and spin back up, um, what we had before, if I've done it all correctly.
+Uh, so I can now do a bright to um, change the brightness down because it's too large.
+Um, so this is a factor of basically the resolution which gets factored into how, how steep these derivatives are.
+Um, so in this case, I think, uh, a very small amount to usually suffices.
+It's very easy to have vortex confinement, blow things up.
+If you've used it, you're aware of that.
+And so now I can add this back into my original, um, velocity field.
+Now we can see how we, uh, manage to spin up our, um, solution or if we cause it to explode.
+And that's actually looking good.
+It's spinning, not exploding, get a lot more detail around these edges.
+Um, so again, if I turn off cache in the simulation, so I recook from frame one every time I cook here, um, I can adjust the amount of contribution, uh, make the zero and we'll have our original, um, un un vortex confined or um, Put in the uh, 0.
+05.
+That's definitely too much.
+And so we can basically dial in how much, uh, confinement we want.
+What we can also do, which is kind of interesting with vortex confinement, is we don't have to use the derivative of the actual vector field directly.
+If you look at this, it's very noisy 'cause we're picking up all these little tiny micro vertices in a very small scale.
+It might be we want to preserve, uh, certain spatial size of vortex.
+Um, so we can do that by pre blurring the field.
+So again, I can throw down a blur cop and by changing the size of the blur, um, we can choose what size features we're gonna actually extract from these derivatives.
+And that will control what size, um, spin back we end up adding into the simulation.
+Um, so if I change the, the blur size, um, down to zero, um, we get the, the very fine stuff coming out.
+At least we should, if I hook this up properly and we do blur, that's big And We we're basically back to what we were before.
+Here we go.
+As you can see there, 0.
+1 was changed in a different size as I go down, you can start to see different scale vortices have are the ones that are being, um, boosted by this process.
+And so this is sort of way to get the vortex equalizers, I always thought of it to control which v seats you actually want to try and boost.
+And so let's put this down to something like uh oh five, which still keeps lots of nice detail to it.
+And let's go back to running our infinity flame, which we can now run with the vortex boosting on.
+So I just wire that into our source and look at it with the, the fire ramp on and have to actually look where it is.
+So now we've got this with the vortex boost turned on.
+Now we still have this smooth laminar stuff that's being generated.
+Again, this is largely because we have very boring, smooth sources.
+Um, sourcing is half the fun for trying to make interesting simulations and interesting fire.
+Uh, so we're going back here and make it more interesting.
+I can do a fractal noise And I can make a fractal noise, which actually animates.
+So turn on 3D noise, turn on to animate.
+Uh, and then we'll have this actually moving and make it animate.
+Make the pulse length, um, shorts so it animates quickly.
+And then the, uh, very small scale for the element size.
+And then we can multiply this in after the mono.
+And I probably wanna increase the contrast.
+There we go.
+Now we have something which is gonna be much more interesting in how it's sourcing unless we can maintain a little bit more texture and interest in the flame as it evolves.
+Okay, this all very good and cute, let me save it.
+Um, but uh, let's move from 2D now into 3D.
+Go up and put another cot down and leave this one.
+Oops, Leave this one and go into a new world.
+Let's start by making a ball of smoke.
+Now Copernicus I said was an image manipulation package.
+Um, but with 21 we moved into the third dimension.
+So it also can do a volume manipulation, um, because a lot of composite operations actually make a lot of sense for volumes and, but rather than dense volumes, it actually only works with vdbs.
+So sparse volumes.
+Uh, so that's its fundamental data type.
+It's it's working with all the time.
+So let's look at how this can be done.
+Going to start with a soft geometry.
+So let's me create, go and dive into SOPs, create A VDB And set it size to uh, 0.
+01 and I'm the VDB and we'll do A VDB activate.
+So I actually have some nu and zero stuff done.
+Make a big cube, big cube of smoke.
+Uh, let's go back up.
+And in cops you see this visualizes 'cause it's geometry.
+But when we have in 21 is I can do a geometry two VDB and we will then convert this into A VDB, which looks exactly the same except now it's sitting on the GPU and uh, it's ready to be processed by Copernicus.
+Uh, to process it.
+Uh, let's start off with an SDF shape And get ourselves another circle but reduce it size.
+Do SDF two mono and now we have a little circle and we can do a, uh, VDB from layer.
+And what this does is set the values of A VDB from a layer.
+Um, so if I take the one I've created there and set it up, oh, you can see it didn't seem to really work.
+As a matter of fact, you can see a little hint of it here, that little, um, start of a cylinder showing up, but the bulk of it didn't change.
+That's because if I go to VDB visualized tree and actually look at the um, topology of this VDB, now we can see all these red leaves on the inside and these are all called active, um, tiles rather than leaf nodes.
+And that's because they all have constant values.
+So the VDB structure only stored a single float for them.
+The problem is the GPO can't expand these on demand.
+It needs to have everything pre expanded for it or else it's not able to write to it.
+Um, fortunately there's a way to, uh, force them to expand.
+You turn around densify and then we will properly densify all the contents.
+This could use a lot more memory.
+So if you're just reading from the V two B, there's no reason to do this.
+So only if you need to write to it.
+Um, so then now after densifying it, I will get the proper cylinder cube.
+Oh, that's not very good.
+I don't want a full length cylinder.
+I want something in just a certain area.
+What I can do is transform 3D and take that uh, plane that the image layer had previously and now um, rotate it 90 degrees and do another VDB from layer.
+And this basically will project along.
+Um, that's other one.
+So I get another cylinder pointing in a different direction.
+That's because any 2D layer we have is, um, always extended along its length, uh, infinitely far, um, actually along its camera.
+So if it's a, it is from a camera, it'll, it'll taper to a point.
+But for an orthographic one like these that just goes off forever like a cylinder.
+Now what I can do is combine these two together and I can use a minimum to get the minimum of the two.
+And um, then we see we end up with exactly what we kind of would hope for, namely this sort of pseudo um, truncated circle.
+Um, it's kinda interesting to see that I just use minimum here.
+This is a normal cop no used stop rate on layers.
+It also works on vdbs.
+So because pixel by pixel and voxel by voxel is pretty much the same.
+Anywhere where an operation with some simple pixel by pixel operation, we try and have it also support voxel by voxel.
+So you can pretty much use all the same loads you had before and that's why there isn't a VDB minimum.
+There's just a plain minimum indeed I can go farther than that.
+I can even put down a blur and uh, and indeed blur out my, uh, my shape without having to do any new, um, type of V two B blur node.
+And that's, um, very cute to be able to build this, but I can actually do it a little bit better.
+If I wanted a sphere, I could actually make an actual sphere.
+So I'm gonna go start again with a geo to VDB to get a a dense uh, cube.
+Um, I'm gonna build a position map and the position map, um, is one that just stores creates a vector VDB.
+So stores, um, three values per voxel, but it's just storing where in the world that is.
+Um, if I do A VDB visualize Slice, I can even see what that, um, vector values look like.
+Um, so they're just storing where they are in space.
+Um, so I can now do a constant to generate a constant value from this.
+So this is activated everywhere the VDB is and has the value everywhere of, in this case zero.
+And if I subtract, um, that I will then have a vector pointing to that constant value and take the length of this.
+And again, this is just a mono node that you'd be familiar of from before.
+And then do a remap and reverse the direction of that remap and start to adjusting my input range.
+And I basically extracted a, um, a sphere from my surface.
+Indeed the constant here is where the center of the sphere is.
+So if I go to the constant and drag that into the view port and make a pivot handle, um, I can then move this pivot handle around and it will properly update what I've, what I've got.
+So now we have a puff of smoke, we want to make it move.
+Um, so we've got the problem here is we don't have the equivalent of a distort node for vdbs.
+Um, so we need to roll our own.
+Um, this is pretty straightforward though.
+Um, first we need to have something which is our, um, uh, uh, velocity though.
+So I'm just gonna do another constant and drive it off our um, subs, uh, any one of these guys just to get a, take a grab of this one.
+Um, and just get a constant direction.
+I'm gonna start with constant direction, which is vertical.
+And this is just so we have a constant direction value.
+I'm gonna do a B2B visualize, uh, velocity and you can see yeah, that's a vertical direction.
+Adjust it, you can see get different directions there.
+So to add that in, what I need to do is three things.
+First I create my position map, then I adjust the position map by the velocity and then I look up that position in the original ones.
+So to do a position map, I can do that from my remap here.
+And now I do the, I add in the, um, Oops, sorry, I add in my velocity in this case I'll scale it by by one over 24 'cause work one to sum or 24 frames per second.
+And so this gives a slightly offset position map.
+And then I can do a position sample.
+And the position sample takes a new position, uh, as the first input.
+And I think the sample is the second one, which is gonna be our density.
+Um, so this then becomes the offset value.
+As a matter of fact, if I don't do that by this, but I can now adjusting and see it has indeed, um, moved, moved where it is.
+So I leave that as a small step now like before I want to make a block out of this and to make a block I can go and put down a block, select both and I'll be wanting to apply both density and um, velocity, select our density and our velocity type float VDB and type vector VDB.
+Um, so my initial, uh, density goes in and my initial, uh, velocity goes in.
+And so like before we want this little trick we have of building position mapping and offset.
+We can do that uh, in inside the network using the, the velocity from inside the network as well Inside the block.
+And then the position sample would come from the density and I'll put the density.
+And likewise, when we want to affect the velocity, we again just do another position sample, but this time of the velocity with respect to this distance.
+And then we get the new velocities.
+Uh, so we display this one and turn on simulation and we should have one that is constantly running actually in the opposite direction, which tells me I should use subtract rather than add, um, to, 'cause we have to point backwards not forwards.
+So there we go.
+We're moving under a constant velocity field.
+Um, quite cool, but let's add a, um, let's replace this with uh, a constant zero velocity initially and add ourselves some forces.
+So what we're going to do is add some, um, uh, so after this, this uh, acceleration here, we want to add some gravity.
+Um, so I'm going to or some buoyancy.
+So here I'm going to again do a uh, bright where I adjust the velocity, find this I can scale by time step 0 1 0 and shift value of one.
+And so this will continuously add to velocity as we go.
+And if I do the VDB visualize velocity and make sure I visualize actually the velocity here and we can see as time went on it got brighter and brighter as we added more to it.
+And if we visualize the um, density field By VDB visualize slice, you can see it's moving upwards.
+It's reading from the bottom and going upwards, but it's not actually filling the new area.
+So this is the same problem we had before where um, even though we are at vectoring, the velocity by the velocity and it doesn't matter because we have haven't got a, uh, divergent free field.
+So it's not able to see past that zero point at the bottom.
+So it stops being able to load anything up to fix this, we need of course, uh, projection and there is indeed a projection operator for this too.
+So if I go to hydro project, non divergent electrostatic, it's good time probably to save.
+And um, this requires both the velocity project but also requires a reference field.
+Uh, so I have to wire that one in.
+Um, but if I just plug this in, um, basically we will get a much more interesting result.
+You can see this happening real time so to speak, by looking at the velocity after the, um, buoyancy was added.
+And then after we do this, uh, correction, we can see suddenly we have this circular, um, um, things produced for it.
+You can also see there's a lot of operations here to improve the quality.
+It's designed to be pretty, um, uh, uh, as fast as possible and as little, um, qualities we could get away with.
+So if you want more accurate projections, you definitely want to increase some of these settings.
+Um, but by default we, we just want something fast, so that's fine.
+And now that we have this as we play, um, we can see we do indicate a puff of smoke that goes upwards.
+Um, and if I go over to a certain frame like this, I can again turn off the caching, change the frame, so we wipe out the cache and then I can try different, um, iterations to see how much differences we get by applying these.
+So we can see stuff like applying the block blast is pretty important also.
+We don't get any convergence at all.
+Um, and, and so on and so forth.
+So you can make your own decisions about quality and time cache in back on again in.
+Okay, so now we have a puff of smoke but it's operating inside this dense volume.
+So it's always inside this solid cube and as we see it quickly leaves the cube and we sort of want to be able to follow the cube and also not waste time simulating on that area that is empty.
+Um, so to do that we wanna take advantage of the sparsity, which is part of Vdbs.
+And so let's look at how we can actually achieve that.
+So we'll go back to the beginning here again.
+Uh, move over here a bit on that.
+Uh, very first frame here.
+Um, there is something called uh, VDB leaf points and BDB leaf points.
+Let's mean generate, um, basically a point for each one of those leaves.
+So these were those blue boxes when we saw the visualized tree.
+Um, so I create a whole bunch of points like this and uh, the opposite of that is basically the VDB activate from points.
+And in this case I provide a reference VD, B and I activation set of points.
+And for each of those points it will activate the leaf that that point's inside of.
+And so this pretty much gives me the same thing back.
+I'm gonna do a constant afterwards and just see what has activated.
+I can do some neat things here.
+Like there's some built-in dilation options, either by distance or by leaf count.
+I could even change the actual resolution of the voxels, but in this case I wanna keep that the same and I will want to add dilation later.
+But for now we want to first, uh, change which ones are active 'cause not all these, um, points are actually very important for us.
+We only want the ones that have non-zero density.
+So to find those I uh, I could just have each point sample its density except there's one point, um, for every 512 voxels.
+So I need to run over those five 12 voxels to find out what the density is.
+Um, I'm not gonna do that now.
+I'm gonna go instead just blur the density.
+Um, 'cause it's a little bit easier for me to, to run.
+Um, so I'm gonna blur the density 'cause I can set this to pixels and blur by four pixels of a box filter.
+And this way I'll pretty much get stuff, um, set to one if there is a, um, a pixel set within four pixels of it.
+So basically this will be what I want to know.
+Uh, 'cause it'll, if it's, if anything is set inside there, it'll get set.
+Uh, so now I can do an open cl 'cause there isn't a built in way to dip these points in unfortunately.
+And so I'm going off run over the attributes.
+So say a run over attribute and I want to bind the point position.
+So p uh, say float three and uh, port name equals gel or port equals gel and bind the, um, Sorry, Invalid.
+So this is an attribute that I will be writing to, to say whether or not it is a valid um, uh, point or not.
+And also bind the, um, sorry these are point attributes to specify that and bind the VDB called density as I float and also bind a parameter, uh, called cutoff volume of value equal 0.
+01.
+How does that float?
+And if I, now I can hit control, click on this and it will set up the interface for it.
+Um, so I can wire my points in and my density in.
+Um, and in the points one here I can add the invalid attribute.
+So it'll be pre-created because you can't create attributes in OpenCL.
+So you have to sort of pre-create them.
+So now we've got this invalid attribute and where then invalid attribute comes from is if you read the help for VDB activate from points, any point that has the invalid attributes set to one will not contribute to the result in activation.
+So I need to in here say if the density is um, small, I do, I want to make it invalid.
+So I can say if, um, density world sample my position is less than my cutoff, then I can say invalid set two one.
+Um, else invalid set two zero.
+And hopefully that will set the invalid stuff properly.
+I can go to the geometry spreadsheet and see if I got stuff set I did.
+So that's a good sign.
+And if I wire this in as my activate points, um, we'll then see that it's only activated there, I area immediately around.
+Um, so now I can use this as my new set of, uh, voxels to process.
+Uh, so basically, um, here I want to replace all these guys with the new resolution.
+So I can do A VDB reshape And, uh, specify the reference to be, uh, oops.
+Not that, not that one, but the, uh, the raw one.
+There we go.
+And, uh, then the other one needs to come from this as well.
+And likewise, A, B, DB reshape of the vector field.
+The V two B reshape basically, um, takes the incoming, um, one and will copy the values over and get the new topology.
+So now we're the need topology.
+Uh, so after reshaping both of them, if I play this forward, it quickly disappears.
+And that's because as it rises up, we are not actually activating the new, uh, tiles above us.
+So that's where we definitely need to go in here and increase our leaf dilation, um, so that we're able to activate where it's trying to go into.
+So now we can see if we create it as it's going up and delete it as it's going, uh, behind.
+So, excellent.
+Okay, now I'm gonna make another copy of the network.
+Again, I, this first copy of this particular network, because I'm going to try and create a, a different type of source this time.
+So I'll definitely create the same, uh, GO two VDB here Be our source one.
+I'm gonna start off with a file, and this time I'm going to load the snail from disc and the snail.
+I'm going to now try and select a little piece of it.
+I'm gonna do this with fill connected, and let's just make the cabal red so I can see exactly what I've selected.
+And again, I can press this little button here or move the, the handle here for it.
+Um, or I can press the button and just dynamically click different locations.
+Definitely need to increase the tolerance so we can start to pick up this, this area, sort of what I wanna get is the sort of the top of the snail.
+Um, so I'm gonna do the same trick before of the VDB from, uh, layer.
+So to convert this, uh, flooded area.
+So I'm taking the flood value, put it into the density layer, and that's getting this piece here.
+And like before, I can do a ramp and, uh, transform this in 3D to get a, make sure I can see what I'm doing, um, three, nine degrees like this, and another B2B from there.
+And the idea here is I want to create a, a thin band.
+So I'm gonna just quickly move as in create like a band like this.
+So we're just extracting hold short piece of, uh, of density And do a minimum between the two.
+In this case, I'd probably want to, um, rotate the ramp to be vertical.
+So now I have a small chunk of snail ready to be used as a source.
+Okay, so, uh, like before, I'm going to use the, I can use this constant to be my zero initial state and use this as my initial, uh, density.
+But I also want to be adding a source every frame.
+So I'm going to be adding extra source input here.
+We'll call source, which will be a float VDB, which will also bring in, uh, to be the, the value of the, um, the snail.
+And so let's mix this into our density every frame.
+So we can do that by first making sure I've got the source available by taking this wire and just moving as a null over so I can find it easily.
+Uh, shift, move, oops, control, move these guys back, give myself some space.
+And I wanna do a bright again with the this as my shift value scale by time step.
+So now I'm adding this in every frame to our, um, source.
+So we're should be continuously adding.
+I have to change my shift to one.
+There we go.
+So now I've got this continuously being added to the bottom.
+Now to make this look more interesting, um, I can, that's gonna go back here and do a rasterized volume on the density and only the first time you have to run these do you have to compile open seal kernels, triple having a fresh install.
+After that they are cached.
+Okay, so I can go to diffuse color and choose, uh, clamped and wire this into diffuse color.
+Let's change our ramp that select ramp, uh, the infrared and change our min input range down a bit so we can get some nice red in there.
+It's now a nice colorful smoke horizon up from it.
+Um, we can now over this.
+So again, I want to bring my original snail over.
+So, um, uh, just use a sacrificial null to move it down here.
+And another null.
+You can also use dots for this if you prefer.
+And now I can run in over with that as my background.
+And We can see it rising here.
+I might want to increase my density more.
+So composite is stronger.
+Now most of the, um, simulation here we note is actually off the screen.
+So if I look here, uh, we've got a whole bunch that's off the screen that's being computed and it's rather pointless.
+Uh, when we did our activation, we can actually control for that.
+Uh, so the V two B activate from points.
+There's a clipping range, so if I turn on clip in y max,
