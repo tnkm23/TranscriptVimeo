@@ -1,5 +1,7 @@
 # Ignore environment secrets
 .env
+# Ignore node modules
+node_modules/
 # Node logs
 npm-debug.log*
 yarn-debug.log*
