@@ -99,10 +99,14 @@ async function runPipeline(url, titleArg, options = {}) {
 
       const splitIntoSentences = (text) => {
         const compact = text.replace(/\s+/g, ' ').trim();
-        const matches = compact.match(/[^.!?]+[.!?]/g) || [];
-        const remainder = compact.slice(matches.join('').length).trim();
+        // 小数点(0.6, 3.14)と略語(Mr. Dr. vs. etc.)を一時的に保護して誤分割を防ぐ
+        const safe = compact
+          .replace(/(\d+)\.(\d)/g, '$1\x00$2')
+          .replace(/\b(Mr|Dr|Ms|Mrs|Jr|Sr|vs|etc)\.\s/gi, '$1\x00 ');
+        const matches = safe.match(/[^.!?]+[.!?]/g) || [];
+        const remainder = safe.slice(matches.join('').length).trim();
         if (remainder) matches.push(remainder);
-        return matches.map(s => s.trim()).filter(Boolean);
+        return matches.map(s => s.trim().replace(/\x00/g, '.')).filter(Boolean);
       };
 
       const findTranscriptRoot = () => (
@@ -165,7 +169,7 @@ async function runPipeline(url, titleArg, options = {}) {
           if (!text) return;
           text = text.replace(/\s*\d{1,2}:\d{2}(?::\d{2})?\s*$/, '').trim();
           if (!text) return;
-          const hasEnglishWords = /\b(the|this|to|a|and|in|of|for|is|that|it|we|you|are|have|with|on|be)\b/i.test(text);
+          const hasEnglishWords = /\b(the|this|to|a|and|in|of|for|is|that|it|we|you|are|have|with|on|be|at|by|from|as|or|an|will|can|so|if|but|not|all|would|there|their|what|up|out|when|your|how|about|which|get)\b/i.test(text);
           if (!/矢印キー/.test(text) && text.length > 10 && hasEnglishWords) {
             transcriptMap.set(text, true);
           }
