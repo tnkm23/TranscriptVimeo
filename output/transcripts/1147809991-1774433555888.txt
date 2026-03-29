@@ -1,0 +1,172 @@
+So in this video, we're gonna dive deeper into Houdini.
+Before you watch this, um, you must watch all the pro videos that we have on Houdini.
+You must have read the manual that we have on Houdini fully on the user side.
+Um, and you have to have some basic knowledge on Houdini itself.
+So you should have known, you should know what notes are, how just the basic things just have spent at least four or five hours on Houdini washing videos.
+Um, 'cause this is gonna get a little bit more advanced.
+So I've opened the project up from a user.
+Um, as you may know now, staff, we have a smart upload system, is where we take all the assets from the user and we copy it over to our site.
+This is the project from this particular user.
+The user could have files anywhere on his workstation, right?
+He could have, uh, on a c drive, on a D drive on his nest.
+And it all comes to this folder.
+So currently it's all unlinked and we'll all.
+I've opened it now, but everything is missing.
+So we first made to me make sure that every day everything, uh, gets connected again.
+Normally this happens in memory before the job starts, but if you do troubleshooting on a job, we have to manually do this, uh, to check what's going on.
+For example, with the project, uh, to look a little bit how it works.
+So we have, uh, a lot of folders.
+Um, the prep folder with the OTLS, this is where users have, uh, their custom acas.
+This is deadline, it's not heated, but uh, um, this was in the user's project.
+So it's also uploaded to our location.
+Uh, there's a custom OCO, which they've used.
+So that's also uploaded and activated.
+Then there's uh, our logs.
+This is logs that's coming from us.
+There's gonna be nothing in it, but there's, oh, there was, ooh, maybe this is something else, but doesn't matter too much.
+The main logs are in here.
+Uh, so the first one, D asset remap contains all the assets that we are uploading.
+And after that, you see the location.
+This is the note that this asset is coming from, right?
+This is an, uh, a cloth simulation and it's, uh, from probably a file cache.
+And, um, this is the location in the project.
+So what we'll do is that we know this location.
+Now the cinnamon sequence, and we know, all right, we need to remap this file.
+Let's take a, just a single file a little bit easier.
+Um, well there's for example, an A CR file here.
+We know this file needs to go to this location.
+And if we look also in the, in the project, we can look like, um, OBJ and then air straight.
+If we probably look here is OBJ and we air straight start was the start.
+I have no idea actually.
+Um, probably on See plus start.
+Yeah, so it should be somewhere on here.
+Um, textures.
+I don't know where it is.
+Oh, here it is.
+General.
+So here you see the particular tense.
+Uh, so on the user's location, it was on a pretty simple location.
+It was under the hip directory textures.
+And then they had this file here.
+If we look at our location, where it is, we got the textures, it's soft box.
+Oh, it is, it is at the same location for this, uh, particular instance.
+So that's good, that's easy.
+Uh, but there's also many locations where it's not.
+So it will still be remapped, um, 'cause for example, all that stuff and Geo has a, has a hash or that won't work.
+We have for that.
+Um, so it all, so, so things can override each other.
+So, um, what we now do have is a script that will v map this all to, uh, to our location.
+The script is located.
+If we go to, uh, this location and scripts, Houdini, Houdini, asset Remap, this is, uh, what's, let's see, 1300 lines of code to remap everything correctly.
+It's one of the more advanced stuff, Hodi, and it's very hard.
+Uh, there's a lot of things that could go wrong, exceptions and um, to get this right, it's just an ongoing process and we're getting closer.
+But we are now a few months in with Houdini.
+Uh, we're changing stuff every day.
+We're like almost daily at least.
+And, uh, we hope that one day this becomes so stable.
+That always works.
+We're not there yet.
+We're close, but we're not there yet.
+So when we click this building here at the top, we have, um, our own little shelf and you can click this asset remap.
+So remember this is the raw project from the user.
+If you click Asset Remap, now it's, it's a little bit slow.
+It will run that script and you see also what's happening.
+It, it says okay, and then, uh, the location of the note and then what texture is remapping.
+And if we give it a second in memory, it's faster.
+Now it's pretty slow because it's printing, printing in the console is slow.
+Let's give it a second.
+It remapped 29 assets and there's zero failures.
+So that's good.
+And you can also see this file name now has changed and it's become our location.
+So it's now an absolute path and it's now loaded as well.
+It was working before but now it's also working.
+Uh, but a lot of things, uh, would've broken.
+We close this for a second.
+Um, let's now go to the output.
+And here we see the Redshift note of the user and our own HDA.
+And we're gonna quickly do a scene check.
+What it's gonna do now is gonna take all the assets again.
+'cause this is what also just happens on the user side.
+Of course it takes it search for all the assets that are in the scene there.
+We will list them down, uh, besides just, just showing the job and job details of course, but we want to, I want to explain some things here.
+So everything is found again, right?
+We can see all the assets here again.
+Uh, but this project has something special with some um, RS proxy files.
+There are files like proxy files or USD files that Houdini tells us.
+Alright, here is an asset.
+It's, it's a use D file and our proxy file.
+But the proxy file can contain many other assets as well.
+It can have dependencies.
+Uh, use D files can reference other use D files that can reference a use D file.
+That current reference, uh, uh, a volume file, which, uh, which contains a lot.
+That makes it so difficult.
+That's where this is hard and also hard to find.
+Um, so there's also a lot of magic.
+And we have like this RS file.
+What happened in that few seconds or a few seconds, almost 15 seconds I believe, is we opened the Redshift mount line, we opened this file, we looked through the dependencies on this file.
+We made a map like a, a map on.
+'cause we have to also make sure that if that, if that dependency is, is a few folders deep somewhere else or a few folders, um, uh, back, uh, and at referencing that file, we have to make sure that that package uh, works and that the, um, that all will stay the same, right?
+So, um, that's a lot of work.
+That's what makes it hard.
+And that's just also what you will be troubleshooting.
+Uh, if we now look at the lock, I'm actually curious if it works, um, on this occasion, I haven't tested it.
+Um, let's go to the lock.
+If you want to go to the lock.
+The easiest way is just we're now in 21.
+We just go to our tool and then here there's the lock you can see.
+And if correctly, if, oh, you know what?
+I have an old version on this that doesn't scan it probably Yeah, that's an old version.
+How old this is.
+Yeah, but I'll leave all these things in 'cause uh, yeah, that can also happen for a user.
+And uh, so this version that we're now using was, uh, didn't have the uh, the proxy file scanner.
+That was only added last week.
+So, um, this didn't search for the proxy.
+Normally you see that it's full search for the RS proxy file and uh, it will now launch the command line, stuff like that.
+But it's okay.
+We'll, um, we'll, we'll you will see that next time.
+That's totally fine.
+So if, if you submit the job again, the same thing, uh, will happen again.
+It will be placed on our location.
+It will be remapped again.
+You can also see that there's some assets missing.
+Um, there are probably actually not needed.
+There's a deadline.
+Stuff not needed.
+Deadline.
+Deadline.
+I don't think there is were needed from the start.
+Maybe they were.
+I don't know actually at this point, I don't think so.
+Um, I'll leave it.
+This is already quite a lot of information on um, how this all works or like, uh, let's take it a few, few more steps.
+If we go, um, to the job again, let's see how I can go back to the job.
+There are a few more scripts to look at.
+'cause if we vap what we just did, we did the asset remap, remember.
+So we get a basic lock from the, in the CY command line.
+That doesn't tell us everything.
+So there's more, there's two more logs that tell you more things on, on how a remap works.
+So we can, there's always at the root, there's this remap reports, the TXT.
+And we could see here that this asset, the, um, the plot, um, we see this is the asset name.
+We found the note, like this is the note, what we need to do.
+Then the, the parameter is like the parameter.
+What, where we gonna change?
+We need to search for this or we search on this note, which, where is the parameter we need to change?
+This is the, this is the correct one.
+We take a look at the raw path.
+So this was the original raw pad.
+The expanded pad means, alright, what is this like expanded?
+This was what it was expanded.
+And then we remap it to our location.
+You see?
+So there's a little change here, which you can see, uh, that will make it work for our location.
+Um, there's also, if there's stuff wrong, we saw that there were zero errors.
+So there will be not, but if there's an error, you can also see it in here.
+So this is based on the assets, but we use, there's one more lock.
+Uh, with Houdini, there's always one more lock.
+That's the, that's the thing.
+Um, there's remark, remap, debug, which isn't even craz a lock, which shows you, um, every note it tried.
+So there's also, this is even more, uh, like on the note, it tries to find the match.
+And, um, let's do this next time.
+'cause it does is just, um, I will try to do this next time with a, with a bit of, uh, more information on how I can, uh, correctly explain this log.
+Um, maybe you can just take a look for yourself and see, maybe you can figure it out.
+Um, so yeah, more things in the next video.

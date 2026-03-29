@@ -1,0 +1,107 @@
+Hey there, my name is Jesse Lehrman and I’m on the Media and Entertainment team from CoreWeave, and I’ll be walking you through how to set up our newly updated Conductor submission plugin for Houdini.
+If you’ve already set up an account through Conductor and have some basic Houdini knowledge, but have yet to send anything our way, this tutorial is for you.
+We’ll be covering a couple of topics today, including the Companion App for easy installation.
+We’re going to go ahead and install the plugin via Conductor’s Companion App, which can be downloaded through our website.
+The Companion App is a desktop application that is the entry point for Conductor and really makes it easy to get going.
+I’m going to navigate to the “Plugins” page.
+Note that I’m not required to sign-in to install.
+As you can see, we keep up-to-date with the latest and greatest DCCs, but today we’re going to focus on Conductor for Houdini.
+Which is right over here.
+If I click on this dropdown menu, ou can see all of the versions available.
+Let’s pick the latest one.
+Make sure Houdini is closed first and hit the “install” button.
+So, what's changed?
+For those of you that are familiar with the previous iteration of the submitter there are some subtle but significant differences.
+We had three major goals for this new release.
+The first goal was to greatly increase support for Solaris and USD.
+The second was to simplify the submitter.
+And the third was to make the submitter more deterministic and less of a black-box.
+I’ll dive into the details of the first goal when we take a look at the submitters.
+To achieve the second goal, we decided to create multiple submitter types.
+We now have three; Solaris, Husk and ROPs.
+But we’re not stopping there - we are currently working on more.
+By focusing each submitter type to a specific workflow, we’ve been able to improve the user experience so that artists are only presented with parameters and choices that are relevant to them.
+To achieve the third goal, we’ve decided to establish a 1:1 relationship between a Conductor submitter and a job.
+With the previous iteration, you were able to submit multiple jobs from a single Conductor submitter.
+While at times this was a handy convenience it also created issues where users did not have visibility on how certain parameters in the submitter would affect all their jobs.
+By establishing a 1:1 relationship, the user gains greater visibility on how an individual job will be submitted.
+We’re also hard at work at writing some tools to make it a lot more convenient to submit multiple jobs.
+Look for those in a future release.
+To learn how to set up a plugin in Houdini, Please check out our documentation for details.
+Our plugin is bundled as a Houdini Package.
+So, we’ll start with the Solaris submitter.
+I’m going to use the Bar Scene available from SideFX’s website.
+The Solaris submitter is intended to connect to a USD Render ROP.
+The setup is pretty straightforward.
+We’ll put down a Conductor (Solaris) Submitter in the /out context and then we'll hit the Connect button.
+The connect button will ask us to login and then populate the submitter with values that are taken from our account.
+I’ll then proceed to select the USD Render ROP.
+This will cause the Conductor submitter to start evaluating the stage and USD graph.
+One of the big improvements with this node is that it will jump directly into the USD scenegraph after evaluating the USD Render ROP (for overrides).
+That means we rely on the USD API to resolve which Render Products to submit and with which settings.
+This provides a more deterministic result for the user.
+A single job can render multiple Render Products.
+We can then start going through the parameters and modifying the specifics of the job.
+At the top here we have the title, which is pretty self explanatory.
+By default, there's a template, but it can be modified.
+And then we can choose our Project, here I just have a single Project, But Projects are a Conductor entity which you can use to differentiate between different types of Jobs and they usually they map pretty well to projects you would use in production.
+We can then go ahead and choose the machine type.
+We have a choice between CPUs or GPUs depending on your render engine being used.
+So, because I'll be rendering with Karma I'll stick to a CPU and choose a 64 core.
+But as you can see, we have quite an array of GPU options and you can go all the way up to 4 GPUs on a single machine.
+And then here you can choose the specific version of Houdini you want to use to render.
+It's best to keep this close to the version you are using and this is exactly the version I'm using.
+But if you want to play around, you're welcome to use different builds.
+As you can see, we have many, many different versions.
+And if there's not something that matches what you need, you can always feel free to reach out to Support and ask us for that version.
+What you'll notice is different versions, or different builds, also have different plugins available.
+And same thing, if there's something missing that you need, you can reach out to Support to request that specific combination.
+Going down, here you can have control over the frames.
+Here we have the Houdini playbar default.
+And then below, we have Chunk Size.
+Chunk Size lets you provide how many frames you want to do on a single machine.
+By default that's 1 and that's usually a good setting.
+And then here we have a concept called Scout Frames.
+The idea behind this is to preview specific frames first.
+So in this case, we'll render the first, middle, and last while all other frames are on hold.
+Once those 3 frames are completed, they can then be download and checked.
+If good, then all the remaining 237 frames can be unheld without the need to resubmit this Job.
+This feature is designed to catch potential errors before they can incur a great cost.
+Imagine the scenario of running 1000 frames at 10 hours each - only to discover that a texture was missing.
+Moving onto the next section we see some details about the job.
+The Output path is based on the output defined by the Render Products or the override in the USD Render ROP.
+Which is, in this case, over here.
+If there are multiple Render Products, it will be the common path of all the render products.
+And you can check out our documentation to understand the role of the output path and why the common path would be used.
+From this point on, most of the parameters are more advanced controls.
+Here we have the Render Script which you're free to modify and it's very easy to select an alternate version.
+And as you can see here from the task template below, it's the render script that's executed to launch the render.
+And same thing with the task template, you're free to modify this command and this is what is executed on the render instance.
+You have complete control in using some templated tokens.
+Moving down a bit further, we have the Location Tag.
+The Location Tag allows support for multiple sites.
+And this is something we won't dive into in this tutorial, But you can come back and check out our documentation.
+The Upload Daemon, we have two methods to upload files.
+One is within the Houdini session, and if I click on "Submit", it will start to upload all the files.
+Or we could use our Upload Daemon, which is a process that can run in the background, and even on a different machine, that will take care of all the uploading for your account.
+For this case, we'll leave it blank just so we can see the process of this submission.
+Moving down into some of the more advanced parameters, these are just indications of the auto-save scene, so this is the scene that is actually uploaded as opposed to the current scene, and this to avoid accidental changes while the submission process is happening.
+And let me talk a bit about asset scraping.
+So, the Conductor Plugin includes logic to scrape and find all the dependencies required to render a scene.
+The Solaris submitter will rely on the USD libraries to find these files.
+Sometimes renders will fail if missing a file.
+Other times they might complete and look incorrect--which scout frames can help mitigate.
+If a specific file or path is missing the easiest workaround is to add them via the extra assets section.
+So here you can browse for individual folders or individual files and you can even add any custom HDAs, which aren't added by default, if necessary.
+This next section allows you to add Environment Variables that you might need for some of your tooling or other purposes.
+We provide the customer almost complete control over these.
+Below, you can add emails to get notified when your render is complete.
+So now, I'm going to go back to the top.
+And I'm going to hit "Submit".
+No issues found by our validator.
+And then I'll start the submission process.
+Now that the Job has submitted, I'm going to go to the Conductor Companion and I'm going to sign into my account.
+And now the Companion will show me all the files I can download.
+So, I will download them.
+And that's it.
+And thank you for joining me for today.

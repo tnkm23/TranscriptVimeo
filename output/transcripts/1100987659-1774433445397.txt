@@ -1,0 +1,1154 @@
+I'm gonna add Grayson to the call invite to speak.
+There we go.
+Grace.
+So, oh, yo, yo, yo.
+Howdy.
+Nice.
+Sounding good.
+Still Sounding good.
+Looks good.
+Awesome.
+Thanks For waking up so early.
+Yes, it's a little bit early over year in LA but, um, happy to be here.
+Yeah.
+I hate the time difference.
+I always have to, it's when, when I'm super tired.
+Unfortunate.
+Yeah.
+Usually I, I'm like already super tired and it's by the end of my day you guys are just waking up full of energy.
+Ugh.
+Yes.
+Yeah.
+I'm, I'm getting your text at like 3:00 AM or I'm waking up around 10 and I see texts from you at 3:00 AM Yeah.
+Yeah.
+It's, it's wild for sure.
+Makes it a little hard to get on calls, but we're making it happen.
+We're here.
+Sweet.
+Well, thanks for taking the time, uh, to do this webinar.
+Uh, I think we can start right away.
+I was thinking about if you can quickly, uh, introduce yourself and tell us what you currently do in this industry.
+Yeah, for sure.
+Uh, so currently I'm at Naughty Dog working as a technical artist, uh, for our destruction team.
+I've been doing that for about three years now.
+Uh, before that I was at Nomen, uh, school of Visual Effects, working in the games track, uh, just kind of honing in my Houdini skills.
+But now at the studio, I'm sort of setting up tools and pipelines for our, um, just speeding up workflows for us.
+Mm.
+Uh, and then I'm also trying to like, introduce the rest of our team to Houdini and kind of get them used to it as well.
+Mm-hmm.
+Uh, just 'cause it's been so powerful for us.
+I think the more that we get people in it, it's gonna be like, uh, like a exponential sort of growth as people start to become, like able to do stuff on their own and grow and create their own HTAs, we're only gonna get like, faster and better.
+Mm-hmm.
+So that's, that's what I'm up to nowadays.
+Sweet.
+Um, I'll also, go ahead.
+Do we want to share my screen now or in a bit?
+I think your video actually froze your camera.
+Oh, no.
+Let Try.
+Are are you on the app or the browser?
+I may be on the browser, Don't you?
+No, not again.
+I, We had this issue.
+What do you mean again?
+Corman?
+What?
+Corman He knows exactly what happened.
+He was on the browser.
+His his sharing wasn't working.
+His camera wasn't work.
+Do not use the browser.
+Oh, no.
+Oh, no.
+I mean, oh, shoot.
+It's completely fine.
+You can, I mean, we can try.
+If I don't have it downloaded though, I think it's worth, uh, if you quickly download it, log in and then rejoin.
+Otherwise, it's gonna be a pain.
+Okay.
+It's, yeah.
+It didn't work the last time.
+Okay.
+I'll speed.
+Run this Sweet.
+Come Back, download with this cord.
+Come back to it.
+Okay.
+Okay.
+All right.
+All right.
+All right.
+All right.
+Sweet.
+Ah, I need to, I need to create a document for, I, I just assume that everybody is using the app.
+I would, I do not understand why anybody would use the browser, but essentially after Gray Sun joins, we're gonna jump straight into the demo.
+He has a very cool demo.
+Uh, I think it's gonna be around 20 to 30 minutes long of like some of the setups.
+He's gonna be teaching you guys, uh, for the workshop.
+And we're just gonna speed run through all the different examples.
+It's a very comprehensive workshop and it really showcase how Houdini and Unreal Engine work together and why that's important, uh, to have that functionality in a studio environment.
+And then he's also gonna talk about how Naughty Dog is, uh, using that workflow.
+Uh, in the studio.
+There will be a replay for the webinar.
+Yeah, I'm recording it.
+Okay.
+Mm-hmm.
+There we go.
+Record time.
+Come On now.
+Dude, that was fast.
+Like under a minute.
+All right.
+Sweet.
+Alright.
+But yeah, essentially, uh, yeah, let's jump into the demo and let's do all the questions and stuff after.
+I think that's gonna be, Yes.
+All right.
+Let's do it.
+Okay.
+Let's see if the screen share works this time.
+My Screens screen one.
+Oh yeah.
+1440 P with Nitro.
+Let's go.
+Yeah.
+The future.
+How are those pixels looking?
+Looks good.
+Can any, can everybody see the, the screen share?
+It works on my side.
+Okay, cool.
+Sweet.
+So I have lots of toys to share today.
+Awesome.
+Uh, these are all things we're gonna be going over in the course.
+I'll just sort of give a quick overview of all the things, and then I think we'll dive specifically into this like, infection growth one.
+Awesome.
+Uh, but starting over here on the right, this is kind of how we're gonna get our introduction to our HTAs and building stuff out.
+This is a completely procedural bridge setup and that's kind of cool.
+But the thing I'm really hyped about is the simulation is also completely procedural for it as well.
+It moves, so anytime you update where the bridge goes, yeah.
+Yeah.
+We got movement, we got breaking, going on all sorts of fun stuff.
+Maybe some artifacts here, but generally I think it's pretty hype.
+We got a nice simulation going for it.
+Um, I was super hyped about this one too, in particular.
+'cause I've seen so many like rope bridge tutorials online for Houdini procedural stuff, but none of them have like dope, like fully fleshed out, like simulation stuff for it.
+So yeah, that was great to figure out.
+And I'll be hyped to share that with you guys.
+Sweet.
+Uh, we have cool pipes as well.
+You need pipes.
+So these are, you need pipes, you need procedural pipes.
+Yeah.
+So if we just drag with our, uh, mouse here, it generates these pipes for us, uh, which I think is super fun.
+And then another small little cherry on the top is we can simulate wires for it.
+We'll see if this does it right away.
+Give it a minute to think.
+Yeah.
+So this is sort of just like a nice little flourish I had for it, which is just creating like a nice simulation on top of our pipes.
+Yeah.
+Uh, but the reason I'm hyped to share this one as well is because this is like modular asset placement versus like procedural mesh generation.
+And I think that like, modular placement is a much more, um, production friendly way to go about things.
+'cause I think usually the way you're gonna get your assets from environment art is gonna be, they're gonna give you like a modular kit.
+They're not gonna expect you to bid out these awesome modular pipes.
+Um, so being able to place this stuff modularly is gonna be like a big help.
+And I think this a lot more applicable.
+Mm-hmm.
+Um, yeah.
+Are these optimized straight from Houdini?
+Raul asks, um, oh, for Unreal Engine, you mean?
+So this one's a bit dense, but these are using mega scans, which are meant for Houdini, I mean, for Unreal.
+Mm-hmm.
+So like, it's, it's okay.
+It's definitely a bit denser on this, on this side, but like, if you wanted to, you could totally have like mesh reduction workflows in place and just use Poly reduces where you want them to make this more friendly for Unreal.
+Mm-hmm.
+Uh, but generally, like this bridge, the reason that it's black and red is because these sort of Vertex colors we're using for the textures inside of Unreal Engine.
+So like, we're driving like how much wind is on the ropes from how red the ropes are.
+Mm-hmm.
+Right.
+So like down here at the bottom, it's black, so there's gonna be no wind on it, which makes sense, because you wouldn't want these to like, clip through the boards or whatnot.
+So it's, I would say all of these are prepared to go directly into Unreal.
+And we also will showcase some of that too, the, uh, HDA a's working inside of Unreal.
+Sweet.
+But we'll come back to this in a bit.
+Yeah.
+So I have a question.
+Okay.
+Um, yes.
+So all of these tools, um, we, we talked about this briefly, but, um, how do you guys use tools like this in HDA and Houdini, uh, at Nadoc?
+Like how important is this in a studio environment?
+I, I would say very, uh, for me, I think that's sort of how I like, was able to make a, uh, a space for myself a naughty dog, um mm-hmm.
+Was just go becoming like the sort of like go-to Houdini person for our team.
+Mm-hmm.
+Which is the destruction team.
+Uh, so what we do right now is we do a lot of like our fracturing inside of Houdini now.
+And then we also do like some extra mess generation stuff inside Houdini too that would be really slow to do by hand.
+Like, uh, if you've ever done like, splinter cards for destruction before, where like you break a door down and you see there's like splinters that are attached to the pieces of wood and they're like transparent that is really slow to create by hand.
+Like it'll take hours to do.
+So we have H das inside of Whoi that do that for us.
+And you can like, of course art direct all the parameters and stuff.
+So I would say for our team, it's super helpful and like that's, that's my whole job is just creating HTAs at this point.
+I mean, I'll help out with other things when the state needs it, but I would say HDA is all the way sweet.
+I think it's, it's, it's, um, being able to, like, even if it's not your specific job to create HTAs, like you're not hired to do that.
+You can still do it for your team, like on the side.
+Um, like if your team is struggling with something and it's like a really slow process and everyone's complaining about it all the time, you could totally just make an HDA to fix it.
+Um, and you know, you're gonna get eyes on you from people on your team and maybe even outside of your team too.
+Mm-hmm.
+So I think it's just, it's a good career, uh, skill to have if you're interested in Houdini.
+Yeah, I agree.
+Awesome.
+Yeah.
+Okay.
+And so this is the one we're gonna dive a bit deeper into, uh, this procedural infection, HDA here.
+So I'll just give like a quick demo of what we got going on here.
+So if we just click and drag, it'll find points along the mesh here and generate vines from it.
+And then we have like a ton of customizable parameters from this as well.
+Need some water?
+Important?
+Oh, yeah.
+Yeah.
+Okay.
+So we have a ton of cool parameters to mess around with here.
+Uh, most importantly, we have this growth amount.
+Oh, it's being super slow because I'm merging it with our million poly count geo.
+Hmm.
+I'll showcase it here.
+Yeah.
+So we have this growth amount, which is also functional inside of Unreal Engine that you can animate to.
+Uh, and then we can change like how many growth iterations we have on it.
+So right now it's only branching out once, but if we up this, it'll think and create a second iteration.
+Um, and then of course we can also sort of change how the actual growth is happening.
+Like it's, it's, uh, decided based on this ramp here, like where it's gonna split along the curve.
+So like here on the far left is the base of the vine, and then on the far right is like the end of the vine.
+So here's how likely it is for it to split.
+And so we can change this and get more unique looks based off of that.
+Mm-hmm.
+Like if I were to move one of these around and Pini would let me, we'll see sort of different changes happening here.
+Uh, it's a little hard to tell on the face what they're actually doing, but it is working.
+Mm-hmm.
+Uh, of course more fun parameters, like how much, what's the minimum amount it can search and then like, changing the alignment of it.
+So right now, so like each branch spawns based on the direction of the branch before it, so a maximum alignment of one would mean that like this branch here would be straight ahead at most.
+And like, alignment of zero would mean it's like perfectly perpendicular to it.
+Mm-hmm.
+So we have control over how much it'll split off.
+And I think that's a really important thing to have.
+'cause like if you're making a procedural vine generator, you need to be able to prove to like an environment team that what you're doing is faster than them sculpting it in ZBrush.
+Mm-hmm.
+And that you could still have control over it.
+'cause that's like a big pushback people have for HDA and Houdini is like, or just procedural stuff in general.
+Like, oh no, I forgot where I was going with this.
+Uh, so this, there's a lot of pushback that can happen just 'cause people like don't want to go into like, the world of procedural stuff.
+Yeah.
+Um, yeah.
+How, how modified and so you have to be able to prove that it's art directable.
+Yeah.
+If it's Art Directable and, uh, especially at Naughty Dog too.
+Yes.
+Like it needs to have all, all the control over it to have that perfect, like handcrafted look to it.
+Mm-hmm.
+So, yeah.
+Um, and so this, if you guys have seen like the promos and stuff, this is the original growth solver that I had created, which I'm happy to say I think it's pretty cool, but I think the one I've created for the course is a lot cooler.
+It has a lot more control over it.
+Uh, if I were just to clear everything and redraw, it's first and foremost a lot slower.
+Uh, it's also, yeah.
+It's a lot slower.
+Might have wanted to optimize this a bit.
+Uh, but there's also not any control over branch direction here.
+Like, so you can see we turn off this extra veins, these will just sort of spawn in any direction based off of the original point.
+They'll just find a point and go to it randomly.
+So there's like no math supporting the growth of it, which I think is, it's, it's cool for a first pass on something, but you kind of need to have that math in place to get like a result that you can art direct, um, twisted journey asking do material transfer over after applying when doing the round trip to Houdini and Unreal.
+So actually, yes.
+I I'm not sure if, if you sense something too unreal and too Houdini and then back it should keep the attributes on it.
+And you can also set up it to auto apply mm-hmm.
+Materials inside your HDA for Unreal, which is done through like a, a, um, unreal material node.
+Yeah.
+And it's literally just an attribute.
+And the attribute is a path to your project.
+So you can have it auto apply different materials once you send it over to Unreal.
+So it'll keep that Sweet.
+Um, there will not be any vats in the course.
+It is something that I was super interested in.
+Mm-hmm.
+But I think the purpose of the course and what I would most want to teach is just the general way of thinking, like a technical artist and like just problem solving a bunch of different HTAs and creating them.
+And VA vats are super cool and I've done them before, but it's not like a, like a straight from Houdini two unreal thing.
+It's like you have to make a simulation and then export that and then import it into Unreal.
+So there's no like direct Houdini bridge pipeline, which is what I want to emphasize a bit with this.
+Mm-hmm.
+Um, okay.
+Sweet.
+I suppose we should dive into the actual creation, the logic behind this.
+Uh, let's, let's, All right, let's do some math.
+Let's have some fun.
+I am curious if anybody else organizes their HTAs or their networks as aggressively as I feel like I do.
+Or even you urban, like No.
+Uh, I'm how subnet heavy are you?
+You're the worst at it.
+Yeah.
+Okay.
+I used to be really bad at it until I realized how helpful it is.
+And I mean, of course it also needs to be organized for people to look at in the course, but I'll, I found myself doing it more and more and I have a lot of fun with all the colors and whatnot.
+I'll post a screenshot.
+Uh, I'm, I'm gonna open up my Houdini and I'm gonna post a screenshot of the, uh, explosion submitter and how it currently looks like and people are gonna Okay.
+Have a panic.
+Panic attack.
+Okay.
+It looks like corbin's happy in the chat.
+Nice.
+Yeah.
+Corbin's gonna have a, okay.
+So Corbin will have to take over my scene that I'm gonna, uh, screenshot soon and hopefully make it Oh, really?
+Make it neat and tidy.
+But he's gonna have a heart attack when I screenshot This.
+Oh, okay.
+I'm excited to see it.
+Are you posting it in this chat?
+In this one?
+Yeah.
+Michael Dini still opening up, but yeah, continue.
+Okay.
+Uh, the reason I ask you ask about the organization is just 'cause as a little tip I'd like to share.
+I feel like forcing yourself to organize things while you're working on them or at the end really makes it a lot easier to think about things modularly.
+Mm-hmm.
+Like, I'm not saying that we could with this specific case, but like, if we wanted to move these sub networks around or just copy and paste them inside of different HTAs, it'd be super easy to do.
+And now we're like prepared for the future and it's like a, it's like a future proof way of looking at things.
+Mm-hmm.
+So I would recommend having fun organizing if, if you haven't tried it before anyways.
+So we have our input here, which is our, uh, this is a poly reduced geo, I think.
+Uh, and then all we're doing in this, this sub network here is we're bringing everything down to a uniform size.
+And that's what I do with all my HTAs, is I, the first thing I usually do is a match size.
+'cause I wanna make sure anytime I'm working on something, it's a predictable scale and it's like a unit of one.
+Mm-hmm.
+So we're just bringing it down to, uh, a scale so that like my VDB operations and my resampling and all that fun stuff.
+Oh my God, I'm looking, that is quite the HDA horrible, I'm looking at your, your screenshot.
+Yeah.
+It's horrible, but I had to quickly do it before we went to FMXI was adding stuff to the tool set.
+Okay.
+And it's just a complete mess.
+Mm-hmm.
+So I need to clean it up, but yeah, continue please.
+Sorry.
+Sorry.
+I mean real, I will share this one's.
+No, no, I need to see it.
+Uh, this is my, my original HDA too, which is just like this mega for loop.
+Damn.
+Pretty intimidating to look at.
+Yeah.
+Yeah.
+Um, new one is organized.
+Sweet.
+All right.
+So we're remming it here and well, I've disabled it for this demo, but we're just turning it into A VDB and then converting it back.
+So it's a clean mesh to work on.
+Um, some poly reduced stuff.
+We'll, just, it mean it's nothing special right now.
+Uh, we're also bringing in our curve over here, which we've drawn, and then we are preparing it, which is just, uh, scaling it down the same amount as our mesh.
+Mm-hmm.
+And then I think we're re-sampling it and smoothing it a bunch of times so that it's like a, a nice curve to work with.
+Uh, and then we are recasting our, um, our curve to our mesh.
+It's already should be done, but in case you're doing it like on the unreal side, where you're not actually drawing a curve, but you're like manually placing a spline, uh, you need it to be recasted a mesh.
+I mean, I'll show you real quick what it looks like.
+I think, oh no, you know what?
+I'll come back to it.
+I've gone off script.
+I'll have to come back into it and, oh, no.
+Uh, it's in the, uh, in the other unreal scene.
+Mm.
+Um, okay.
+So here is where, here's where the sausage is made.
+This is the sub network that we're interested in.
+So it goes from just our normal, our normal curves to our actual generation of our, uh, vines.
+And so this is where our for loop fund starts happening.
+So the general logic overview of this, we're bringing in the curve.
+We are searching for points to, for the curve to connect to.
+We're connecting those points.
+And then, and then that's our, that's our second iteration of our curve.
+That's our split off curve.
+And then we're taking that and we're gonna run it back through the loop again, and then you can branch off of that.
+And so it's just like a feedback based loop where each time you increase the iteration, it works on the previous branch iterations.
+So yeah, we can see this is our first iteration of growth in here.
+Uh, and then we're just slicing the mesh with a poly cut, uh, to create where our curve should start.
+It's, uh, search points from.
+Uh, and then over here, I think we're just selecting some random spawn points with vex.
+Uh, and we're setting an attribute to it.
+I'm not sure what the attribute is.
+I haven't looked at this in a second, but basically we're, we're picking random points along this curve.
+Um, and then we're deleting everything that wasn't picked and creating lines from that.
+And so these are gonna be the branching points from the curve, uh, doing some attribute transfer stuff.
+Yeah.
+We're transferring attributes to our original mesh here.
+Uh, and then this is kind of where the fun really happens for deciding where it should search for the next point.
+So let me turn on this demo switch I have.
+So we only have one point, and I'll open up our outside parameters here.
+Okay.
+So this vex code is basically telling us where to search for points.
+And you can see that based on this, this uh, blue, this blue color is where a valid point would be for our curve to search to.
+So if we change like how much the curve as I was talking before, how much it has to be aligned with our, uh, original branch, our original spine, um, as we change that, this will update here based on like the dot product stuff, which is, if, if you haven't used it before, we'll be going over some of these more mathematical terms in the class.
+Um, we have minimum and maxing searching amounts and this red point is where it's searching for it.
+And so this is some of that like art direction that I think that HTAs need to have if you're gonna make them production ready is being able to pick and, uh, fine tune all your parameters so much.
+Yeah.
+So this is like the powerhouse node.
+This is doing most of our work.
+And then from there we're connecting our curves based on the point that I found.
+So we'll turn this back to work over everything.
+Yeah.
+So we have points here next to find the curves and then we're like adding some noise to the mesh and like re projecting it back onto its mesh a bunch of times.
+Yeah.
+We have like some res samples after applying some noise and then we're just ray casting it, it back on and resampling it again.
+Uh, that's a technique I like to use a lot.
+Just raycast, resample, raycast resample, smooth raycast resample.
+Mm-hmm.
+And just kind of, kind of do it till it looks good.
+Um, yeah.
+And so that's, that's our output from our first iteration.
+And so then this will be looped back in to the top if we have multiple iterations.
+And so then the whole network will work on this curve input instead.
+Yeah.
+Lemme make sure it's doing that.
+It looks like it is.
+Turn off this point view.
+Sure.
+Oh, I think it's 'cause we adjusted our growth chance too.
+Yeah.
+So if we up this Yeah.
+Now we're starting to get more stuff.
+Oh yeah.
+And of course we need to change our parameters to be a little bit more Okay.
+With finding stuff.
+Or did I switch something in here?
+Possibly.
+Quite possibly.
+It happens to me every time when I'm trying to do a live demo.
+Um, yeah.
+We'll see.
+I guess.
+Oh man, where did I go?
+Oh.
+Because my maximum search was lower than my minimum search.
+There we go.
+Yeah.
+Okay.
+So of course.
+No, it's gonna have a lot.
+That's gonna be way too high.
+It's gonna crash.
+Yep.
+Yep, yep, yep.
+All right.
+All right.
+So I want to get something decent looking real quick to show you guys the vellum simulation on it that we have baked in as well.
+Uh, it's not completely fleshed out yet, but if we were to lower this to one for now and draw a curve along like the bottom of this, I have a vellum simulation set up so that anything that's like under a certain if, if it's angled to be upside down, it'll simulate on it.
+Uh, and it'll like not constrain it to our geometry.
+So I think if we just reset our sim and play it.
+Yeah.
+So now we get some nice droopy cables on the underside here.
+Sweet.
+And it's gonna be slow with this, but yeah.
+So we have a nice vellum sim for it.
+That's fun.
+Looks great.
+Yeah, love Looks great.
+Veem is a favorite for me.
+Yeah.
+It's just a nice little cherry on the top most of the time and it's so easy to set up too.
+It makes me so happy they made it so, so user friendly.
+I mean, other than the endless messing with parameters until you get something decent.
+Yeah.
+Yeah.
+Okay.
+So that's, that's, oh, that's actually not everything.
+Yeah.
+We have a couple post-process things happening here too.
+So we have our curves and then we're trying to generate a growth attribute from them to use inside of, uh, unreal.
+So that we can have them grow over time.
+Uh, I guess that's actually technically happening up here with this attribute transfer stuff, but we're remapping it down here to be whatever we want it to be.
+And so we can visualize it over here.
+So we have our vines here, And if we sort of display them, like, so the way this is working is this is our original, uh, drawing our original curve, or these are our three original curves, and this is a growth value of zero, which of course is our slider over here from zero to one.
+And the top is one.
+And so these are the branching off vines from that.
+And those are gonna start growing at their specific area.
+So this one will start growing once our growth value is at 0.5, and it'll end when our growth value is at like 0.6 or something.
+Uh, but we're able to remap that too.
+If we wanna have it like, grow quicker or slower over time, we can just change this, like this power function I've added in, which will basically just, it's just like a fancy way to remap the curve.
+So I think if we change this, you can see like if we have negative strength, what's gonna happen is the way our points are set up is it's gonna grow really quick in the beginning and then, or no, it's gonna grow really slow in the beginning 'cause it's stressed out, stretched out like this.
+And then really quick at the end.
+Uh, and so if we change this the other way, this is sort of more of what I was looking for, of more of like a even value for it.
+Mm-hmm.
+And it's not gonna be the easiest to see inside of, um, Houdini.
+I can try and showcase it just by changing the scrubber, but we're not gonna have like real time feedback for it until we bring it into Unreal Mm.
+Um, and use it in a sequencer.
+Okay.
+Yeah.
+So that's, that's the general gist of how our HDA is working.
+There's some, I mean, there's a sweeping happening down here, but it's nothing special.
+Okay.
+So where do we start with this urban?
+Do we start with the final result here or do we look at the other fine project first?
+What do you think?
+I, uh, it's up to you.
+I mean, I don't know what you have already opened, but I wanted to add with the, with the vines and everything, uh, that's a, it could be a, a very similar setup for electricity as well, right?
+Like it's, uh, electricity has that similar type of, that's a good point.
+Type of branching.
+Like the only thing that would be different is the, like the animation aspects, like how electricity moves and how it flashes.
+But it could be a, a very similar setup.
+Mm-hmm.
+That's a great idea.
+Yeah.
+I didn't even think about that.
+Um, I mean, so the original idea with this was inspired by Project Titans.
+Um, side effects is Project Titan.
+They have a procedural vine generator in it.
+Hmm.
+Which is super cool.
+Uh, but it didn't have enough art direction for me first and foremost.
+And then secondly, I wanted to present my own thing.
+And I felt like doing another procedural vine generator is like, you've seen like a hundred of those at this point.
+And so like if you just change the texture of it a little bit and like change the, the, the way that you're presenting it, you can have like a, a unique portfolio piece, which will like stand out compared to however many other fine generators there are out there.
+Um, so yeah, I think, I think that's just a general thing I would also recommend is like, if you're gonna make an HDA, you can usually base it on something that already exists, but like just spice it up a little bit.
+Change, change the basic idea of it.
+Like electricity would be a great way to go about this too.
+That'd be cool to dive into.
+Yep.
+Yeah.
+Okay.
+So this is another one of the things we're gonna be going over in the course.
+Um, I think someone asked in chat if this, if all this stuff is gonna be sequencer friendly, and it is, as long as we set up the parameters to support that.
+So in our sequencer we're, well, I guess I should explain this a little bit more.
+The way we're doing the growth inside of Houdini is based on P scale, and we're actually deforming the mesh based on whether or not it's grown to that right amount yet or not.
+Like, so if our growth attribute is at 0.1 in Houdini, we're, we're shrinking all of the points that aren't grown out yet versus an unreal what we have to do.
+'cause we can't just defor meshes that easily, or at least I couldn't figure out a way to, and you definitely can't just like bring in an limbic, uh, what we're doing is we're just, uh, changing the growth attribute to be mapped to our opacity or our alpha, which is why these look, see-through here mm-hmm.
+And Houdini.
+And so we're just, we're Dr And we also have Vertex color to drive that too.
+So like the vertex color and the alpha value our, what's driving the growth inside of Unreal, which I was also super hyped to figure out because for my, uh, like the procedural infection portfolio piece, that's been shown a lot in the, in the, uh, demo reel or on the, the promo for my course that was done through a limbic, which is like, like kind of like a game crime, I would say.
+You're only really gonna do that for presentations and for rendering.
+Yes.
+I, you can't really just go around fling it out, 10 gigabyte Olympics into Unreal.
+Like, yeah, it's, it's just not gonna work.
+But I had to, I had to present it somehow.
+So that's how I did it at the time.
+I didn't know how I was gonna solve this issue.
+Uh, and there will be blueprinting that we do a little bit.
+Um, we're gonna be doing some blueprinting for the procedural destruction.
+It's a, a question in the chat.
+Mm-hmm.
+Uh, yeah, we're gonna do a little bit of blueprinting for our procedural destruction, mainly just to set up impulses that are applied from the gun projectile when you shoot it.
+And whenever it hits a target, we're gonna blueprint it so that it applies an impulse at that target to actually break our mesh apart.
+Um, yeah.
+So it's not like, like a blueprint heavy course, but we are diving into it a little bit because I, I think that's another important thing.
+It's like a technical artist.
+It's just being like unafraid to dive into things that you don't really know that well.
+Um, I definitely did that for a lot of parts in this course, but the more you're able to just like Google it out, I would say that that's the difference between a good and a bad technical artist is like how well you can use Google.
+So, um, I think in, I think with technical art or any, like, any effects in Houdini or Unreal Engine, it's mostly how well do you, um, how, how good are you at problem solving?
+'cause that's essentially mm-hmm.
+A huge part of the job is just solving problems that occur each day, especially in a studio environment where it's impossible to prepare for certain type of scenarios.
+Um, yeah.
+I feel like there's something in a studio that gets thrown at you unexpectedly, and there's Yeah.
+Literally nobody can prepare you for it.
+It's like, in some cases it's like somebody throws you in the water and now you have to learn how to swim.
+And it's all about knowing how to solve the problems on the spot.
+So in, in a way, we are all professional problem solvers.
+We're just doing it through definitely games or movies or, you know, through Unreal or through Houdini.
+Yeah.
+Without a doubt.
+Yeah.
+I mean, that's what somebody at school told me too back when I was at Nomen.
+They were like, you know, you're good at Houdini when, you know what question to Google.
+Yeah.
+'cause it's like sometimes you're trying to figure out the problem, you don't even know what the right question is to ask.
+Sure.
+Mm-hmm.
+So yeah.
+Problem solving, that's, that's what we do and that's what we love.
+Yeah.
+Um, yeah.
+So I, I think I, I think I already said this, but yeah, we're gonna be going over how to present this and we're gonna build like a similar setup to this in the course.
+Mm-hmm.
+Uh, during the last two weeks.
+And those two weeks are gonna be focused entirely on like, presentation, which is such a huge app, part of like creating a good strong portfolio.
+Like you can have the coolest tech in the world, but if you're not presenting it in a way that catches people's eyes, I feel like that's, um, you're only halfway there.
+Uh, so we're gonna spend the last two weeks building out a quick environment and then setting up some like, nice lighting for it with lumen and, uh, some volumetric fog.
+And I think these lights flicker too in the blueprint a little bit.
+Yeah.
+Yeah.
+So we're doing a little bit of light animation.
+We're gonna learn sequencer if you haven't learned it before.
+Uh, and then we're gonna render it out too.
+Sweet.
+And I, I mean, this is all just like, I feel like you need to know this stuff to have a strong piece.
+'cause I've, I've seen so many like amazing technical art pieces that are just like flip books inside of Houdini, and I'm like, you could have put it so much further and this would've been amazing.
+But Yeah, I, it's funny.
+Anyway, that's, I was just talking to another very senior artist today about this, um, how mm-hmm.
+If you wanna be good at effects, you need to also know a lot about animation and compositing and lighting.
+Definitely.
+Because if you don't know mm-hmm.
+All of these adjacent kind of, um, how would you say, like, positions or like, um, uh, not positions, but just like adjacent, um, what's the word I'm looking for?
+Uh, adjacent professions.
+I Professions, yeah.
+Skill sets.
+Skillset, Exactly.
+Like, yeah.
+Yeah.
+Essentially you, you have to build a skillset from adjacent per Yeah.
+Adjacent skill sets, uh, to be able to make, even if you, if you just wanna be an effects person, that's fine, but you will definitely have to learn how to comp and you will have to know the principles of animation, because if you don't know those principles, then how would you know how your effects are gonna move?
+You know?
+It's all in the end.
+Yeah.
+Yeah.
+Exactly.
+In the end, all these artistic languages, uh, are essentially the same thing.
+And it was so funny, this is a complete tangent, but I was watching a video where a guy was, he was, uh, essentially looking at music and color and how they're exactly the same, and how you can transfer a color harmony and, and put it into music, music and color.
+Yeah.
+Huh.
+It was literally the same language.
+That's crazy.
+Yeah.
+And so he was able to create harmonies and color, and when he played the chords, they were also, uh, harmonious chords.
+And if the Dang, so you start thinking, you're like, oh, oh, damn.
+Like literally everything is connected and it's it then mm-hmm.
+You, you zoom out a bit and you see that color, music, art, uh, storytelling, uh, filmmaking, it's all mm-hmm.
+Speaking the same language.
+And that's why you need to know.
+You need to be, you need to stack up your skills, uh, to be like, super efficient and successful.
+Yeah.
+Yeah.
+Yeah.
+I would agree with that.
+I would, I would love for you to link that video at some point to me.
+Yeah.
+Um, It's very fascinating.
+I would, I would say, you know, uh, on top of that, I feel like the more you learn about Associated Fields and just like learn how to, I mean presentation or just how to light scenes or how to set up cameras and all that stuff.
+Like, you get, it's like an exponential return type of thing.
+Like the more you learn about other things, the easier it is to learn new things.
+Like, I didn't really know Niagara until like a couple years ago, but before that I was doing all my particles inside of Houdini, uh, transfers over pretty easily.
+And then like, you're just unafraid to learn new things about lighting or whatever.
+It's like, oh, I'll, I'll Google how to do this.
+I'll read the documentation.
+Yeah.
+And, you know, you can just learn how to set it up as you learn these wider professions.
+Mm-hmm.
+So, I mean, yeah, knowledge is power.
+Right.
+Um, okay.
+So, uh, this is the actual Vine setup here instead of Unreal.
+And this is what I was trying to show earlier, but I was off script.
+Um, yeah.
+So this, we're not drawing the curves the same way we are in Houdini.
+I, I don't know if that's a feature that's as easy to do inside.
+Unreal.
+Maybe I'm missing it.
+But instead we're just, we're manually creating these points on the curve and moving it, and then it's recasting it to the mesh and then, you know, doing all the fun magic that we went over in the Houdini side.
+But like, if we move one of these, I think it's gonna take a second to think, 'cause I don't have Houdini session started up, but it should connect and then think.
+Okay.
+Yeah.
+So you had to start this Houdini session down in the corner corner.
+Uh, it's thinking a little bit.
+I'll go ahead and get this material open in the meantime as well.
+Yeah.
+Okay.
+So I don't have it currently auto applying textures to it.
+So this is our, uh, I mean, we will have that set up of course, but this is just the basic thing that comes into Unreal.
+And this is of course, powered by our HDA.
+Uh, there's two good questions in chat.
+Hmm.
+Uh, let me, let me go over this real quick and then I'll go back to those.
+'cause I, I do want to answer those, but this is also cool.
+So we have this material instance here and we can drag and drop it on.
+And this is the shader that we're also gonna be setting up inside of, uh, unreal.
+And I, I was super hyped to create this, uh, just 'cause it has like a weird trippy camera space effect to it, which is using screen space uvs.
+And then this noise on top of it is done through like a tri planer projection as well as some 3D Unreal, uh, noise, which is like warping the actual texture a little bit around.
+Mm-hmm.
+And so, like, those are both like, I think really important concepts to understand when you're creating materials.
+Um, 'cause it applies to so many other things.
+Like, I could have used Triplaner projection for like, the wood boards that I had set up for the bridge if I wanted to.
+Uh, the infection setup that is in the promos and all that stuff.
+I wish I had a video of it.
+But that's using Tri Planar projection and it just makes you, you know, not have to worry about uvs, which is always a plus.
+Right.
+Um, so anywho fun sliders inside of the material instance that we have are this growth attribute.
+And so this is over one right now, but I'll move this down.
+Uh, as we go lower with it, you'll see that our vines, their, their mesh is still there, but the actual opacity is coming in.
+Uh, and so this looks okay to me right now, like, it's cool, but you can, it still feels kind of gamey.
+And so, something that we did for the, the final presentation, and I haven't actually updated this material yet, but it's also gonna grow the mesh outwards as we change the growth attribute.
+So if this was at zero, all of the point, normals would be transformed inwards towards themself so that it would be super skinny mesh.
+And then as the growth attribute goes up, the mesh is gonna expand.
+So it actually feels like a vind growing over time, rather than just this like opacity slider feeling.
+Um, and then we have this over here, which is just another setup I had of it.
+And I really like the look of this one.
+It kind of feels really organic to me.
+And this is, was done with like the, the minimum and maximum alignment mount, tweaked a bunch, applied a material to this, see how this looks and it has the, the Vellum sim on it.
+Yeah.
+So really like the way this one turned out.
+Uh, two questions.
+Okay.
+So Raul asked, what does it take to be a technical artist at Naughty Dog?
+I would say I would start by prefacing it by saying, I started as a props artist at Naughty Dog.
+And I would say, if you haven't established yourself as a technical artist yet, I don't think it's a bad idea to get in through a profession that you're already good at.
+And so for me, that was modeling and texturing at the time.
+And from there I was actually on the props and modeling team at Naughty Dog as a associate artist.
+And I had okay.
+Houdini skills at the time, but they weren't, like, I wasn't using it every day.
+I, I'd taken like a year worth of classes on it.
+So I was, I was decent.
+I didn't know vex or anything, but I spent any free time I had at the studio, uh, learning Houdini.
+And then one day our, we, we transferred to a new Maya version and our fracture plugin stopped working.
+And so we were kind of like a little bit outta luck there.
+And I, I offered to set up a, a similar tool inside Houdini, and that's how I started transitioning into a technical artist role.
+Mm.
+Um, so I think if you're, if you're doing, you could do this with animation or environment or anything else, is you could just start with what you're good at and then you can grow into that tech art role.
+If you're already technical, uh, I would say you're at, you're on a different boat than me.
+You're, you're better off than I was when you started.
+Um, I think the main things I would say a naughty dog or any AAA studio really look for is just like, how good is your eye?
+Like, do you, do you know what looks good?
+Can you light and compose a scene?
+Can you present your work well?
+I mean, can you work well with others?
+It's, it, I think it's really pretty similar to other AAA studios.
+You just need to have a really strong portfolio tailored towards what you're good at.
+Um, do you have anything to add in terms of AAA work, urban getting in there, getting your foot in the door?
+Um, well it's, so, it's so different for everybody.
+Like, like you said, for, for yourself.
+Mm-hmm.
+It was because there was a broken plugin and you had to step up, step up, right.
+So essentially mm-hmm.
+It was, it was what I was talking before.
+Somebody threw you in the water and you were like, well, oh, okay, then I'll build this plugin and hopefully it's gonna work.
+Mm-hmm.
+Right.
+And you, you just solve the problem on the spot.
+And it's that problem solving, I think that really gets you, um, that makes you a super valuable team player.
+Uh, but in terms of getting your foot through the door, it's so different for everybody.
+'cause the, like, um, when I, when I worked at Access, I was working on AAA game Cinematics, using Houdini, and then by some luck, we, we, um, we got a project, uh, gears of War and they were like, well, now we need to learn on Unreal Engine.
+But because we were already technical with Houdini, we knew how to build the tools.
+We knew how to do more high level, like more high end effects.
+It wasn't difficult for us to transition to Unreal Engine and figure that whole part out.
+Uh, we were actually very good at it because we knew mm-hmm.
+It's exactly what you said.
+We knew how pre-rendered cinematics look, you know, we knew how, how the high end stuff is supposed to look like.
+So we were able to then apply that right into the game world really easily.
+It wasn't, it wasn't a problem at all.
+It Definitely, But I think in all cases, having, um, stuff in your portfolio that looks good, that's usually if you can Yeah, definitely.
+Yeah.
+Like, just make something that people are gonna be like, wow, like, you know, holy s**t, that's amazing.
+You, you want that wow.
+Factor in your portfolio.
+Definitely.
+And that can come through.
+Yeah.
+Without a doubt.
+Yeah.
+It can come through either if you set up a really, really technical tool that really, really solves a lot of problems, or you make something that looks very, very good, nice and polished.
+Mm-hmm.
+So, yeah.
+Yeah, I definitely agree with all of that.
+Um, okay.
+Two things.
+One, we're in a new project now.
+Mm.
+Uh, this is the procedural destruction.
+We're gonna be going over this for a week inside of, uh, the course.
+And I'll demo that.
+But two, the other question, uh, math and coding background from a meal.
+I would say I don't have a strong coding background or a strong math background.
+I, I didn't at the time, at least, I was not ideal at math in high school.
+I think I, I, I think I stopped in like junior year.
+I don't know how I did that, but you could, you could quit math a year early.
+Uh, and that was solely to focus on art to get into the school that I wanted to go to, which was nomen.
+Like, I, I wouldn't recommend this to people to do, but I, I spent a lot of my time in classes and I got all my renders on my computer and creating artwork to have a strong portfolio to get into the school that I wanted to go to.
+Mm-hmm.
+So I didn't have a strong math background, and I really wish that I did, because now I'm having to learn all these concepts like vector math and all that fun stuff, which has been super useful.
+But it's, it's definitely a pain to learn.
+And I know it now, but I, I didn't at the time as for coding, uh, mainly self-taught.
+And at the studio when the, when the time arose, I took like one course on it in Nomen for it, which was a great course, but I didn't, I didn't do too well in it.
+So a lot of it was figuring out when I needed to use Python at the studio.
+And so a lot of the tools that I make have Python integrated in them to make them easier for like users to use.
+Like, we have like a seed manager inside of Houdini that I set up, and it like stores every scene that you wanna save and saves an icon of them next to it.
+And you can scroll through like the entire studio's Houdini scenes.
+So like, it, it was really just more self-taught for me and just learning from the incredibly talented people around me that knew coding at the time.
+Um, yeah.
+Yes.
+And okay, I'll go ahead and start shooting some stuff.
+Shoot it.
+Uh, we'll answer some more questions.
+Yes.
+So, so these are all mega scans that we've brought in.
+Uh, and the tool we set up creates, it takes any mesh and it turns it into a de tractable mesh.
+And there's a bunch of parameters we can mess around with it on.
+Uh, but what I like about it so much is it's also creating these interior faces for it.
+Like this shader on inside of course doesn't come with a mega scan.
+So the HT a, it takes your mega scan or whatever asset you have, it cleans it up and makes it destruction ready.
+It'll fracture it, and then it'll apply, uh, inside material to it all at once so that you don't really have to worry about that process of it.
+Um, the articles are work in progress.
+They will be published up, but the thing that I was hyped about for them is that it's like linked up automatically.
+Like as soon as you, uh, use the HDA to set up the destruction, you just have to turn on like two check boxes on the mesh and then all of a sudden it's linked up to our Niagara system.
+So it's like, if we select this mesh here, I think it's like if I just type in break Yeah.
+Notify breaks.
+So all I'm doing is turning on this checkbox and all of a sudden we have this whole Niagara system, which is procedural, procedural with inside Unreal.
+Uh, so it just works really well together.
+And so like if you're trying to build out a game with, with like a bunch of destruction in it, and you have an environment artist that doesn't know Houdini that well, maybe you can just give them like this HDA and this, like, tell them how the basics of it work and they can kind of get to work with it.
+Yeah.
+Sweet.
+I, I mean, some of the issues that I ran into with it too, or like mega scans are like notoriously mediocre geometry, I would say for destroying.
+Mm.
+Because it's, it, you're just taking a photo scan of it, so it's not even like guaranteed to be like a closed mesh when you get it.
+Mm-hmm.
+Like this pillar was terrible to figure out how to get working when I started.
+'cause this is like three meshes in one.
+Uh, it's not easy to see at all, but like, there's like three meshes layered on top of each other.
+Some of them are just like cards or decals, and it's like this weird triangulated mesh that's like optimized solely to look good.
+So it's really hard to create destruction on it.
+Um, so we're covering a lot of like how to fix that stuff up inside of the, uh, HDA, uh, the chaos or the destruction is chaos based from the, uh, question and chat.
+Mm-hmm.
+Uh, I will also, uh, attest Jamal's talking about, uh, uni Uni Shiro.
+I, I don't know how to say his name, but I know who you're talking about.
+That guy is a great YouTuber to learn about vex.
+Uh, if you're going into the deep end of it, agree.
+A great resource.
+Yep.
+Yeah.
+You've watched some, uh, yeah.
+Yeah.
+That guy is, he's something else.
+Um, yeah.
+So this is the, uh, destruction HDA and I didn't show off the actual HDA side of it in Unreal.
+Uh, I felt like it wasn't as, as, as like flashy as like these vines or like the infection stuff.
+'cause really what it's doing is it's, it's generating a fracture based on the region that you give it.
+And then you're creating a ton of unreal attributes inside of Houdini.
+And so it's just like a lot of like writing out like, okay, what is the starting mask gonna be?
+How hard is it gonna hold it together?
+How many levels of clustering are you gonna have?
+And so it's a lot of like, uh, vex attribute setting that's going on.
+And I felt like it'd be a lot cooler to show off stuff like this.
+So, uh, anyw who, uh, I think that's about where I'm at with this stuff.
+Hmm.
+I think those are the main projects.
+I, I could show off more of the procedural bridge.
+I don't really have an unreal level for it yet.
+Uh, yeah.
+I I mean we could dive into this if, if you think that's something we could look forward to doing, uh, unreal.
+Uh, urban, uh, otherwise you can do a quick, make a more q and a mode.
+Yeah.
+You can do a quick demo, but I think we can then jump into the q and a.
+Uh, yeah.
+Maybe just show the high level stuff.
+Yeah, Sure.
+Yeah.
+So this is our very organized procedural bridge, HDA, uh, high level stuff.
+Let's see.
+So we're bringing, we're drawing a single curve.
+We're creating some rails from it.
+Uh, we're creating poles based on the rail positioning of it, uh, as well as some more railings for it.
+And then, like, we have a couple different patterns for our railings here that we can change between, uh, just for the sake of like doing an exercise in pattern generation.
+'cause I feel like that's a super important thing to, uh, dive into when you're creating procedural meshes, is learning how to create repeating patterns and different approaches to that.
+So this is a good little exercise and setting up multiple different patterns for it.
+Um, let's see.
+Yeah, we're creating some knots and then we're doing our spicy vellum simulation, which includes rigid bodies, which I was really happy to figure out how to do.
+Have them interact with each other.
+Uh, and there's some invisible, invisible collision here, but, uh, I've set it up to make it look a little more interesting.
+Uh, and then we're sweeping everything all at the end.
+We have a unitized, uh, unified sweep operation over everything.
+Uh, and that's, that's basically it.
+I mean, that's, that's the overview of how this is all working.
+Sweet.
+Yeah.
+The Looks good.
+Unfortunate thing.
+Yeah.
+Something I haven't figured out yet that I'm curious though, is this is res sweeping every frame.
+If we, uh, enable this sweep, do you know any ways for point deformations to work to have this not re-wet every frame?
+'cause I was trying to do like a point deform on the curves.
+Mm-hmm.
+But it gives you like, these, these like terrible artifacts of like the mesh, like squishing too far together.
+Um, I don't know any, any, any, don't mean to put you on a spot, but I'm just curious if you have any thoughts on that.
+Prob uh, I don't know from the top of my head.
+I would need to play around probably.
+Mm-hmm.
+Corbin knows.
+Oh yeah.
+Can you hear me?
+Yep.
+Welcome.
+Yep.
+I was gonna say, that is something I've, yeah, I've, we, we built at, um, access and then when I was at Met Cross, we built a, it's a point of, uh, point of form that works with the matrix attributes.
+So it's much better for thin meshes like, um, curves.
+So it like literally in any case that the normal point of form doesn't work, this one works better, and then vice versa.
+So it doesn't replace it.
+But they're definitely, they're good to work in tandem.
+But I just haven't rebuilt it for double jump yet, but I absolutely can.
+Nice.
+Yeah, I'll definitely get that implemented too.
+That's cool.
+Matrix.
+Yep.
+Sweet.
+Yeah.
+Um, I'm happy to jump into more q and a things.
+I, I think I've answered most of the questions in the chat.
+Um, Well, I have a few, a Few.
+I really, not even A few quick ones.
+Yeah.
+So, um, just for everybody who's watching this, so our spring registration ends in four days roughly.
+And because, uh, this current workshop, the Houdini for games is still on the presale, uh, there's a 10% off code called 10 jumps.
+I'll put it in the chat.
+So you, because, uh, because it's on the presale, we still have the discount code, and then after it's not on the presale anymore, uh, there won't be any discount.
+So just saying if you guys want to grab it, uh, now is gonna be, it's as the cheapest as it's gonna be, uh, right now.
+And yeah, the spring registrations are gonna end in four days.
+So if you guys are interested in leveling up your if Houdini plus Unreal engine technical skills, and especially if you wanna break or already are in the gaming industry, um, I know a lot of people, especially now are not transitioning, but like, games are definitely an area a lot of people are trying to get into.
+So I feel like this workshop kind of blends both worlds, you know, Houdini, uh, technical ability and then unreal engine, which gives you, um, at least if you are looking to break into the industry, it's gonna give you an ice portfolio of skills.
+It's exactly, exactly what we were talking about, like skill building, right.
+Knowing Houdini, being technical, artistic, and knowing Unreal Engine is gonna give you a huge advantage, uh, when it comes to, makes You pretty rare, I would Say.
+Yeah.
+Yeah, exactly.
+It's your rare asset.
+Yes, a hundred percent.
+Yeah.
+But yeah, that was my public announcement, but yeah, if you guys have any questions, uh, just write them down.
+We're gonna, and we're gonna answer them right away.
+Uh, let's see.
+I feel like I missed something.
+How much of Houdini is used for procedural modeling versus effects in the game industry?
+Uh, that's a great question, actually.
+I'm glad I saw that.
+Uh, I would say procedural modeling and effects are both used pretty heavily in the industry, uh, at least from what I've seen, uh, from the people around me.
+Um, I mean, really it just comes down to the department.
+Like my team, the destruct, the destruction team that I'm working on is a ton of procedural modeling, I would say, at least for generating like our fracture setups and like our, our complimentary pieces to the fractures, like the splinter cards or whatever else you might need to do.
+And then like, also applying vertex colors to the fracture so that you can have different shader effects on it.
+So all of that I would classify as procedural modeling.
+So we do a ton of that.
+But then I also know our effects department does a ton of, um, I mean, there are some effects they do in Houdini where they'll bake out like a simulation onto a card or something.
+I'm not sure their entire workflow, but they also do procedural modeling from what I've seen for their effects.
+Like they'll do asset placement based on like the curvature of the terrain or something.
+And then, I mean, then that way it's procedural modeling.
+It's not exactly like creating a procedural vine or a bridge or something, but you're still doing the same like, ideology of procedural modeling.
+Uh, so I mean, I would say really they're pretty, pretty intertwined procedural modeling and effects for general industry work and GA and games at least.
+Yeah.
+Um, Yeah.
+Do we have any other questions in the chat?
+I have a bunch of questions, but I want you guys to ask them first before I go on my, On your spree.
+On my spree?
+Yeah.
+76 people.
+Nice.
+But I guess, uh, can you share the course link?
+Yes, I can share the course link.
+There you go.
+Nice.
+Uh, one of the questions that I'm interested in, um, is do, can you share any cool ex um, lessons or experiences at Nadoc?
+Like something memorable that happened?
+It could be a bad or a good experience.
+It's up to you.
+Yes.
+Uh, I would say, uh, I, I would put this as a mixed experience.
+Mm.
+Um, so my director was my teacher as well at Noman, which was great.
+Mm-hmm.
+Um, and so that's kind of how I got to new naughty dog a little bit.
+But when I was taking his class, I was not the best student, I would say.
+Like, I, I was an okay student, I did my work, but, uh, an incident happened in which he was looking at like our substance painter files and looking at our renders.
+And he specifically said like, no, Photoshop, don't use Photoshop and all this stuff.
+Uh, 'cause we didn't, it was just supposed to be a raw render.
+Uh, any who, the person before me had a really nice looking render, and he asked like, did you use Photoshop?
+And he said, no.
+And, uh, he was like, oh, well, you could have used it and I wouldn't have seen it.
+And so my render clearly had a ton of Photoshop.
+Like it was, it was pretty bad, but I thought it was like almost obvi obvious enough to the point where people would know.
+Mm-hmm.
+Or he would know.
+I was joking, but he did not realize I was joking.
+But he said, did you use Photoshop?
+And I was like, no.
+And he said, are you sure?
+And I felt like at that point I was too deep into the statement, and I was like, Nope, definitely not.
+And I, I was trying to sell the joke.
+Uh, it didn't sell at all.
+He, he did not get it one bit.
+Um, yeah.
+And so he like took me outside of class.
+He, and in the middle of class he was like, okay, let's go talk outside for a minute.
+And so I had to like, walk between all the rows of all the other students' desks and not make eye contact.
+Oh My God.
+Really embarrassing moment.
+But it turned into a positive 'cause.
+Like, he took me outside and he's a great director.
+Um, but he said, look, I'm not mad at you, but if you did that in the industry, if you lied to, um, someone who's teaching you, or like any anybody above you, like you're, you're done for, you're, you're done for from that, uh, specific industry, from that game company.
+And you might be blacklisted from other things too.
+So like, don't, don't try and pull a fast one like that.
+Uh, again, not mad at you, but he is tried to turn it into like a teaching lesson.
+Yeah.
+Which was great.
+Um, so I would say general takeaway from that own up to your mistakes And don't use Photoshop, um, Photoshop, forbidden from, don't Use Photoshop.
+Definitely not.
+Yep.
+Um, uh, yeah.
+But that ended up being a great talking point between us, uh, and that I think that's part of why he remembered me as a student when I, like a couple years later when I applied to Naughty Dog, he was like, yes, I, I know who you are.
+Um, so it turned out being a positive, but at the time it was definitely a bit of a, a wild experience.
+Yeah.
+I, I do think, I don't think you would get fired on the spot or like blacklisted if you did anything like that.
+No.
+Um, definitely never.
+Obviously, you always have to be transparent with your workflows or like how you did it, or, um, lying in general in a teamwork environment is never gonna pan out good.
+Uh, definitely.
+Yeah.
+But yeah, it's, it's definitely a funny story.
+I think we do have some questions now in the chat, um, if you want to go through them.
+Mm-hmm.
+Uh, okay.
+So first question, how does this course work?
+I saw prerecorded, uh, how do we receive help and how to learn if we want to create a new thing?
+Uh, what is transferable in this course?
+All right.
+Couple of questions here.
+Mm-hmm.
+So, course is prerecorded, and then I'll be providing support and discord for people who have questions for it.
+Um, and just doing my best to get through all those questions and help out with any technical issues you guys may have.
+Um, I am building the entire HTAs from scratch in the course, and then I'm also attaching the files too.
+So I hope that I'll also help with some of the technical issues.
+Like all the hips files are gonna be attached.
+They're gonna be well organized and commented out.
+But if that's, if that's not enough, or if you have general questions, I'm happy to help in a Discord chat.
+Um, let's see.
+How do we receive help if we want to create a new thing and what's transferable from this course?
+So I would say the way that I'm approaching this course, these HTAs, I would say, are not only like a cool portfolio piece to have and something that you could turn into a portfolio piece if you wanted.
+But I'm also trying to design it in a way where it's showing you the concepts of procedural modeling and like working with games a little bit more so that you can like transfer those concepts onto, uh, onto a new HDA if you wanted, like, the procedural bridge.
+HDA could be like anything you wanted.
+Like this could be, I don't know, a, a destructible stone procedural bridge.
+You could implement this with the other HDA if you wanted, or you could build out some sort of other different type of, uh, HDA.
+Like I have a procedural scaffolding, HDA that I'm gonna be sharing with the, um, the legendary student legendary version of the course.
+And that's, that's like, um, a much more tedious version of this bridge that I've set up here.
+It's like, you know, just a ton of nodes that are setting up every single part of the procedural model.
+And then we have velum simulations on like, the caution tape on the procedural bridge.
+So like, I really, I think that most of the HTAs in here are just transferable, transferable in the fact that you'll know the workflow from Houdini two Unreal.
+And then you'll also know how to set up really nice tools and HTAs for like yourself and other people to use.
+Yeah.
+So I would say that that's the big transferable part from this course to like real life applications.
+Um, if you can talk about this, uh, what is Naughty Dog's the engine, like for effects?
+Um, I would say, I don't know a ton about it, but I do know that Naughty Dog uses proprietary software.
+Mm-hmm.
+So I, I know that's not a great answer, but it's not Unreal Engine that we're using.
+We, we developed our own in-house engine.
+Uh, and I, I don't know the entire workflow of how they create their particles or anything like that.
+Um, yeah, I wish I could answer more on that, but yeah, it's, it's proprietary.
+Yeah.
+It's still, I I think a lot of these studios do use proprietary stuff, but if you know the basics and if you know how to use Unreal Engine slash Kini, it transfers quite well in terms of, uh, the general knowledge.
+It's just the buttons are in a different place.
+Absolutely.
+Yeah.
+Yeah, without a doubt.
+Um, I mean, it's funny enough, I would say I learned the Destruction workflow at Naughty Dog on their proprietary engine and then transferred that knowledge to Unreal.
+Yeah.
+That, that's how I'm creating all the techniques here.
+That's exactly, yeah.
+Um, okay.
+What do you use for the interface of your custom Python tools?
+Uh, PI qt?
+Yes.
+I use QT Designer to create the, um, the interfaces and then, uh, PI QT and Python, just to set it all up.
+And I'm very grateful and lucky to have a bunch of other people at OG that also are very good at Python.
+Everything that I'm sharing in this course also, that's been a great learning resource for me.
+Let's see.
+I have plenty of unreal engine knowledge, but my Houdini knowledge is very weak.
+How much foundational knowledge of Houdini does someone need for the course?
+I know it's advertised as intermediate, but how strict is that prerequisite?
+Okay.
+That's a great question.
+Mm-hmm.
+I would say I start off as slow as I can and we get faster throughout the course.
+Like in the beginning, I would say, I would expect you to know the interface of Houdini, how to navigate around.
+Um, I mean, I, I think I cover this a little bit, but like general things like p scale attributes, I would say is, is nice to know, like just what that is.
+And like, maybe even like basic expression writing.
+I, I don't even think that's true.
+I would say really, if you just know how to navigate Houdini, I think that you can probably pick up most of this.
+'cause I, I go through the procedural bridge part in two weeks, and I do that on purpose so that we can start off really slow and learn the thought process behind procedural modeling.
+And then the second part is the unreal side of that.
+And then we kind of get a little bit faster throughout the next modules and the next weeks.
+So yeah, I would say generally just knowing the interface a little bit and like the idea behind UD Dini of like why nodes exist is probably enough.
+Yeah.
+Uh, if you're dedicated.
+Yeah, we do, we have a, an upcoming intro to Houdini workshop that, um, will hopefully take care of any people who are, um, it, that that workshop is gonna have no previous experience required.
+So that usually, even for Grayson's workshop, I do think you might need some previous experience with Houdini otherwise, 'cause this is not an intro to Houdini workshop, but hopefully the intro to Houdini workshop is gonna take care of, uh, the other, uh, the, the needs for intro people.
+Yes.
+Uh, will the hip files be agnostic and readable by apprentice?
+I, I think so.
+Right.
+It's, I'm using a Houdini Indie Limited Commercial Edition.
+I think that that transfers backwards to non-commercial.
+Right.
+So that should be fine.
+Mm-hmm.
+Hmm.
+Oh, good question.
+The private legendary Discord group from, uh, the legendary edition.
+Mm-hmm.
+Uh, would you like to go into the, the, uh, details, the ins and outs of that urban?
+Yeah.
+So essentially, um, our public Discord group is, we are quite active on it all the time, but it's, uh, we don't require our instructors to actually answer questions in that group where, whereas the legendary group, it's a private VIP group that's not public.
+And that's where actually all of our instructors are, uh, the most active and actually help with questions or, uh, add additional hip files or we, we have a voting system where you can vote for any extra tips and tricks you wanna see in the workshop and stuff like that.
+So, uh, I think Grayson, I think, um, you will be answering some questions on the public one as well, but, uh, we try to, uh, encourage our instructors to be the most active on the legendary one.
+That's where you get more of that one-on-one time, Right?
+Yes.
+Um, let's see.
+Can you grow that thing through the bridge while it's animating?
+I assume you are talking about the procedural vines growing on the bridge, and you can correct me if I'm wrong.
+I would say the workflow I would go through it with it is you would probably want a freeze frame of your bridge.
+It wouldn't actually be simulating, and then you could add the vine art on top of that, and then that would be like your basic asset instead of Unreal.
+And if you wanted to go further with it, I would say you'd probably need to do some sort of custom Houdini based solution where like you're deforming the vines along the bridge, but it wouldn't like recalculate on the spot and update inside of Unreal as like a, as the bridge falls, the Vines combined with it, it have to be like a custom Houdini solution.
+Mm-hmm.
+Uh, as a senior modeling and texturing artist with experience using nodes and substance designer and unreal.
+And also good problem solving abilities.
+I want to be a technical artist.
+Any tips?
+Get this workshop, I mean, By the workshop.
+That's the tip.
+Oh, man.
+Yes.
+Yes.
+I, I would say, I mean, it sounds like a substance design is already a little bit technical, I would say.
+I mean, it sounds like you're already technically a, a technical artist by the standards, and it's just a matter of like, figuring out where you fit in in the pipeline, right?
+Like, I mean, if you, if you're adding procedural modeling on top of your procedural, uh, um, textures from substance designer, you have like a crazy result that nobody else can make.
+Like I'd say my substance designer skills are mediocre at best.
+I'm not, it's not my specialty at all.
+But if you're creating like a procedural texture that can interact with your procedural mesh, you have like a really, really cool, unique thing that I don't think a lot of people can do at all.
+Hmm.
+So I would say that that could be a cool, cool alley to go down.
+Uh, just a recommendation though.
+Um, can I follow the workshop with a old laptop?
+I would say GForce 10 70?
+I think so.
+Yeah.
+I mean, it's just really running Houdini.
+And then if you can open Houdini and if you can open Unreal, you're probably fine because like, it's not computationally heavy for Unreal to read and create, um, meshes based on your HDA.
+It's just like a little bit slow for every computer, no matter how fast it is, just 'cause the way the interface works.
+So I, I, I think as long as you can open on reel and put a couple polygons inside there, you'll be fine.
+Um, let's see.
+Other questions?
+I think that's it though.
+Oh, man.
+Alrightyy, I think that's it for now.
+It's, we, we are already past an hour, so I think we're gonna wrap it Up.
+Oh, yes, you're right.
+Time flies.
+Yeah.
+You need to go back to work.
+I do, I do.
+I am.
+I wonder if anyone else is new in LA and woke up early for this, but Yep.
+I am off to my nine to five now at Naughty Dog.
+Hmm.
+Sweet.
+That's my, my nine 30.
+Yeah.
+Well, uh, thanks for, uh, hopping on the call, Grayson.
+I think I, I'm super excited for the workshop.
+I think it's, it's a, it's an essential one, especially if you uh, wanna transition from Yeah.
+Like, uh, working in the game industry.
+I think this is gonna be a very good, uh, essential workshop that I'm looking forward to taking as well.
+So thanks for, uh, your time and thanks everybody for joining.
+Yeah, of course.
+I'm really excited to share with you all and, uh, thank you guys so much for joining.
+Hmm.
+Alright.
+Sweet.
+All right.
+Cheers everybody.
+Bye.
+Bye guys.

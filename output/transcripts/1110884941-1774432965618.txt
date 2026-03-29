@@ -1,0 +1,93 @@
+Bonjour à tous, vous le savez, on passe énormément de temps dans la net network view, dont vo Dini.
+Je vous présentai de nombreux raccourcis et astuces pour j'obtiens la documentation dans laquelle il y a énormément de raccourcis qui sont déjà expliqués.
+Vous en connaissez sûrement de très nombreux mrai étonnés que vous les connaissez tous.
+On retrouve aussi de nombreux raccourcis en laissant notre souris sur les icônes ou dans les menus d'édition.
+Je vais commencer avec le menu tab et venir créer un Roberto.
+J'ai maintenant un a et comme on passe beaucoup de temps Ça fonctionne d'ailleurs dans toutes les vues et au passage, il m'a ouvert la fenêtre des paramètres avec paix.
+On peut la récupérer.
+On peut la voir en permanence.
+Il y a une recherche, ce qui est intelligent.
+Donc, par exemple, si je viens ici dans file, je vais pouvoir faire un import d'un alambic.
+to créera la racine de netto la recherche étant intelligente, si je un chercher, par exemple, un a comme le particule flux de surface, je peux commencer par écrire particule, puis fluide.
+Et il me le trouve assez rapidement.
+On un particule flue de surface que j viens chercher avec Ensuite, j'ajoute s pour surface et il me l'a trouvé.
+Je peux lire encore plus vite en faisant pfs.
+Et là il est sur le deuxième ou C'est juste qu'il n'est pas dans les premiers puisqu'il commence pas par un s.
+Mais il y a bien l'un de ces mots qui commencent par un s.
+à venir chercher un ob gie.
+Ça va me créer un fail qui vient me charger mon fichier.
+Le bouton égal s'adapte aussi en fonction du type de fichier que vous allez chercher.
+Si par exemple, je viens chercher un alambic ici.
+Et bien, dans ce cas là, il vient me créer un a alambic, alors qu'avec un ogie m'a plutôt proposé un note de fail pour renommer un a, vous pouvez double cliquer sur son nom et le renommer comme vous en avez envie.
+Pouvez aussi changer dans sa fenêtre de paramètre, son nom.
+On peut aussi utiliser f pour renommer le note sélectionné.
+J'avais vu que j'ai dupliqué des nodes pour dupliqué, un no on peut faire contrôle, c'est marque, copie et contre lever.
+Ça permet de dupliquer plusieurs nodes dans le temps contre c contre lever, sup dél lettre pour supprimer.
+Et puis on peut aussi faire halte et cliquer glisser.
+vous aurez un chemin absolu lorsqu'un est paramétré d'une certaine façon, par exemple ici, no géométrie.
+Si je veux avoir un autre note qui paramétré de la même façon, je peux faire contrôle shift halt et cliquer glissé.
+Ce qui me fait un a référencé dont chacun des paramètres Donc si je remets celui-ci en rip por ici, le premier a récupéré rip par té.
+Si celui-ci lui dis c'est toto a BBC, eh bien, celui-ci vient bien maintenant chercher toto pour a chacun des paramètres a été référencé contrôle shift halt et clique glissé.
+On le retrouve aussi en faisant droit action, référence, copie.
+On remarque que les notes de référence ont la précision l'idéale, mais y a aussi la possibilité de couper un ou plusieurs notes.
+Par exemple, si je fais contrôle x ici, j'ai ces notes là en mémoire maintenant.
+Et lorsque je fais contrôle lever, je vais les recoller.
+On peut aussi du couler coller dans un autre contexte identique.
+Par exemple, de so avec contrôle a, je vais sélectionné toutes les nodes.
+Alors afin d'organiser, il est souvent box sur laquelle on peut mettre un titre.
+Et on peut aussi replier éventuellement les network box.
+On va pouvoir en créer plusieurs.
+On peut les agrandir, les déplacer lorsqu'on déplace une network box à déplace toutes les notes qui sont dedans, pas forcément celles qui sont en dessous.
+Et lorsqu'on veut placer un a dedans, eh bien, on peut le cliquer glisser dedans et ça fonctionne lorsque vous voulez le déplacer, il faut le déplacer rapidement pour que, et puis cette sortie de la network box très pratique aussi, on retrouve les sticky notes avec qui vous permettent de définir des zones dans lesquelles on fait un clic droit droit drop à grande, la sticky note.
+On peut aussi la créer via le menu tout en haut eh bien, on vous en shift, m.
+Elle se réduit à son minimum.
+On peut aussi changer les couleurs d' faire, il va être noir.
+Lorsque vous avez un note de sélectionner, on peut aussi changer sa shape avec z ou la petite icône en en faisant contrôle les clic pour dire que tous les nodes de nul auront une forme ronde.
+Si bien sûr, vous précisez qu'un nul a une forme si je déplace un ode et bien ça ne change rien.
+Par contre, si je déplace le no qui était lié à l'image ou On peut éventuellement avoir plusieurs entrées et éventuellement avoir plusieurs sorties en faisant plusieurs à hot put qui non pas le même index.
+vous ne la voyez plus et soit elle est activée partiellement, c'est-à-dire, eh bien, en automatique ici, elle est activée uniquement s'il y a des notes qui ne sont pas dans le cadre de votre vue.
+Lorsque vous avez plusieurs sorties, c'est celle qui a la haute pou zéro qui lorsque vous visualez le no attention, les numéros out put un et out putt deux ici ne correspondent pas à ceux qu'il y a ici qui s'appellent En droit.
+On retrouve aussi la possibilité d'afficher les paramètres d'un autre no si vous permet d'avoir les paramètres, par exemple, d'une note color ici à gauche et d'eril à Par exemple, on peut faire un contrôle un ici avec le pavé numérique.
+Vous pouvez en faire jusque cinq venir d, je peux faire halte et flèche de gauche pour remonter au niveau so pour remonter encore au niveau objet et halte le prcdent endroit où je suis allé à l'intérieur.
+Si maintenant je viens à l'intérieur dunet network et que je faisant shift h, celle-ci s'adapte aux notes sélectionnées h.
+Lorsque vos notes ne sont pas alignées comme ceux-ci, vous pouvez les aligner en appuyant sur a et en ça se passe pas toujours comme souhaité afin de mieux contrôler ceux-ci.
+Vous pouvez aussi sélectionner certaines notes en disant bah, celles qui ne sont pas sélectionnées.
+Je n'ai pas forcément envie de les aligner en faisant a et cliquer glisser sur l'une des sélectionnées.
+Ça fonctionne aussi en horizontal.
+Si je sélectionne ces trois ci et je fais a et que je glisse vers la droite, une autre solution est le bouton l pour layout qui va réarranger vos notes pour essayer de les placer correctement.
+Ça fonctionne sur les éléments sélectionnés du coup si vous elle, ça réarrange bientôt lorsque des notes qui ne sont pas réparties à cu distance avec halte et a, vous allez pouvoir faire un cliquet glissé pour les répartir à cu distance.
+C'est pareil pour le faire gauche droite afin de les répartir horizontalement.
+Lorsque vous déplacez un a, vous pouvez to et de demander afficher la grille sous forme de points ou sous forme de ligne par défaut, on se snap sur la grille en glissant un ode sur un lien.
+Je pouvoir le connecter, vérifier qu'il est bien connecté puisque parfois le lien passe derrière comme ici, ça fonctionne aussi avec les multien.
+On peut aussi connecter un ode en cliquant glissant le lien dessus.
+Attention, si vous cliquez au-dessus sans connect que Maintenant, lorsque je me place au-dessus d'un lien, le nod va venir se connecter.
+On remarque s'il n y a pas assez de place, c'est bien.
+de la même manière ici si on refait contrôle neuf.
+Alors là maintenant, quand je le place, ça déplace mi, différents sous contexte, on peut aller chercher ailleurs.
+Cette tribu se retrouve ici.
+De la même manière, vous avez la liste view avec shift thé Il reste aussi la contente palette qui vous permet d'avoir une liste des notes qui sont possibles de créer.
+Et donc là, si vous voulez ajouter en a supplémentaire, par exemple, un clause capture, je un double cliquet dessus et celui-ci s'ajoute dans ma scène.
+Ça correspond au menu tabulation avec shift edge.
+désactiver leur tempate les bye pas ou retirer le bye pas.
+On sait combien de nades sont présentes dans ce groupe.
+Là, on peut les sélectionner rapidement ou les des sélectionner, ce qui permet dire je veux tout sélectionner sauf ces nodes là.
+Et on peut aussi choisir la visibilité.
+On peut dire, je veux visualiser tout le monde, sauf ces nodes là.
+Alors je vous conseille pas de masquer les nodes, mais c'est effectivement possible.
+On peut sélectionner un no en faisant clic droit flag et en On pouvait maintenir le bouton j et venir indiquer que vous voudriez connecter ce no là.
+Si vous voulez faire des connexions complexes, par exemple, ici, on peut tout simplement les cliquer glisser rapidement comme ceci avec le bouton j enfoncé, le moyen des mots techniques, c'est pour et le qui a plutôt une forme de ciseaux avec le bouton n, je vais avoir un menu radial dans lequel je pouvoir aller sur up ou dn pour rentrer au sortir d'un ode ou changer de contexte.
+Par exemple, en passant au contexte objet au contexte des cop ou des matériaux.
+Lorsqu'on veut rentrer dans un ode, on peut le sélectionner et appuyer sur entrée ou double cliquer dessus.
+Une autre solution, c'est d'appuyer sur i pour in tout inside et u pour en ressortir avec le moyen mnémotechnique.
+On peut aussi utiliser la barre d'adresse si je suis à l'intérieur et si je peux cliquer sur la barre d'adresse en Une fois sélectionné, ça m'affiche celui-ci en focus dessus.
+Il est aussi possible de retrouver plusieurs nodes, par exemple ici, en recherchant les nuls de dire que je veux chercher les nul et je vais vouloir les remplacer par out.
+Si je click, chacun a été renommé avec shift, lorsqu'on veut connecter plusieurs nodes à un merge.
+Eh bien, il est possible de sélectionner plusieurs nodes et de cliquer sur leur sortie et de le connecter aux merge.
+Lorsque les notes sont, vous pouvez faire shift r pour inverser l'ordre des connexions.
+Lorsqu'il y a un lien entre une valeur et une autre, On retrouve les différents boutons pour les actions bypass lock, template et display.
+Ils sont les mêmes que ceux sur le notes directement Lorsqu'on est loin des nodes, il est souvent pratique de pouvoir déplacer les flags pour indiquer ce que l'on voudrait visualiser.
+l'un l'autre ou le dernier.
+Dans ce cas, vous pouvez utiliser les raccourcis qti.
+On retrouve le r pour le display.
+si vous sauvegardez votre desktop, la prochaine fois que vous ouvrez au de dîner, ceci seront déjà repris.
+Voilà, j'espère que ça vous aura plu et que ça
